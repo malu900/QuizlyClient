@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../App/App.scss";
 import { Container, Form, Button } from "react-bootstrap";
 import AddCircleRoundedIcon from "@material-ui/icons/AddCircleRounded";
+import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import Register from "./Register";
 
 export class Login extends Component {
@@ -17,11 +18,15 @@ export class Login extends Component {
     return (
       <Container id="auth">
         <div className="auth">
-          {showing ? <Register /> : null}
-          <AddCircleRoundedIcon
-            className="rounded-circle"
-            onClick={() => this.setState({ showing: !showing })}
-          />
+          <i class="icons" onClick={() => this.setState({ showing: !showing })}>
+            {showing ? (
+              <div>
+                <CancelRoundedIcon className="rounded-circle" /> <Register />
+              </div>
+            ) : (
+              <AddCircleRoundedIcon className="rounded-circle" />
+            )}
+          </i>
           <h2> Login</h2>
           <Form>
             <Form.Group controlId="formBasicEmail">
