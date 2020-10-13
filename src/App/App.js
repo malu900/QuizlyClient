@@ -10,29 +10,27 @@ import {
   Route,
 } from "react-router-dom";
 import Quiz from '../Quiz';
+import Login from '../auth/Login';
 
 function App() {
   return (
     <div className="App">
       <AppHeader> </AppHeader>
       <Container> 
-      <div>
         <Switch>
-          <Route path="/about">
-            <About />
+        <Route path="/login">
+            <Login />
           </Route>
           <Route path="/topics">
             <Topics />
           </Route>
           <Route path="/quiz">
             <Quiz />
-          </Route>
+          </Route>                        
           <Route path="/">
             <Home />
-          </Route>
-          
+          </Route>         
         </Switch>
-      </div>
       </Container>
     </div>
   );
