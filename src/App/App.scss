@@ -1,6 +1,7 @@
 * {
     text-decoration: none!important;
     list-style: none;
+    font-style: normal;
 }
 
 body {
@@ -36,6 +37,7 @@ body {
     left: 0;
     top: 0;
     z-index: 10;
+    padding: 0;
 }
 
 #auth {
