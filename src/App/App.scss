@@ -32,14 +32,13 @@ body {
     }
 }
 
-#register {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 10;
-    padding: 0;
-}
-
+// #register {
+//     position: absolute;
+//     left: 0;
+//     top: 0;
+//     z-index: 999;
+//     padding: 0;
+// }
 #auth {
     height: 90vh;
     display: flex;

@@ -6,6 +6,7 @@ import { Container } from "react-bootstrap";
 import { Switch, BrowserRouter, Link, Route } from "react-router-dom";
 import Quiz from "../Quiz";
 import Login from "../auth/Login";
+import Auth from "../auth/Auth";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <AppHeader> </AppHeader>
       <Switch>
         <Route path="/login">
-          <Login />
+          <Auth />
         </Route>
         <Route path="/topics">
           <Topics />
