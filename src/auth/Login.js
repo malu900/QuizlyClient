@@ -22,20 +22,23 @@ export class Login extends Component {
     });
   };
 
-  onSubmit = () => {
+  onSubmit = (e) => {
+    // e.stopPropagation();
+    e.preventDefault();
     this.props.login.email = this.state.email;
     this.props.login.password = this.state.password;
     this.setState({
       email: "",
       password: "",
     });
+    console.log(this.props.login);
   };
 
   render() {
     return (
       <Container id="login">
         <h2> Login</h2>
-        <Form>
+        <Form onSubmit={this.onSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -62,7 +65,7 @@ export class Login extends Component {
           <Form.Group controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
-          <Button variant="primary" type="submit" onSubmit={this.onSubmit}>
+          <Button variant="primary" value="submit" type="submit">
             Submit
           </Button>
         </Form>

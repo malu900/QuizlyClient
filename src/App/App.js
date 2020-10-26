@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import AppHeader from "../common/AppHeader";
 import logo from "../logo.svg";
 import "./App.scss";
@@ -8,26 +8,37 @@ import Quiz from "../Quiz";
 import Login from "../auth/Login";
 import Auth from "../auth/Auth";
 
-function App() {
-  return (
-    <div className="App">
-      <AppHeader> </AppHeader>
-      <Switch>
-        <Route path="/login">
-          <Auth />
-        </Route>
-        <Route path="/topics">
-          <Topics />
-        </Route>
-        <Route path="/quiz">
-          <Quiz />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
-    </div>
-  );
+export class App extends Component {
+  constructor(props) {
+    super(props);
+    this.setState({
+      login: [],
+    });
+  }
+  componentDidUpdate() {
+    console.log(this.state.login);
+  }
+  render() {
+    return (
+      <div className="App">
+        <AppHeader> </AppHeader>
+        <Switch>
+          <Route path="/login">
+            <Auth />
+          </Route>
+          <Route path="/topics">
+            <Topics />
+          </Route>
+          <Route path="/quiz">
+            <Quiz />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
+    );
+  }
 }
 function Home() {
   return <h2>Home</h2>;
