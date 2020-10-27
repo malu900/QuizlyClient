@@ -22,12 +22,12 @@ export class Auth extends Component {
       },
     };
   }
-  componentDidMount() {
-    console.log(this.state.login.email);
-  }
-  componentDidUpdate() {
-    console.log(this.state.login.email);
-  }
+  // componentDidMount() {
+  //   console.log(this.state.login.email);
+  // }
+  // componentDidUpdate() {
+  //   console.log(this.state.login.email);
+  // }
   render() {
     const { showing } = this.state;
     return (
