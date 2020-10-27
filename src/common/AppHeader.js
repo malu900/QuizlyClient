@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import {Link} from 'react-router-dom';
-import '../Quiz';
+import '../Quiz/Quiz';
 import '../App/App.scss'; 
 import { Container, Row } from 'react-bootstrap';
 
@@ -16,7 +16,10 @@ export class AppHeader extends Component {
                             <Link to="/">Home</Link>
                             </li>
                             <li>
-                            <Link to="/topics">Topics</Link>
+                                <Link to="/rooms">Rooms</Link>
+                            </li>
+                            <li>
+                                <Link to="/topics">Topics</Link>
                             </li>
                             <li>
                             <Link to="/quiz">Quiz</Link>

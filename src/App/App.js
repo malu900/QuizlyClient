@@ -4,8 +4,9 @@ import logo from "../logo.svg";
 import "./App.scss";
 import { Container } from "react-bootstrap";
 import { Switch, BrowserRouter, Link, Route } from "react-router-dom";
-import Quiz from "../Quiz";
+import Quiz from "../Quiz/Quiz";
 import Login from "../auth/Login";
+import RoomList from "../Room/RoomList";
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
       <Switch>
         <Route path="/login">
           <Login />
+        </Route>
+        <Route path="/rooms">
+          <RoomList/>
         </Route>
         <Route path="/topics">
           <Topics />
@@ -38,5 +42,4 @@ function About() {
 function Topics() {
   return <h2>About</h2>;
 }
-
 export default App;
