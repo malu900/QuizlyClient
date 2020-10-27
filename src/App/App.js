@@ -7,6 +7,7 @@ import { Switch, BrowserRouter, Link, Route } from "react-router-dom";
 import Quiz from "../Quiz";
 import Login from "../auth/Login";
 import Auth from "../auth/Auth";
+import AddQuestion from "../Quiz/AddQuestion";
 
 export class App extends Component {
   constructor(props) {
@@ -31,6 +32,9 @@ export class App extends Component {
           </Route>
           <Route path="/quiz">
             <Quiz />
+          </Route>
+          <Route path="/addquestion">
+            <AddQuestion />
           </Route>
           <Route path="/">
             <Home />
