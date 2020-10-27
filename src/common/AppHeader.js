@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import "../Quiz";
+import "../Quiz/AllQuiz";
 import "../App/App.scss";
 import { Container, Row } from "react-bootstrap";
 
