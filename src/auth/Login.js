@@ -2,14 +2,20 @@ import React, { Component } from "react";
 import "../App/App.scss";
 import { Container, Form, Button } from "react-bootstrap";
 import PropTypes from "prop-types";
+import axios from "axios";
 
 export class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      email: "",
-      password: "",
-    };
+    this.state = this.initialState;
+    this.state.show = false;
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
+
+  }
+  initialState = {
+    email: "",
+    password: ""
   }
 
   componentDidUpdate() {
@@ -25,20 +31,30 @@ export class Login extends Component {
   onSubmit = (e) => {
     // e.stopPropagation();
     e.preventDefault();
-    this.props.login.email = this.state.email;
-    this.props.login.password = this.state.password;
-    this.setState({
-      email: "",
-      password: "",
-    });
+    const login = {
+      email: this.state.email,
+      password: this.state.password
+    };
+    axios.post("http://localhost:8080/auth/login", login)
+        .then(response =>{
+          if(response.data != null) {
+            /*localStorage.setItem('token', response.data.token);*/
+            localStorage.setItem('userId', response.data.userId);
+            this.setState({"show": true});
+            setTimeout(() => this.setState({"show": false}), 3000);
+          }
+        })
+    this.setState(this.initialState);
     console.log(this.props.login);
   };
-
+  resetLogin = () => {
+    this.setState(() => this.initialState)
+  }
   render() {
     return (
       <Container id="login">
         <h2> Login</h2>
-        <Form onSubmit={this.onSubmit}>
+        <Form onReset={this.resetLogin} onSubmit={this.onSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -66,7 +82,10 @@ export class Login extends Component {
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
           <Button variant="primary" value="submit" type="submit">
-            Submit
+            Log in
+          </Button>
+          <Button variant="info" type={"reset"}>
+            reset
           </Button>
         </Form>
       </Container>
