@@ -1,6 +1,6 @@
 import { Button, Form } from "react-bootstrap";
 import React, { Component } from "react";
-import Question from "./Question";
+import AddQuestion from "./AddQuestion";
 
 export class AddQuiz extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ export class AddQuiz extends Component {
 
   newQuestion = (e) => {
     this.setState({
-      questions: [...this.state.questions, <Question />],
+      questions: [...this.state.questions, <AddQuestion />],
     });
   };
 
