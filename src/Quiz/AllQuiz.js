@@ -1,14 +1,40 @@
+import { Button } from "react-bootstrap";
 import React, { Component } from "react";
+import AddQuiz from "./AddQuiz";
 
 export class AllQuiz extends Component {
   constructor(props) {
     super(props);
-    this.setState({
+    this.state = {
+      newQuizClicked: false,
       Quiz: [],
-    });
+    };
   }
+  onClickCreateQuiz = (e) => {
+    // this.setState({
+    //   newQuizClicked: !newQuizClicked,
+    // });
+    console.log(this.newQuizClicked);
+  };
+
   render() {
-    return <div></div>;
+    const { newQuizClicked } = this.state;
+    return (
+      <div>
+        <Button
+          onClick={() => this.setState({ newQuizClicked: !newQuizClicked })}
+        >
+          Create Quiz
+        </Button>
+        <div>
+          {newQuizClicked ? (
+            <AddQuiz QuizList={this.state.Quiz} />
+          ) : (
+            <div></div>
+          )}
+        </div>
+      </div>
+    );
   }
 }
 

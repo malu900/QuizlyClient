@@ -4,51 +4,42 @@ import logo from "../logo.svg";
 import "./App.scss";
 import { Container } from "react-bootstrap";
 import { Switch, BrowserRouter, Link, Route } from "react-router-dom";
-import Quiz from "../Quiz";
+import Quiz from "../Quiz/AllQuiz";
 import Login from "../auth/Login";
 import Auth from "../auth/Auth";
+import AddQuestion from "../Quiz/AddQuestion";
+import Home from "../Home";
 
 export class App extends Component {
   constructor(props) {
     super(props);
-    this.setState({
+    this.state = {
       login: [],
-    });
+    };
   }
-  componentDidUpdate() {
-    console.log(this.state.login);
+  componentDidMount() {
+    console.log("Did mount!");
   }
   render() {
     return (
-      <div className="App">
+      <Container className="App">
         <AppHeader> </AppHeader>
         <Switch>
           <Route path="/login">
             <Auth />
           </Route>
-          <Route path="/topics">
-            <Topics />
-          </Route>
           <Route path="/quiz">
             <Quiz />
+          </Route>
+          <Route path="/addquestion">
+            <AddQuestion />
           </Route>
           <Route path="/">
             <Home />
           </Route>
         </Switch>
-      </div>
+      </Container>
     );
   }
 }
-function Home() {
-  return <h2>Home</h2>;
-}
-
-function About() {
-  return <h2>About</h2>;
-}
-function Topics() {
-  return <h2>About</h2>;
-}
-
 export default App;
