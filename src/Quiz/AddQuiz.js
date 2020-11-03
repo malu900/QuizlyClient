@@ -1,6 +1,6 @@
 import { Button, Form } from "react-bootstrap";
 import React, { Component } from "react";
-import Question from "./Question";
+import AddQuestion from "./AddQuestion";
 
 export class AddQuiz extends Component {
   constructor(props) {
@@ -19,19 +19,16 @@ export class AddQuiz extends Component {
 
   newQuestion = (e) => {
     this.setState({
-      questions: [...this.state.questions, <Question />],
+      questions: [...this.state.questions, <AddQuestion />],
     });
   };
 
-  deleteQuestion = (id) => {
-    // this.setState((prevState) => ({
-    //   questions: prevState.data.filter((el) => el != id),
-    // }));
-    // this.setState({
-    //   questions: [
-    //     ...this.state.questions.filter((question) => question.id !== id),
-    //   ],
-    // });
+  deleteQuestion = (e) => {
+    this.setState({
+      questions: this.state.questionsle.filter(function (id) {
+        return id !== id;
+      }),
+    });
   };
 
   onChange = (e) => {
@@ -41,7 +38,6 @@ export class AddQuiz extends Component {
   };
 
   render() {
-    // const { createQuestion: CreateQuestion } = this.state;
     return (
       <div>
         <Form>
@@ -56,10 +52,15 @@ export class AddQuiz extends Component {
             <Form.Text className="text-muted"></Form.Text>
           </Form.Group>
           <Button onClick={this.newQuestion}>Create Question</Button>
-          <div> {this.state.questions} </div>
+          <div>
+            {this.state.questions.map((question) => (
+              <AddQuestion key={question.name} />
+            ))}
+          </div>
           <Button variant="primary" type="submit">
             Submit Quiz
           </Button>
+          <Button onClick={this.deleteQuestion}>remove Question</Button>
         </Form>
       </div>
     );

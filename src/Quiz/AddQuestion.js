@@ -39,7 +39,7 @@ export default class AddQuestion extends Component {
 
   questionChange = (event) => {
     this.setState({
-      [event.target.questionName]: event.target.value,
+      [event.target.name]: event.target.value,
     });
   };
 
@@ -59,51 +59,45 @@ export default class AddQuestion extends Component {
             }}
           />
         </div>
-        <Card className={""}>
-          <Card.Header>Add Question</Card.Header>
-          <Form
-            onReset={this.resetQuestion}
-            onSubmit={this.submitQuestion}
-            id={"questionId"}
-          >
-            <Card.Body>
-              <Form.Group>
-                <Form.Label>Question</Form.Label>
-                <Form.Control
-                  required
-                  autoComplete={"off"}
-                  type="text"
-                  name={"questionName"}
-                  value={questionName}
-                  onChange={this.questionChange}
-                  className={"bg-dark text-white"}
-                  placeholder="Enter Question"
-                />
-              </Form.Group>
-              <Form.Group>
-                <Form.Label>Answer</Form.Label>
-                <Form.Control
-                  required
-                  autoComplete={"off"}
-                  type="text"
-                  name={"answers"}
-                  value={answers}
-                  onChange={this.questionChange}
-                  className={"bg-dark text-white"}
-                  placeholder="Enter answer "
-                />
-              </Form.Group>
-            </Card.Body>
-            <Card.Footer style={{ textAlign: "center" }}>
-              <Button variant="primary" type="submit">
-                Add question
-              </Button>{" "}
-              <Button variant="info" type={"reset"}>
-                reset
-              </Button>
-            </Card.Footer>
-          </Form>
-        </Card>
+
+        <Form
+          onReset={this.resetQuestion}
+          onSubmit={this.submitQuestion}
+          id={"questionId"}
+        >
+          <Form.Group>
+            <Form.Label>Question</Form.Label>
+            <Form.Control
+              required
+              autoComplete={"off"}
+              type="text"
+              name={"questionName"}
+              value={questionName}
+              onChange={this.questionChange}
+              className={"bg-dark text-white"}
+              placeholder="Enter Question"
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Answer</Form.Label>
+            <Form.Control
+              required
+              autoComplete={"off"}
+              type="text"
+              name={"answers"}
+              value={answers}
+              onChange={this.questionChange}
+              className={"bg-dark text-white"}
+              placeholder="Enter answer "
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Add question
+          </Button>{" "}
+          <Button variant="info" type={"reset"}>
+            reset
+          </Button>
+        </Form>
       </div>
     );
   }
