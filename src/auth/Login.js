@@ -35,7 +35,7 @@ export class Login extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    axios.post("http://localhost:8080/auth/login", login)
+    axios.post("http://localhost:8081/auth/login", login)
         .then(response =>{
           if(response.data != null) {
             /*localStorage.setItem('token', response.data.token);*/
