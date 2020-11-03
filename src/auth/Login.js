@@ -11,12 +11,11 @@ export class Login extends Component {
     this.state.show = false;
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
-
   }
   initialState = {
     email: "",
-    password: ""
-  }
+    password: "",
+  };
 
   componentDidUpdate() {
     console.log(this.props.login.email);
@@ -33,23 +32,22 @@ export class Login extends Component {
     e.preventDefault();
     const login = {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
     };
-    axios.post("http://localhost:8081/auth/login", login)
-        .then(response =>{
-          if(response.data != null) {
-            /*localStorage.setItem('token', response.data.token);*/
-            localStorage.setItem('userId', response.data.userId);
-            this.setState({"show": true});
-            setTimeout(() => this.setState({"show": false}), 3000);
-          }
-        })
+    axios.post("http://localhost:8080/auth/login", login).then((response) => {
+      if (response.data != null) {
+        /*localStorage.setItem('token', response.data.token);*/
+        localStorage.setItem("userId", response.data.userId);
+        this.setState({ show: true });
+        setTimeout(() => this.setState({ show: false }), 3000);
+      }
+    });
     this.setState(this.initialState);
     console.log(this.props.login);
   };
   resetLogin = () => {
-    this.setState(() => this.initialState)
-  }
+    this.setState(() => this.initialState);
+  };
   render() {
     return (
       <Container id="login">

@@ -10,19 +10,18 @@ export class Register extends Component {
     this.state.show = false;
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
-    ;
   }
   initialState = {
     name: "",
     email: "",
     password: "",
-    secondPassword: ""
-  }
+    secondPassword: "",
+  };
   /*componentDidUpdate() {
     console.log(this.props.login.email);
   }*/
 
-  onChange = event => {
+  onChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
@@ -31,59 +30,69 @@ export class Register extends Component {
   onSubmit = (e) => {
     // e.stopPropagation();
     e.preventDefault();
-    const user ={
+    const user = {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
-      secondPassword: this.state.secondPassword
+      secondPassword: this.state.secondPassword,
     };
-    axios.post("http://localhost:8081/auth/register", user)
-        .then(response =>{
-          if(response.data !=null) {
-            this.setState({"show": true});
-            setTimeout(() => this.setState({"show": false}), 3000);
-          }
-          else{
-            this.setState({"show": false})
-          }
-        })
+    axios.post("http://localhost:8080/auth/register", user).then((response) => {
+      if (response.data != null) {
+        this.setState({ show: true });
+        setTimeout(() => this.setState({ show: false }), 3000);
+      } else {
+        this.setState({ show: false });
+      }
+    });
     this.setState(this.initialState);
   };
   render() {
-    const {name, email, password, secondPassword} = this.state;
+    const { name, email, password, secondPassword } = this.state;
     return (
       <Container id="register">
         <h2> Register </h2>
         <Form onSubmit={this.onSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Name</Form.Label>
-            <Form.Control type="name" name={"name"}
-                          value={name}
-                          onChange={this.onChange}
-                          placeholder="Enter email" />
+            <Form.Control
+              type="name"
+              name={"name"}
+              value={name}
+              onChange={this.onChange}
+              placeholder="Enter email"
+            />
             <Form.Text className="text-muted"></Form.Text>
           </Form.Group>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" name={"email"}
-                          value={email}
-                          onChange={this.onChange}
-                          placeholder="Enter email" />
+            <Form.Control
+              type="email"
+              name={"email"}
+              value={email}
+              onChange={this.onChange}
+              placeholder="Enter email"
+            />
             <Form.Text className="text-muted"></Form.Text>
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" name={"password"}
-                          value={password}
-                          onChange={this.onChange}
-                          placeholder="Password" />
+            <Form.Control
+              type="password"
+              name={"password"}
+              value={password}
+              onChange={this.onChange}
+              placeholder="Password"
+            />
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" name={"secondPassword"}
-                          value={secondPassword}
-                          onChange={this.onChange}
-                          placeholder="Password" />
+            <Form.Control
+              type="password"
+              name={"secondPassword"}
+              value={secondPassword}
+              onChange={this.onChange}
+              placeholder="Password"
+            />
           </Form.Group>
           <Button variant="primary" type="submit">
             Submit
