@@ -22,9 +22,9 @@ export class Login extends Component {
     console.log(this.props.login.email);
   }
 
-  onChange = (e) => {
+  onChange = event => {
     this.setState({
-      [e.target.name]: e.target.value,
+      [event.target.name]: event.target.value,
     });
   };
 
@@ -38,8 +38,9 @@ export class Login extends Component {
     axios.post("http://localhost:8081/auth/login", login)
         .then(response =>{
           if(response.data != null) {
+            console.log(response.data);
             /*localStorage.setItem('token', response.data.token);*/
-            localStorage.setItem('userId', response.data.userId);
+            //localStorage.setItem('userId', response.data.userId);
             this.setState({"show": true});
             setTimeout(() => this.setState({"show": false}), 3000);
           }
@@ -51,6 +52,7 @@ export class Login extends Component {
     this.setState(() => this.initialState)
   }
   render() {
+    const {email, password} = this.state;
     return (
       <Container id="login">
         <h2> Login</h2>
@@ -61,7 +63,7 @@ export class Login extends Component {
               type="email"
               name="email"
               placeholder="Enter email"
-              value={this.state.email}
+              value={email}
               onChange={this.onChange}
             />
             <Form.Text className="text-muted">
@@ -74,7 +76,7 @@ export class Login extends Component {
               type="password"
               name="password"
               placeholder="Password"
-              value={this.state.password}
+              value={password}
               onChange={this.onChange}
             />
           </Form.Group>
