@@ -12,9 +12,11 @@ export class AddQuiz extends Component {
       questions: [],
     };
   }
-
+  componentDidUpdate() {
+    console.log(this.props.Quiz);
+  }
   componentDidMount() {
-    console.log(this.props.QuizList);
+    console.log(this.props.Quiz);
   }
 
   newQuestion = (e) => {
@@ -25,7 +27,7 @@ export class AddQuiz extends Component {
 
   deleteQuestion = (e) => {
     this.setState({
-      questions: this.state.questionsle.filter(function (id) {
+      questions: this.state.questions.filter(function (id) {
         return id !== id;
       }),
     });
