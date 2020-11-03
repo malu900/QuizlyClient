@@ -36,7 +36,7 @@ export class Register extends Component {
       password: this.state.password,
       secondPassword: this.state.secondPassword,
     };
-    axios.post("http://localhost:8080/auth/register", user).then((response) => {
+    axios.post("http://localhost:8081/auth/register", user).then((response) => {
       if (response.data != null) {
         this.setState({ show: true });
         setTimeout(() => this.setState({ show: false }), 3000);
