@@ -28,9 +28,9 @@ export class AppHeader extends Component {
               <li>
                 <Link to="/login">Login</Link>
               </li>
-              <li>
+       {/*       <li>
                 <Link to="/guest">Guest</Link>
-              </li>
+              </li>*/}
             </ul>
           </div>
         </Row>

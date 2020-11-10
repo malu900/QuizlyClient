@@ -29,9 +29,9 @@ export class App extends Component {
           <Route path="/login">
             <Auth />
           </Route>
-          <Route path="/guest">
+          {/*<Route path="/guest">
             <Guest />
-          </Route>
+          </Route>*/}
           <Route path="/quiz">
             <Quiz />
           </Route>
@@ -39,7 +39,7 @@ export class App extends Component {
             <AddQuestion />
           </Route>
           <Route path="/">
-            <Home />
+            <Guest />
           </Route>
         </Switch>
       </Container>
