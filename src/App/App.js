@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import AppHeader from "../common/AppHeader";
-import logo from "../logo.svg";
 import "./App.scss";
 import { Container } from "react-bootstrap";
 import { Switch, BrowserRouter, Link, Route } from "react-router-dom";
 import Quiz from "../Quiz/AllQuiz";
-import Login from "../auth/Login";
 import Auth from "../auth/Auth";
 import AddQuestion from "../Quiz/AddQuestion";
 import Home from "../Home";

@@ -10,6 +10,7 @@ export class AllQuiz extends Component {
         };
     }
 
+<<<<<<< HEAD
     componentDidMount() {
         this.findAllQuizzes();
     }
@@ -34,6 +35,28 @@ export class AllQuiz extends Component {
                 ))
         );
     }
+=======
+  render() {
+    const { newQuizClicked } = this.state;
+    return (
+      <div>
+        <Button
+          onClick={() => this.setState({ newQuizClicked: !newQuizClicked })}
+        >
+          {newQuizClicked ? "Remove quiz" : "Add quiz"}
+        </Button>
+        <div>
+          {newQuizClicked ? <AddQuiz Quiz={this.state.Quiz} /> : <div></div>}
+        </div>
+        {newQuizClicked ? (
+          <Button variant="primary" type="submit">
+            Submit Quiz
+          </Button>
+        ) : null}
+      </div>
+    );
+  }
+>>>>>>> Quizes
 }
 
 export default AllQuiz;
