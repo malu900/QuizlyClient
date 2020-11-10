@@ -12,9 +12,11 @@ export class AddQuiz extends Component {
       questions: [],
     };
   }
-
+  componentDidUpdate() {
+    console.log(this.props.Quiz);
+  }
   componentDidMount() {
-    console.log(this.props.QuizList);
+    console.log(this.props.Quiz);
   }
 
   newQuestion = (e) => {
@@ -23,15 +25,12 @@ export class AddQuiz extends Component {
     });
   };
 
-  deleteQuestion = (id) => {
-    // this.setState((prevState) => ({
-    //   questions: prevState.data.filter((el) => el != id),
-    // }));
-    // this.setState({
-    //   questions: [
-    //     ...this.state.questions.filter((question) => question.id !== id),
-    //   ],
-    // });
+  deleteQuestion = (e) => {
+    this.setState({
+      questions: this.state.questions.filter(function (id) {
+        return id !== id;
+      }),
+    });
   };
 
   onChange = (e) => {
@@ -41,7 +40,6 @@ export class AddQuiz extends Component {
   };
 
   render() {
-    // const { createQuestion: CreateQuestion } = this.state;
     return (
       <div>
         <Form>
@@ -56,10 +54,15 @@ export class AddQuiz extends Component {
             <Form.Text className="text-muted"></Form.Text>
           </Form.Group>
           <Button onClick={this.newQuestion}>Create Question</Button>
-          <div> {this.state.questions} </div>
+          <div>
+            {this.state.questions.map((question) => (
+              <AddQuestion key={question.name} />
+            ))}
+          </div>
           <Button variant="primary" type="submit">
             Submit Quiz
           </Button>
+          <Button onClick={this.deleteQuestion}>remove Question</Button>
         </Form>
       </div>
     );

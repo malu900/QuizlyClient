@@ -11,9 +11,6 @@ export class AllQuiz extends Component {
     };
   }
   onClickCreateQuiz = (e) => {
-    // this.setState({
-    //   newQuizClicked: !newQuizClicked,
-    // });
     console.log(this.newQuizClicked);
   };
 
@@ -27,11 +24,7 @@ export class AllQuiz extends Component {
           Create Quiz
         </Button>
         <div>
-          {newQuizClicked ? (
-            <AddQuiz QuizList={this.state.Quiz} />
-          ) : (
-            <div></div>
-          )}
+          {newQuizClicked ? <AddQuiz Quiz={this.state.Quiz} /> : <div></div>}
         </div>
       </div>
     );
