@@ -1,34 +1,39 @@
-import { Button } from "react-bootstrap";
-import React, { Component } from "react";
-import AddQuiz from "./AddQuiz";
+import {Button} from "react-bootstrap";
+import React, {Component} from "react";
+import axios from "axios";
 
 export class AllQuiz extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      newQuizClicked: false,
-      Quiz: [],
-    };
-  }
-  onClickCreateQuiz = (e) => {
-    console.log(this.newQuizClicked);
-  };
+    constructor(props) {
+        super(props);
+        this.state = {
+            Quizzes: [],
+        };
+    }
 
-  render() {
-    const { newQuizClicked } = this.state;
-    return (
-      <div>
-        <Button
-          onClick={() => this.setState({ newQuizClicked: !newQuizClicked })}
-        >
-          Create Quiz
-        </Button>
-        <div>
-          {newQuizClicked ? <AddQuiz Quiz={this.state.Quiz} /> : <div></div>}
-        </div>
-      </div>
-    );
-  }
+    componentDidMount() {
+        this.findAllQuizzes();
+    }
+
+    findAllQuizzes() {
+        axios.get("http://localhost:8081/quiz/getall")
+            .then(response => response.data)
+            .then((data) => {
+                this.setState({Quizzes: data})
+            });
+        console.log(this.state.dishesId)
+    }
+
+    render() {
+        const {newQuizClicked} = this.state;
+        return (
+            this.state.Quizzes.map((quiz) =>
+                (
+                    <div>
+                        <h3>quiz.quizName</h3>
+                    </div>
+                ))
+        );
+    }
 }
 
 export default AllQuiz;
