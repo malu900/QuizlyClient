@@ -25,11 +25,11 @@ export class Guest extends Component {
     onSubmit = (e) => {
         // e.stopPropagation();
         e.preventDefault();
-        const user = {
+        const guest = {
             name: this.state.name,
             code: this.state.code
         };
-        axios.post("http://localhost:8081/auth/registerguest", user).then((response) => {
+        axios.post("http://localhost:8081/auth/guest", guest).then((response) => {
             if (response.data != null) {
                 this.setState({ show: true });
                 setTimeout(() => this.setState({ show: false }), 3000);
