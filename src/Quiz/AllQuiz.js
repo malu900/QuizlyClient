@@ -21,11 +21,16 @@ export class AllQuiz extends Component {
         <Button
           onClick={() => this.setState({ newQuizClicked: !newQuizClicked })}
         >
-          Create Quiz
+          {newQuizClicked ? "Remove quiz" : "Add quiz"}
         </Button>
         <div>
           {newQuizClicked ? <AddQuiz Quiz={this.state.Quiz} /> : <div></div>}
         </div>
+        {newQuizClicked ? (
+          <Button variant="primary" type="submit">
+            Submit Quiz
+          </Button>
+        ) : null}
       </div>
     );
   }
