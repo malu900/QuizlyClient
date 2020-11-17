@@ -21,7 +21,6 @@ export default class AddQuestion extends Component {
 
   submitQuestion = (event) => {
     event.preventDefault();
-
     const question = {
       questionName: this.state.questionName,
       answers: this.state.answers,
@@ -35,6 +34,7 @@ export default class AddQuestion extends Component {
       }
     });
     this.setState(this.initialState);
+    console.log(this.state.que);
   };
 
   questionChange = (event) => {

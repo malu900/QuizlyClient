@@ -21,6 +21,9 @@ export class AppHeader extends Component {
               <li>
                 <Link to="/quiz">Quiz</Link>
               </li>
+              <li>
+                <Link to="/testquiz">Quiz</Link>
+              </li>
             </ul>
           </div>
           <div>

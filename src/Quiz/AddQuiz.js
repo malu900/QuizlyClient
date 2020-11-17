@@ -14,6 +14,7 @@ export class AddQuiz extends Component {
   }
   componentDidUpdate() {
     console.log(this.props.Quiz);
+    console.log(this.questions);
   }
   componentDidMount() {
     console.log(this.props.Quiz);
@@ -23,6 +24,7 @@ export class AddQuiz extends Component {
     this.setState({
       questions: [...this.state.questions, <AddQuestion />],
     });
+    console.log(this.state.questions);
   };
 
   deleteQuestion = (e) => {
@@ -34,9 +36,9 @@ export class AddQuiz extends Component {
   };
 
   onChange = (e) => {
-    this.setState = {
+    this.setState({
       [e.target.name]: e.target.value,
-    };
+    });
   };
 
   render() {
@@ -46,7 +48,8 @@ export class AddQuiz extends Component {
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Quiz name</Form.Label>
             <Form.Control
-              type="QuizName"
+              type="quizName"
+              name="quizName"
               placeholder="quiz name"
               value={this.state.quizName}
               onChange={this.onChange}
