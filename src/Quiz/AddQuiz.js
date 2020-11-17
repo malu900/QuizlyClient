@@ -46,6 +46,16 @@ export class AddQuiz extends Component {
     });
   };
 
+  componentDidUpdate() {
+    console.log(this.state.questions);
+  }
+
+  addQuestionToQuiz = (question) => {
+    this.setState({
+      questions: [...this.state.questions, question],
+    });
+  };
+
   render() {
     return (
       <div>
@@ -62,17 +72,20 @@ export class AddQuiz extends Component {
             />
             <Form.Text className="text-muted"></Form.Text>
           </Form.Group>
-          <Button onClick={this.newQuestion}>Create Question</Button>
-          <div>
-            {this.state.questions.map((question) => (
-              <AddQuestion key={question.name} />
-            ))}
-          </div>
           <Button variant="primary" type="submit">
             Submit Quiz
           </Button>
-          <Button onClick={this.deleteQuestion}>remove Question</Button>
         </Form>
+        <Button onClick={this.newQuestion}>Create Question</Button>
+        <div>
+          {this.state.questions.map((question) => (
+            <AddQuestion
+              key={question.name}
+              addQuestionToQuiz={this.addQuestionToQuiz}
+            />
+          ))}
+        </div>
+        <Button onClick={this.deleteQuestion}>remove Question</Button>
       </div>
     );
   }

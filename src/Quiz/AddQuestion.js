@@ -11,8 +11,8 @@ export default class AddQuestion extends Component {
     super(props);
     this.state = this.initialState;
     this.state.show = false;
-    // this.questionChange = this.questionChange.bind(this);
-    // this.submitQuestion = this.submitQuestion.bind(this);
+    this.questionChange = this.questionChange.bind(this);
+    this.submitQuestion = this.submitQuestion.bind(this);
   }
 
   initialState = {
@@ -37,7 +37,17 @@ export default class AddQuestion extends Component {
     this.setState(this.initialState);
     // console.log(this.state.que);
   };
+  onSubmit = (e) => {
+    e.preventDefault();
+    let question = {
+      questionName: this.state.questionName,
+    };
+    this.props.addQuestionToQuiz(question);
 
+    this.setState({
+      questionName: "",
+    });
+  };
   questionChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -63,7 +73,7 @@ export default class AddQuestion extends Component {
 
         <Form
           onReset={this.resetQuestion}
-          onSubmit={this.submitQuestion}
+          onSubmit={this.onSubmit}
           id={"questionId"}
         >
           <Form.Group>

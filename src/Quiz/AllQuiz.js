@@ -26,18 +26,7 @@ export class AllQuiz extends Component {
   componentDidUpdate() {
     console.log(this.state.Quiz);
   }
-  // onSubmit = (e) => {
-  //   e.preventDefault();
-  //   let quiz = {
-  //     quizName: this.state.quizName,
-  //   };
-  //   console.log(quiz);
-  //   this.props.AddQuiz(quiz);
 
-  //   this.setState({
-  //     quizName: "",
-  //   });
-  // };
   render() {
     const { newQuizClicked } = this.state;
     return (
@@ -52,7 +41,7 @@ export class AllQuiz extends Component {
         </div>
         {newQuizClicked ? (
           <Button variant="primary" type="submit">
-            Submit Quiz
+            Submit Quiz and question
           </Button>
         ) : null}
 
