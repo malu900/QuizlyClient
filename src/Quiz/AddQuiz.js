@@ -10,6 +10,7 @@ export class AddQuiz extends Component {
       createQuestion: false,
       quizName: "",
       questions: [],
+      questionsData: []
     };
   }
 
@@ -52,8 +53,11 @@ export class AddQuiz extends Component {
 
   addQuestionToQuiz = (question) => {
     this.setState({
-      questions: [...this.state.questions, question],
+      questionsData: [...this.state.questionsData, question],
     });
+    this.state.questionsData.forEach(item => console.log(item));
+    console.log(this.state.questionsData.length);
+    // console.log(this.state.questionsData)
   };
 
   render() {

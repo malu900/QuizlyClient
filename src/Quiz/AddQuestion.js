@@ -37,15 +37,18 @@ export default class AddQuestion extends Component {
     this.setState(this.initialState);
     // console.log(this.state.que);
   };
+
   onSubmit = (e) => {
     e.preventDefault();
     let question = {
       questionName: this.state.questionName,
+      answers: this.state.answers
     };
     this.props.addQuestionToQuiz(question);
 
     this.setState({
       questionName: "",
+      answers: []
     });
   };
   questionChange = (event) => {
