@@ -59,9 +59,9 @@ export class AddQuiz extends Component {
               <AddQuestion key={question.name} />
             ))}
           </div>
-          <Button variant="primary" type="submit">
+          {/* <Button variant="primary" type="submit">
             Submit Quiz
-          </Button>
+          </Button> */}
           <Button onClick={this.deleteQuestion}>remove Question</Button>
         </Form>
       </div>
