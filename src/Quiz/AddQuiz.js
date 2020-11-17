@@ -1,7 +1,6 @@
 import { Button, Form } from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuestion from "./AddQuestion";
-import PropTypes from "prop-types";
 
 export class AddQuiz extends Component {
   constructor(props) {
@@ -13,13 +12,6 @@ export class AddQuiz extends Component {
       questions: [],
     };
   }
-  // componentDidUpdate() {
-  //   console.log(this.props.Quiz);
-  //   console.log(this.questions);
-  // }
-  // componentDidMount() {
-  //   console.log(this.props.Quiz);
-  // }
 
   newQuestion = (e) => {
     this.setState({
@@ -66,6 +58,7 @@ export class AddQuiz extends Component {
               placeholder="quiz name"
               value={this.state.quizName}
               onChange={this.onChange}
+              required
             />
             <Form.Text className="text-muted"></Form.Text>
           </Form.Group>
@@ -84,14 +77,5 @@ export class AddQuiz extends Component {
     );
   }
 }
-AddQuiz.propTypes = {
-  quizName: PropTypes.string.isRequired,
-};
-
-// Todos.propTypes = {
-//   todos: PropTypes.array.isRequired,
-//   markComplete: PropTypes.func.isRequired,
-//   delTodo: PropTypes.func.isRequired,
-// };
 
 export default AddQuiz;

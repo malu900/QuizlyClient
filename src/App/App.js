@@ -7,7 +7,6 @@ import Quiz from "../Quiz/AllQuiz";
 import Auth from "../auth/Auth";
 import AddQuestion from "../Quiz/AddQuestion";
 import Home from "../Home";
-import TestQuiz from "../testquiz/TestQuiz";
 
 export class App extends Component {
   constructor(props) {
@@ -32,9 +31,6 @@ export class App extends Component {
           </Route>
           <Route path="/addquestion">
             <AddQuestion />
-          </Route>
-          <Route path="/testquiz">
-            <TestQuiz />
           </Route>
           <Route path="/">
             <Home />

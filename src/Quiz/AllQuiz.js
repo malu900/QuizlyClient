@@ -1,6 +1,7 @@
 import { Button } from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
+import Quiz from "./Quiz";
 import { propTypes } from "react-bootstrap/esm/Image";
 
 export class AllQuiz extends Component {
@@ -11,6 +12,7 @@ export class AllQuiz extends Component {
       Quiz: [],
     };
   }
+
   onClickCreateQuiz = (e) => {
     console.log(this.newQuizClicked);
   };
@@ -36,12 +38,6 @@ export class AllQuiz extends Component {
   //     quizName: "",
   //   });
   // };
-  // <Todos
-  //                   todos={this.state.todos}
-  //                   markComplete={this.markComplete}
-  //                   delTodo={this.delTodo}
-  //                 />
-
   render() {
     const { newQuizClicked } = this.state;
     return (
@@ -59,6 +55,12 @@ export class AllQuiz extends Component {
             Submit Quiz
           </Button>
         ) : null}
+
+        <div>
+          {this.state.Quiz.map((q) => (
+            <Quiz quiz={q} key={q} />
+          ))}
+        </div>
       </div>
     );
   }
