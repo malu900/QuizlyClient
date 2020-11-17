@@ -16,9 +16,9 @@ export class App extends Component {
       login: [],
     };
   }
-  componentDidMount() {
-    console.log("Did mount!");
-  }
+  // componentDidMount() {
+  //   console.log("Did mount!");
+  // }
   render() {
     return (
       <Container className="App">

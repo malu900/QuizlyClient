@@ -1,6 +1,7 @@
 import { Button } from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 export class AllQuiz extends Component {
   constructor(props) {
@@ -14,6 +15,33 @@ export class AllQuiz extends Component {
     console.log(this.newQuizClicked);
   };
 
+  addQuiz = (quiz) => {
+    this.setState({
+      Quiz: [...this.state.Quiz, quiz],
+    });
+  };
+
+  componentDidUpdate() {
+    console.log(this.state.Quiz);
+  }
+  // onSubmit = (e) => {
+  //   e.preventDefault();
+  //   let quiz = {
+  //     quizName: this.state.quizName,
+  //   };
+  //   console.log(quiz);
+  //   this.props.AddQuiz(quiz);
+
+  //   this.setState({
+  //     quizName: "",
+  //   });
+  // };
+  // <Todos
+  //                   todos={this.state.todos}
+  //                   markComplete={this.markComplete}
+  //                   delTodo={this.delTodo}
+  //                 />
+
   render() {
     const { newQuizClicked } = this.state;
     return (
@@ -24,7 +52,7 @@ export class AllQuiz extends Component {
           {newQuizClicked ? "Remove quiz" : "Add quiz"}
         </Button>
         <div>
-          {newQuizClicked ? <AddQuiz Quiz={this.state.Quiz} /> : <div></div>}
+          {newQuizClicked ? <AddQuiz addQuiz={this.addQuiz} /> : <div></div>}
         </div>
         {newQuizClicked ? (
           <Button variant="primary" type="submit">

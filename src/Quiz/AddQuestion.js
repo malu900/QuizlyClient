@@ -10,8 +10,8 @@ export default class AddQuestion extends Component {
     super(props);
     this.state = this.initialState;
     this.state.show = false;
-    this.questionChange = this.questionChange.bind(this);
-    this.submitQuestion = this.submitQuestion.bind(this);
+    // this.questionChange = this.questionChange.bind(this);
+    // this.submitQuestion = this.submitQuestion.bind(this);
   }
 
   initialState = {
@@ -34,7 +34,7 @@ export default class AddQuestion extends Component {
       }
     });
     this.setState(this.initialState);
-    console.log(this.state.que);
+    // console.log(this.state.que);
   };
 
   questionChange = (event) => {

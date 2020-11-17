@@ -1,6 +1,7 @@
 import { Button, Form } from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuestion from "./AddQuestion";
+import PropTypes from "prop-types";
 
 export class AddQuiz extends Component {
   constructor(props) {
@@ -12,13 +13,13 @@ export class AddQuiz extends Component {
       questions: [],
     };
   }
-  componentDidUpdate() {
-    console.log(this.props.Quiz);
-    console.log(this.questions);
-  }
-  componentDidMount() {
-    console.log(this.props.Quiz);
-  }
+  // componentDidUpdate() {
+  //   console.log(this.props.Quiz);
+  //   console.log(this.questions);
+  // }
+  // componentDidMount() {
+  //   console.log(this.props.Quiz);
+  // }
 
   newQuestion = (e) => {
     this.setState({
@@ -41,10 +42,22 @@ export class AddQuiz extends Component {
     });
   };
 
+  onSubmit = (e) => {
+    e.preventDefault();
+    let quiz = {
+      quizName: this.state.quizName,
+    };
+    this.props.addQuiz(quiz);
+
+    this.setState({
+      quizName: "",
+    });
+  };
+
   render() {
     return (
       <div>
-        <Form>
+        <Form onSubmit={this.onSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Quiz name</Form.Label>
             <Form.Control
@@ -62,14 +75,23 @@ export class AddQuiz extends Component {
               <AddQuestion key={question.name} />
             ))}
           </div>
-          {/* <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit">
             Submit Quiz
-          </Button> */}
+          </Button>
           <Button onClick={this.deleteQuestion}>remove Question</Button>
         </Form>
       </div>
     );
   }
 }
+AddQuiz.propTypes = {
+  quizName: PropTypes.string.isRequired,
+};
+
+// Todos.propTypes = {
+//   todos: PropTypes.array.isRequired,
+//   markComplete: PropTypes.func.isRequired,
+//   delTodo: PropTypes.func.isRequired,
+// };
 
 export default AddQuiz;
