@@ -9,15 +9,17 @@ export class AddQuiz extends Component {
       id: 0,
       createQuestion: false,
       quizName: "",
+      createdQuestions: [],
       questions: [],
     };
   }
 
   newQuestion = (e) => {
     this.setState({
-      questions: [...this.state.questions, <AddQuestion />],
+      createdQuestions: [...this.state.createdQuestions, <AddQuestion />],
     });
-    console.log(this.state.questions);
+    console.log(e);
+    console.log(this.state.createdQuestions);
   };
 
   deleteQuestion = (e) => {
@@ -78,7 +80,7 @@ export class AddQuiz extends Component {
         </Form>
         <Button onClick={this.newQuestion}>Create Question</Button>
         <div>
-          {this.state.questions.map((question) => (
+          {this.state.createdQuestions.map((question) => (
             <AddQuestion
               key={question.name}
               addQuestionToQuiz={this.addQuestionToQuiz}

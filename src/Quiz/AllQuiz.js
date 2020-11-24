@@ -2,7 +2,6 @@ import { Button } from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
 import Quiz from "./Quiz";
-import { propTypes } from "react-bootstrap/esm/Image";
 
 export class AllQuiz extends Component {
   constructor(props) {
