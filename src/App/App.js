@@ -24,6 +24,9 @@ export class App extends Component {
       <Container className="App">
         <AppHeader> </AppHeader>
         <Switch>
+          <Route path="/lobby">
+            <Lobby/>
+          </Route>
           <Route path="/login">
             <Auth />
           </Route>
@@ -35,9 +38,6 @@ export class App extends Component {
           </Route>
           <Route path="/">
             <Home />
-          </Route>
-          <Route path="/lobby">
-            <Lobby/>
           </Route>
         </Switch>
       </Container>

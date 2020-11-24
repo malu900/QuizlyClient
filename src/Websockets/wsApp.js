@@ -1,5 +1,7 @@
 import SockJS from 'sockjs-client'
-import Stomp from 'react-stomp'
+import Stomp from 'react-stomp-client'
+import $ from 'jquery';
+
 var stompClient = null;
 
 function setConnected(connected) {
@@ -15,15 +17,21 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/quizly');
+    const socket = new SockJS('/quizly');
     stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
-        setConnected(true);
-        console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/quizes', function (greeting) {
-            showGreeting(JSON.parse(greeting.body).content);
-        });
+    stompClient.connect({}, onConnected(), onError());
+}
+
+function onConnected(){
+    setConnected(true);
+    console.log('Connected: ' + frame);
+    stompClient.subscribe('/topic/quizes', function (greeting) {
+        showGreeting(JSON.parse(greeting.body).content);
     });
+}
+
+function onError(){
+
 }
 
 function disconnect() {
