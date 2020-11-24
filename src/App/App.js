@@ -7,6 +7,7 @@ import Quiz from "../Quiz/AllQuiz";
 import Auth from "../auth/Auth";
 import AddQuestion from "../Quiz/AddQuestion";
 import Home from "../Home";
+import Lobby from "../Lobby/Lobby";
 
 export class App extends Component {
   constructor(props) {
@@ -34,6 +35,9 @@ export class App extends Component {
           </Route>
           <Route path="/">
             <Home />
+          </Route>
+          <Route path="/lobby">
+            <Lobby/>
           </Route>
         </Switch>
       </Container>
