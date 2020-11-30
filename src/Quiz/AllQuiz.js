@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
 import Quiz from "./Quiz";
 import { propTypes } from "react-bootstrap/esm/Image";
+import { connect, disconnect } from '../Websockets/wsApp'
 import axios from 'axios'
 
 export class AllQuiz extends Component {
@@ -14,12 +15,17 @@ export class AllQuiz extends Component {
         };
     }
     componentDidMount() {
+        connect(this.state.Quiz);
         this.findAllQuizzes()
     }
 
     onClickCreateQuiz = (e) => {
         console.log(this.newQuizClicked);
     };
+
+    wsGetQuizzes(){
+    }
+
     findAllQuizzes(){
         axios.get("http://localhost:8081/quiz/getAll")
             .then(response => response.data)
