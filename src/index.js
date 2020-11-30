@@ -9,7 +9,7 @@ import QuestionOverview from "./Quiz/QuestionOverview";
 
 ReactDOM.render(
   <BrowserRouter>
-    <QuestionOverview />
+    <App />
   </BrowserRouter>,
   document.getElementById("root")
 );
