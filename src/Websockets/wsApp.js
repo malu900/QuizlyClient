@@ -16,19 +16,23 @@ function setConnected(connected) {
     $("#greetings").html("");
 }
 
-export function connect(quizList) {
+function connect() {
     const socket = new SockJS('/quizly');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/lobby/quizes', function (message) {
-            showQuizzes(JSON.parse(message.body).content, quizList);
+        stompClient.subscribe('/topic/quizes', function (greeting) {
+            showGreeting(JSON.parse(greeting.body).content);
         });
     });
 }
 
-export function disconnect() {
+function onConnected(){
+
+}
+
+function disconnect() {
     if (stompClient !== null) {
         stompClient.disconnect();
     }
@@ -40,8 +44,8 @@ function sendName() {
     stompClient.send("/app/getAll", {}, JSON.stringify({'name': $("#name").val()}));
 }
 
-function showQuizzes(message, quizList) {
-    quizList.push(message);
+function showGreeting(message) {
+    $("#greetings").append("<tr><td>" + message + "</td></tr>");
 }
 
 $(function () {

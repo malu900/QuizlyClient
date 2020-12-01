@@ -14,10 +14,11 @@ export default class Lobby extends Component {
     }
 
     render() {
-
-
         return (
             <form>
+                {/*<script src="..Websockets/wsApp.js"/>*/}
+                {/*<script src="/webjars/sockjs-client/sockjs.min.js"></script>*/}
+                {/*<script src="/webjars/stomp-websocket/stomp.min.js"></script>*/}
             <div>
                 <label>WebSocket connection:</label>
                 <button id="connect" type="submit">Connect</button>
