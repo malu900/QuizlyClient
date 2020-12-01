@@ -1,8 +1,8 @@
-import SockJS from 'sockjs-client'
-import Stomp from 'react-stomp-client'
+import * as Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client';
 import $ from 'jquery';
 
-var stompClient = null;
+let stompClient = null;
 
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
@@ -17,7 +17,7 @@ function setConnected(connected) {
 }
 
 export function connect(quizList) {
-    const socket = new SockJS('/quizly');
+    const socket = new SockJS('http://localhost:8080/quizly');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
@@ -26,6 +26,7 @@ export function connect(quizList) {
             showQuizzes(JSON.parse(message.body).content, quizList);
         });
     });
+    console.log("subscribe should have happened already..")
 }
 
 export function disconnect() {
