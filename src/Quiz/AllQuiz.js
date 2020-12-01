@@ -20,6 +20,7 @@ export class AllQuiz extends Component {
     onClickCreateQuiz = (e) => {
         console.log(this.newQuizClicked);
     };
+
     findAllQuizzes(){
         axios.get("http://localhost:8081/quiz/getAll")
             .then(response => response.data)
@@ -27,7 +28,7 @@ export class AllQuiz extends Component {
                 this.setState({Quiz: data})
                 console.log(data)
             });
-        //console.log(this.state.Quiz)
+        console.log(this.state.Quiz)
     }
 
     render() {
