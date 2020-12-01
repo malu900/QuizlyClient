@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import wsApp from "../Main/resources/static/wsApp";
+import wsApp from "../Websockets/wsApp";
 
 export default class Lobby extends Component {
     constructor(props) {
