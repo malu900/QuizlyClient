@@ -10,9 +10,6 @@ export class Question extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log("Mounted!");
-  }
   render() {
     return (
       <div>

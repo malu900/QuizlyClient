@@ -10,7 +10,11 @@ export class AddQuiz extends Component {
       createQuestion: false,
       quizName: "",
       createdQuestions: [],
-      questions: [],
+      questions: {
+        answers: {
+          name: "",
+        },
+      },
     };
   }
 
@@ -18,8 +22,8 @@ export class AddQuiz extends Component {
     this.setState({
       createdQuestions: [...this.state.createdQuestions, <AddQuestion />],
     });
-    console.log(e);
-    console.log(this.state.createdQuestions);
+    // console.log(e);
+    // console.log(this.state.createdQuestions);
   };
 
   deleteQuestion = (e) => {
@@ -48,9 +52,9 @@ export class AddQuiz extends Component {
     });
   };
 
-  componentDidUpdate() {
-    console.log(this.state.questions);
-  }
+  // componentDidUpdate() {
+  //   console.log(this.state.questions);
+  // }
 
   addQuestionToQuiz = (question) => {
     this.setState({

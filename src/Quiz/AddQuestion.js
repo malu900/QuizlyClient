@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Card } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import MyToast from "./MyToast";
 import axios from "axios";
-import PropTypes from "prop-types";
+import NewAnswers from "./NewAnswers";
 
 export default class AddQuestion extends Component {
   constructor(props) {
@@ -17,7 +16,13 @@ export default class AddQuestion extends Component {
 
   initialState = {
     questionName: "",
-    answers: "",
+    answers: [],
+    // answers: {
+    //   goodanswer,
+    //   answerOne
+    //   answerTwo
+    //   answerThree
+    // },
   };
 
   submitQuestion = (event) => {
@@ -43,23 +48,35 @@ export default class AddQuestion extends Component {
       questionName: this.state.questionName,
     };
     this.props.addQuestionToQuiz(question);
-
     this.setState({
-      questionName: "",
+      questionName: question.questionName,
     });
+    console.log(this.state.answers);
   };
+
   questionChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
   };
 
+  // componentDidUpdate() {
+  //   console.log(this.state.answers);
+  // }
+
   resetDish = () => {
     this.setState(() => this.initialState);
   };
 
+  submitAnswers = (answers) => {
+    console.log(" test", answers);
+    this.setState({
+      answers: [...this.state.answers, answers],
+    });
+  };
+
   render() {
-    const { questionName, answers } = this.state;
+    const { questionName } = this.state;
     return (
       <div>
         <div style={{ display: this.state.show ? "block" : "none" }}>
@@ -89,22 +106,11 @@ export default class AddQuestion extends Component {
               placeholder="Enter Question"
             />
           </Form.Group>
-          <Form.Group>
-            <Form.Label>Answer</Form.Label>
-            <Form.Control
-              required
-              autoComplete={"off"}
-              type="text"
-              name={"answers"}
-              value={answers}
-              onChange={this.questionChange}
-              className={"bg-dark text-white"}
-              placeholder="Enter answer "
-            />
-          </Form.Group>
-          <Button variant="primary" type="submit">
+          <NewAnswers submittAnswers={this.submitAnswers} />
+          <Button onClick={this.submittAnswers} variant="primary" type="submit">
             Add question
-          </Button>{" "}
+          </Button>
+          {/* <NewAnswers addAnswersToQuiz={this.addAnswersToQuiz} /> */}
           <Button variant="info" type={"reset"}>
             reset
           </Button>

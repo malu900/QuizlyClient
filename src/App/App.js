@@ -7,7 +7,7 @@ import Quiz from "../Quiz/AllQuiz";
 import Auth from "../auth/Auth";
 import AddQuestion from "../Quiz/AddQuestion";
 import Home from "../Home";
-
+import Parent from "../Test/Parent";
 export class App extends Component {
   constructor(props) {
     super(props);
@@ -15,9 +15,7 @@ export class App extends Component {
       login: [],
     };
   }
-  // componentDidMount() {
-  //   console.log("Did mount!");
-  // }
+
   render() {
     return (
       <Container className="App">
@@ -31,6 +29,9 @@ export class App extends Component {
           </Route>
           <Route path="/addquestion">
             <AddQuestion />
+          </Route>
+          <Route path="/parent">
+            <Parent />
           </Route>
           <Route path="/">
             <Home />

@@ -12,9 +12,9 @@ export class AllQuiz extends Component {
     };
   }
 
-  onClickCreateQuiz = (e) => {
-    console.log(this.newQuizClicked);
-  };
+  // onClickCreateQuiz = (e) => {
+  //   console.log(this.newQuizClicked);
+  // };
 
   addQuiz = (quiz) => {
     this.setState({
@@ -22,9 +22,9 @@ export class AllQuiz extends Component {
     });
   };
 
-  componentDidUpdate() {
-    console.log(this.state.Quiz);
-  }
+  // componentDidUpdate() {
+  //   console.log(this.state.Quiz);
+  // }
 
   render() {
     const { newQuizClicked } = this.state;
@@ -46,7 +46,7 @@ export class AllQuiz extends Component {
 
         <div>
           {this.state.Quiz.map((q) => (
-            <Quiz quiz={q} key={q} />
+            <Quiz quiz={q} key={q} questions={q.questions} />
           ))}
         </div>
       </div>
