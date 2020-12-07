@@ -2,19 +2,37 @@ import {Button, Table} from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
 import Quiz from "./Quiz";
-import { propTypes } from "react-bootstrap/esm/Image";
 import axios from 'axios'
 
 export class AllQuiz extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
             newQuizClicked: false,
             Quiz: [],
+            stompClient: null,
         };
     }
     componentDidMount() {
-        this.findAllQuizzes()
+        this.connect();
+        this.state.stompClient.send("/app/getAll",{},"");
+    }
+
+    connect() {
+        const socket = new SockJS('http://localhost:8081/quizly');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, function (frame) {
+            setConnected(true);
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/topic/quizes', function (message) {
+                onMessageReceived(message);
+            });
+        });
+    }
+
+    onMessageReceived(message){
+        this.setState({Quiz: JSON.parse(message)})
     }
 
     onClickCreateQuiz = (e) => {
