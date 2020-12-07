@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
 import Quiz from "./Quiz";
 import axios from 'axios'
+import SockJsClient from 'react-stomp';
 
 export class AllQuiz extends Component {
     
@@ -14,26 +15,10 @@ export class AllQuiz extends Component {
             stompClient: null,
         };
     }
-    componentDidMount() {
-        this.connect();
-        this.state.stompClient.send("/app/getAll",{},"");
-    }
 
-    connect() {
-        const socket = new SockJS('http://localhost:8081/quizly');
-        stompClient = Stomp.over(socket);
-        stompClient.connect({}, function (frame) {
-            setConnected(true);
-            console.log('Connected: ' + frame);
-            stompClient.subscribe('/topic/quizes', function (message) {
-                onMessageReceived(message);
-            });
-        });
-    }
-
-    onMessageReceived(message){
-        this.setState({Quiz: JSON.parse(message)})
-    }
+    sendMessage = () => {
+        this.clientRef.sendMessage('/app/getAll');
+    };
 
     onClickCreateQuiz = (e) => {
         console.log(this.newQuizClicked);
@@ -87,6 +72,23 @@ export class AllQuiz extends Component {
                     }
                     </tbody>
                 </Table>
+                <SockJsClient url='http://localhost:8081/quizly'
+                              topics={['/topic/quizzes']}
+                              onConnect={() => {
+                                  console.log("connected");
+                              }}
+                              onDisconnect={() => {
+                                  console.log("Disconnected");
+                              }}
+                              onMessage={(msg) => {
+                                  var jobs = this.state.Quiz;
+                                  jobs.push(msg);
+                                  this.setState({Quiz: jobs});
+                                  console.log(this.state);
+                              }}
+                              ref={(client) => {
+                                  this.clientRef = client
+                              }}/>
             </div>
 
 
