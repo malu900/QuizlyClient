@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
 import Quiz from "./Quiz";
 import axios from 'axios'
+import * as Stomp from 'stompjs';
+import * as SockJS from 'sockjs-client';
 
 export class AllQuiz extends Component {
     
@@ -21,12 +23,14 @@ export class AllQuiz extends Component {
 
     connect() {
         const socket = new SockJS('http://localhost:8081/quizly');
-        stompClient = Stomp.over(socket);
-        stompClient.connect({}, function (frame) {
-            setConnected(true);
+        this.state.stompClient = Stomp.over(socket);
+            
+        console.log("Stompclient rn: " +  this.state.stompClient)
+        this.state.stompClient.connect({}, function (frame) {
             console.log('Connected: ' + frame);
-            stompClient.subscribe('/topic/quizes', function (message) {
-                onMessageReceived(message);
+            this.state.stompClient.subscribe('/topic/quizzes', function (message) {
+                this.onMessageReceived(message);
+                console.log("Message: " + message)
             });
         });
     }
