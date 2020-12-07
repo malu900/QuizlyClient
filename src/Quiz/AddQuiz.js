@@ -9,12 +9,17 @@ export class AddQuiz extends Component {
       id: 0,
       createQuestion: false,
       quizName: "",
+      // <<<<<<< HEAD
       createdQuestions: [],
       questions: {
         answers: {
           name: "",
         },
       },
+      // =======
+      //       questions: [],
+      //       questionsData: []
+      // >>>>>>> cfc7003299b6031e574f355e599a8527f9d8cc1c
     };
   }
 
@@ -55,10 +60,19 @@ export class AddQuiz extends Component {
   // }
 
   addQuestionToQuiz = (question) => {
+    // <<<<<<< HEAD
     console.log(question);
     // this.setState({
     //   questions: [...this.state.questions, question],
     // });
+    // =======
+    //     this.setState({
+    //       questionsData: [...this.state.questionsData, question],
+    //     });
+    //     this.state.questionsData.forEach(item => console.log(item));
+    //     console.log(this.state.questionsData.length);
+    //     // console.log(this.state.questionsData)
+    // >>>>>>> cfc7003299b6031e574f355e599a8527f9d8cc1c
   };
 
   render() {
