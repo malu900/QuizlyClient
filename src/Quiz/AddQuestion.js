@@ -16,13 +16,7 @@ export default class AddQuestion extends Component {
 
   initialState = {
     questionName: "",
-    answers: [],
-    // answers: {
-    //   goodanswer,
-    //   answerOne
-    //   answerTwo
-    //   answerThree
-    // },
+    answerss: [],
   };
 
   submitQuestion = (event) => {
@@ -46,12 +40,10 @@ export default class AddQuestion extends Component {
     e.preventDefault();
     let question = {
       questionName: this.state.questionName,
+      answers: this.state.answerss,
     };
     this.props.addQuestionToQuiz(question);
-    this.setState({
-      questionName: question.questionName,
-    });
-    console.log(this.state.answers);
+    console.log(this.state.answerss);
   };
 
   questionChange = (event) => {
@@ -60,20 +52,18 @@ export default class AddQuestion extends Component {
     });
   };
 
-  // componentDidUpdate() {
-  //   console.log(this.state.answers);
-  // }
-
   resetDish = () => {
     this.setState(() => this.initialState);
   };
 
   submitAnswers = (answers) => {
-    console.log(" test", answers);
     this.setState({
-      answers: [...this.state.answers, answers],
+      answerss: answers,
     });
   };
+  componentDidUpdate() {
+    console.log(" answeeeeeeers", this.state.answerss);
+  }
 
   render() {
     const { questionName } = this.state;
@@ -106,8 +96,8 @@ export default class AddQuestion extends Component {
               placeholder="Enter Question"
             />
           </Form.Group>
-          <NewAnswers submittAnswers={this.submitAnswers} />
-          <Button onClick={this.submittAnswers} variant="primary" type="submit">
+          <NewAnswers onChange={this.submitAnswers} />
+          <Button variant="primary" type="submit">
             Add question
           </Button>
           {/* <NewAnswers addAnswersToQuiz={this.addAnswersToQuiz} /> */}

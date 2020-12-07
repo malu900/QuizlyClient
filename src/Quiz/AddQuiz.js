@@ -22,8 +22,6 @@ export class AddQuiz extends Component {
     this.setState({
       createdQuestions: [...this.state.createdQuestions, <AddQuestion />],
     });
-    // console.log(e);
-    // console.log(this.state.createdQuestions);
   };
 
   deleteQuestion = (e) => {
@@ -57,9 +55,10 @@ export class AddQuiz extends Component {
   // }
 
   addQuestionToQuiz = (question) => {
-    this.setState({
-      questions: [...this.state.questions, question],
-    });
+    console.log(question);
+    // this.setState({
+    //   questions: [...this.state.questions, question],
+    // });
   };
 
   render() {

@@ -12,21 +12,17 @@ export class NewAnswers extends Component {
     };
   }
 
-  onChange = (e) => {
+  handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
-  };
-  submittAnswers = () => {
     let answers = {
       goodanswer: this.state.goodanswer,
       answerOne: this.state.answerOne,
       answerTwo: this.state.answerTwo,
       answerThree: this.state.answerThree,
     };
-    this.props.submitAnswers(answers);
-    console.log(this.state.answerOne);
-    console.log(" pff", answers.goodanswer);
+    this.props.onChange(answers);
   };
 
   render() {
@@ -40,7 +36,7 @@ export class NewAnswers extends Component {
             type="text"
             name="goodanswer"
             value={this.state.goodanswer}
-            onChange={this.onChange}
+            onChange={this.handleChange}
             className={"bg-dark text-white"}
             placeholder="Enter answer "
           />
@@ -53,7 +49,7 @@ export class NewAnswers extends Component {
             type="text"
             name="answerOne"
             value={this.state.answerOne}
-            onChange={this.onChange}
+            onChange={this.handleChange}
             className={"bg-dark text-white"}
             placeholder="Enter answer "
           />
@@ -66,7 +62,7 @@ export class NewAnswers extends Component {
             type="text"
             name="answerTwo"
             value={this.state.answerTwo}
-            onChange={this.onChange}
+            onChange={this.handleChange}
             className={"bg-dark text-white"}
             placeholder="Enter answer "
           />
@@ -79,7 +75,7 @@ export class NewAnswers extends Component {
             type="text"
             name="answerThree"
             value={this.state.answerThree}
-            onChange={this.onChange}
+            onChange={this.handleChange}
             className={"bg-dark text-white"}
             placeholder="Enter answer "
           />
