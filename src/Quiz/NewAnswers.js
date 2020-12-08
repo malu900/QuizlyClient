@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
+import "../App/App.scss";
 
 export class NewAnswers extends Component {
   constructor(props) {
@@ -27,8 +28,8 @@ export class NewAnswers extends Component {
 
   render() {
     return (
-      <div>
-        <Form.Group>
+      <div id="answers">
+        <Form.Group className="answers">
           <Form.Label>Right answer</Form.Label>
           <Form.Control
             required
@@ -41,7 +42,7 @@ export class NewAnswers extends Component {
             placeholder="Enter answer "
           />
         </Form.Group>
-        <Form.Group>
+        <Form.Group className="answers">
           <Form.Label>Answer 1</Form.Label>
           <Form.Control
             required
@@ -54,7 +55,7 @@ export class NewAnswers extends Component {
             placeholder="Enter answer "
           />
         </Form.Group>
-        <Form.Group>
+        <Form.Group className="answers">
           <Form.Label>Answer 2</Form.Label>
           <Form.Control
             required
@@ -67,7 +68,7 @@ export class NewAnswers extends Component {
             placeholder="Enter answer "
           />
         </Form.Group>
-        <Form.Group>
+        <Form.Group className="answers">
           <Form.Label>Answer 3</Form.Label>
           <Form.Control
             required
