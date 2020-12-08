@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import MyToast from "./MyToast";
 import axios from "axios";
+import PropTypes from "prop-types";
 
 export default class AddQuestion extends Component {
   constructor(props) {
@@ -21,7 +22,6 @@ export default class AddQuestion extends Component {
 
   submitQuestion = (event) => {
     event.preventDefault();
-
     const question = {
       questionName: this.state.questionName,
       answers: this.state.answers,
@@ -35,8 +35,22 @@ export default class AddQuestion extends Component {
       }
     });
     this.setState(this.initialState);
+    // console.log(this.state.que);
   };
 
+  onSubmit = (e) => {
+    e.preventDefault();
+    let question = {
+      questionName: this.state.questionName,
+      answers: this.state.answers
+    };
+    this.props.addQuestionToQuiz(question);
+
+    this.setState({
+      questionName: "",
+      answers: []
+    });
+  };
   questionChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -62,7 +76,7 @@ export default class AddQuestion extends Component {
 
         <Form
           onReset={this.resetQuestion}
-          onSubmit={this.submitQuestion}
+          onSubmit={this.onSubmit}
           id={"questionId"}
         >
           <Form.Group>

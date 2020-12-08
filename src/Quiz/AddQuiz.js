@@ -10,19 +10,15 @@ export class AddQuiz extends Component {
       createQuestion: false,
       quizName: "",
       questions: [],
+      questionsData: []
     };
-  }
-  componentDidUpdate() {
-    console.log(this.props.Quiz);
-  }
-  componentDidMount() {
-    console.log(this.props.Quiz);
   }
 
   newQuestion = (e) => {
     this.setState({
       questions: [...this.state.questions, <AddQuestion />],
     });
+    console.log(this.state.questions);
   };
 
   deleteQuestion = (e) => {
@@ -34,36 +30,66 @@ export class AddQuiz extends Component {
   };
 
   onChange = (e) => {
-    this.setState = {
+    this.setState({
       [e.target.name]: e.target.value,
+    });
+  };
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    let quiz = {
+      quizName: this.state.quizName,
     };
+    this.props.addQuiz(quiz);
+
+    this.setState({
+      quizName: "",
+    });
+  };
+
+  componentDidUpdate() {
+    console.log(this.state.questions);
+  }
+
+  addQuestionToQuiz = (question) => {
+    this.setState({
+      questionsData: [...this.state.questionsData, question],
+    });
+    this.state.questionsData.forEach(item => console.log(item));
+    console.log(this.state.questionsData.length);
+    // console.log(this.state.questionsData)
   };
 
   render() {
     return (
       <div>
-        <Form>
+        <Form onSubmit={this.onSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Quiz name</Form.Label>
             <Form.Control
-              type="QuizName"
+              type="quizName"
+              name="quizName"
               placeholder="quiz name"
               value={this.state.quizName}
               onChange={this.onChange}
+              required
             />
             <Form.Text className="text-muted"></Form.Text>
           </Form.Group>
-          <Button onClick={this.newQuestion}>Create Question</Button>
-          <div>
-            {this.state.questions.map((question) => (
-              <AddQuestion key={question.name} />
-            ))}
-          </div>
-          {/* <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit">
             Submit Quiz
-          </Button> */}
-          <Button onClick={this.deleteQuestion}>remove Question</Button>
+          </Button>
         </Form>
+        <Button onClick={this.newQuestion}>Create Question</Button>
+        <div>
+          {this.state.questions.map((question) => (
+            <AddQuestion
+              key={question.name}
+              addQuestionToQuiz={this.addQuestionToQuiz}
+            />
+          ))}
+        </div>
+        <Button onClick={this.deleteQuestion}>remove Question</Button>
       </div>
     );
   }
