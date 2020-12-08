@@ -1,23 +1,29 @@
 import {Button, Table} from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
+import Quiz from "./Quiz";
 import axios from 'axios'
+import SockJsClient from 'react-stomp';
 
 export class AllQuiz extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
             newQuizClicked: false,
             Quiz: [],
+            stompClient: null,
         };
     }
-    componentDidMount() {
-        this.findAllQuizzes()
-    }
+
+    sendMessage = () => {
+        this.clientRef.sendMessage('/app/getAll');
+    };
 
     onClickCreateQuiz = (e) => {
         console.log(this.newQuizClicked);
     };
+
     findAllQuizzes(){
         axios.get("http://localhost:8081/quiz/getAll")
             .then(response => response.data)
@@ -25,7 +31,7 @@ export class AllQuiz extends Component {
                 this.setState({Quiz: data})
                 console.log(data)
             });
-        //console.log(this.state.Quiz)
+        console.log(this.state.Quiz)
     }
 
     render() {
@@ -66,6 +72,23 @@ export class AllQuiz extends Component {
                     }
                     </tbody>
                 </Table>
+                <SockJsClient url='http://localhost:8081/quizly'
+                              topics={['/topic/quizzes']}
+                              onConnect={() => {
+                                  console.log("connected");
+                              }}
+                              onDisconnect={() => {
+                                  console.log("Disconnected");
+                              }}
+                              onMessage={(msg) => {
+                                  var jobs = this.state.Quiz;
+                                  jobs.push(msg);
+                                  this.setState({Quiz: jobs});
+                                  console.log(this.state);
+                              }}
+                              ref={(client) => {
+                                  this.clientRef = client
+                              }}/>
             </div>
 
 
