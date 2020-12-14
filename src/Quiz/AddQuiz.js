@@ -17,6 +17,7 @@ export class AddQuiz extends Component {
       //   },
       // },
       // =======
+      Quiz: [],
       questions: [],
       questionsData: [],
       // >>>>>>> cfc7003299b6031e574f355e599a8527f9d8cc1c
@@ -49,8 +50,14 @@ export class AddQuiz extends Component {
       quizName: this.state.quizName,
       questions: this.state.questions,
     };
+    // this.setState({
+    //   Quiz: [...this.state.Quiz, quiz],
+    // });
     this.props.addQuiz(quiz);
   };
+  // componentDidUpdate() {
+  //   console.log("testtttt " + quiz);
+  // }
 
   addQuestionToQuiz = (question) => {
     console.log(question);

@@ -7,13 +7,13 @@ import Quiz from "../Quiz/AllQuiz";
 import Auth from "../auth/Auth";
 import AddQuestion from "../Quiz/AddQuestion";
 import Home from "../Home";
-<<<<<<< HEAD
-import Parent from "../Test/Parent";
-=======
+// <<<<<<< HEAD
+// import Parent from "../Test/Parent";
+// =======
 import Lobby from "../Lobby/Lobby";
 import Guest from "../auth/Guest";
 
->>>>>>> 62115990f07f0455acbe6b0cb82cd8e1dc62bf4a
+// >>>>>>> 62115990f07f0455acbe6b0cb82cd8e1dc62bf4a
 export class App extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +28,7 @@ export class App extends Component {
         <AppHeader> </AppHeader>
         <Switch>
           <Route path="/lobby">
-            <Lobby/>
+            <Lobby />
           </Route>
           <Route path="/login">
             <Auth />
@@ -42,9 +42,9 @@ export class App extends Component {
           <Route path="/addquestion">
             <AddQuestion />
           </Route>
-          <Route path="/parent">
+          {/* <Route path="/parent">
             <Parent />
-          </Route>
+          </Route> */}
           <Route path="/">
             <Guest />
           </Route>
