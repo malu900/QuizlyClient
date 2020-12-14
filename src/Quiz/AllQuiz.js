@@ -4,13 +4,15 @@ import AddQuiz from "./AddQuiz";
 import Quiz from "./Quiz";
 import axios from "axios";
 import SockJsClient from "react-stomp";
+import { Link } from "react-router-dom";
 
 export class AllQuiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
       newQuizClicked: false,
-      Quiz: [],
+      Quizzes: [],
+      NewQuiz: [],
       stompClient: null,
     };
   }
@@ -75,15 +77,25 @@ export class AllQuiz extends Component {
       .get("http://localhost:8081/quiz/getAll")
       .then((response) => response.data)
       .then((data) => {
-        this.setState({ Quiz: data });
+        this.setState({ NewQuiz: data });
         console.log(data);
       });
-    console.log(this.state.Quiz);
+    console.log(this.state.NewQuiz);
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.sendMessage();
+      console.log(this.state.NewQuiz);
+    }, 1000);
+  }
+
+  startQuiz() {
+    console.log("Start");
   }
 
   render() {
     const { newQuizClicked } = this.state;
-    const quizzes = this.state.Quiz;
     return (
       <div>
         <Button
@@ -106,20 +118,26 @@ export class AllQuiz extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.Quiz.length === 0 ? (
+            {this.state.NewQuiz.length === 0 ? (
               <tr align={"center"}>
                 <td colSpan={"4"}>
                   {" "}
-                  {this.state.Quiz.length} You have quizzes ready to start
+                  {this.state.NewQuiz.length} You have quizzes ready to start
                 </td>
               </tr>
             ) : (
-              this.state.Quiz.map((quiz) => (
-                <tr key={quiz.quizId}>
-                  <td>{quiz.quizName}</td>
-                  {/*{<td><Button onClick={this.startQuiz(quiz)}>Start Quiz</Button></td>}*/}
-                </tr>
-              ))
+              this.state.NewQuiz.map((quiz) =>
+                quiz.map((q) => (
+                  <tr key={q.quizId}>
+                    <td>{q.quizName}</td>
+                    {
+                      <td>
+                        <Link to={"/quiz/lobby/" + q.quizId}> Join </Link>
+                      </td>
+                    }
+                  </tr>
+                ))
+              )
             )}
           </tbody>
         </Table>
@@ -133,9 +151,9 @@ export class AllQuiz extends Component {
             console.log("Disconnected");
           }}
           onMessage={(msg) => {
-            var jobs = this.state.Quiz;
+            var jobs = this.state.NewQuiz;
             jobs.push(msg);
-            this.setState({ Quiz: jobs });
+            this.setState({ NewQuiz: jobs });
             console.log(this.state);
           }}
           ref={(client) => {
