@@ -1,9 +1,8 @@
 import {Button, Table} from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
-import Quiz from "./Quiz";
 import axios from 'axios'
-import SockJsClient from 'react-stomp';
+import {connect, onMessageReceived} from '../Ws/WsService'
 
 export class AllQuiz extends Component {
     
@@ -14,6 +13,10 @@ export class AllQuiz extends Component {
             Quiz: [],
             stompClient: null,
         };
+    }
+
+    componentDidMount = () => {
+        connect();
     }
 
     sendMessage = () => {
@@ -72,7 +75,7 @@ export class AllQuiz extends Component {
                     }
                     </tbody>
                 </Table>
-                <SockJsClient url='http://localhost:8081/quizly'
+                {/* <SockJsClient url='http://localhost:8081/quizly'
                               topics={['/topic/quizzes']}
                               onConnect={() => {
                                   console.log("connected");
@@ -88,7 +91,7 @@ export class AllQuiz extends Component {
                               }}
                               ref={(client) => {
                                   this.clientRef = client
-                              }}/>
+                              }}/> */}
             </div>
 
 
