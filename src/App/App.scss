@@ -46,11 +46,6 @@ body {
     min-height: 100vh !important;
 }
 
-.animate-bg {
-    -webkit-animation: bgcolorchange 10s infinite;
-    animation: 4s infinite bgcolorchange;
-}
-
 #content-container {
     // background: rgba(0, 0, 0, 0.3);
     // height: 90%!important;
@@ -100,13 +95,6 @@ body {
     padding: 20px;
 }
 
-// #register {
-//     position: absolute;
-//     left: 0;
-//     top: 0;
-//     z-index: 999;
-//     padding: 0;
-// }
 #auth {
     // height: 90vh;
     display: flex;
@@ -139,38 +127,6 @@ body {
     }
 }
 
-@keyframes bgcolorchange {
-    0% {
-        background-color: red;
-    }
-    25% {
-        background-color: green;
-    }
-    50% {
-        background-color: yellow;
-    }
-    75% {
-        background-color: yellow;
-    }
-    100% {
-        background-color: red;
-    }
-}
-
-
-/* Chrome, Safari, Opera */
-
-@-webkit-keyframes bgcolorchange {
-    0% {
-        background: red;
-    }
-    25% {
-        background: yellow;
-    }
-    75% {
-        background: green;
-    }
-    100% {
-        background: blue;
-    }
+.animate-bg {
+    background-color: pink;
 }
