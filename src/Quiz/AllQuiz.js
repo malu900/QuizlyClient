@@ -1,7 +1,6 @@
 import { Button, Table } from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
-import Quiz from "./Quiz";
 import axios from "axios";
 import SockJsClient from "react-stomp";
 import { Link } from "react-router-dom";
@@ -12,6 +11,7 @@ export class AllQuiz extends Component {
     this.state = {
       newQuizClicked: false,
       Quizzes: [],
+      Quiz: [],
       NewQuiz: [],
       stompClient: null,
     };
@@ -20,10 +20,6 @@ export class AllQuiz extends Component {
   sendMessage = () => {
     this.clientRef.sendMessage("/app/getAll");
   };
-
-  // onClickCreateQuiz = (e) => {
-  //   console.log(this.newQuizClicked);
-  // };
 
   addQuiz = (quiz) => {
     console.log(quiz);
@@ -35,38 +31,6 @@ export class AllQuiz extends Component {
   componentDidUpdate() {
     console.log(this.state.Quiz);
   }
-
-  // componentDidUpdate() {
-  //   console.log(this.state.Quiz);
-  // }
-
-  // render() {
-  //   const { newQuizClicked } = this.state;
-  //   return (
-  //     <div>
-  //       <Button
-  //         onClick={() => this.setState({ newQuizClicked: !newQuizClicked })}
-  //       >
-  //         {newQuizClicked ? "Remove quiz" : "Add quiz"}
-  //       </Button>
-  //       <div>
-  //         {newQuizClicked ? <AddQuiz addQuiz={this.addQuiz} /> : <div></div>}
-  //       </div>
-  //       {newQuizClicked ? (
-  //         <Button variant="primary" type="submit">
-  //           Submit Quiz and question
-  //         </Button>
-  //       ) : null}
-
-  //       <div>
-  //         {this.state.Quiz.map((q) => (
-  //           <Quiz quiz={q} key={q} questions={q.questions} />
-  //         ))}
-  //       </div>
-  //     </div>
-  //   );
-  // }
-  // }
 
   onClickCreateQuiz = (e) => {
     console.log(this.newQuizClicked);

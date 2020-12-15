@@ -7,12 +7,20 @@
 body {
     background-color: #f7f7f7!important;
     position: relative;
+    height: 100%!important;
+    min-height: 100%!important;
 }
 
 #AppHeader {
     height: 10vh;
+    width: 100% !important;
     display: flex;
     align-items: center;
+    z-index: 9999;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-content: center;
     .row {
         justify-content: space-between!important;
         width: 100%!important;
@@ -30,6 +38,47 @@ body {
             }
         }
     }
+}
+
+.App {
+    display: flex;
+    flex-flow: column;
+    min-height: 100vh !important;
+}
+
+.animate-bg {
+    -webkit-animation: bgcolorchange 10s infinite;
+    animation: 4s infinite bgcolorchange;
+}
+
+#content-container {
+    // background: rgba(0, 0, 0, 0.3);
+    // height: 90%!important;
+    // box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    flex-grow: 1;
+    #center-content {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 15px;
+        border-radius: 5px;
+        // position: absolute;
+        // top: 0;
+        // bottom: 0;
+        // width: 1000px;
+        // min-height: 100%;
+    }
+}
+
+#playersListLobby ul {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 #answers {
@@ -59,11 +108,11 @@ body {
 //     padding: 0;
 // }
 #auth {
-    height: 90vh;
+    // height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: -10vh;
+    // margin-top: -10vh;
     .auth {
         background-color: white;
         padding: 5vw;
@@ -87,5 +136,41 @@ body {
                 background-color: black;
             }
         }
+    }
+}
+
+@keyframes bgcolorchange {
+    0% {
+        background-color: red;
+    }
+    25% {
+        background-color: green;
+    }
+    50% {
+        background-color: yellow;
+    }
+    75% {
+        background-color: yellow;
+    }
+    100% {
+        background-color: red;
+    }
+}
+
+
+/* Chrome, Safari, Opera */
+
+@-webkit-keyframes bgcolorchange {
+    0% {
+        background: red;
+    }
+    25% {
+        background: yellow;
+    }
+    75% {
+        background: green;
+    }
+    100% {
+        background: blue;
     }
 }
