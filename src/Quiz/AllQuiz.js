@@ -1,6 +1,7 @@
 import { Button, Table } from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
+<<<<<<< HEAD
 import Quiz from "./Quiz";
 import axios from "axios";
 import SockJsClient from "react-stomp";
@@ -14,6 +15,28 @@ export class AllQuiz extends Component {
       Quizzes: [],
       NewQuiz: [],
       stompClient: null,
+=======
+import axios from 'axios'
+import {connect, onMessageReceived} from '../Ws/WsService'
+
+export class AllQuiz extends Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            newQuizClicked: false,
+            Quiz: [],
+            stompClient: null,
+        };
+    }
+
+    componentDidMount = () => {
+        connect();
+    }
+
+    sendMessage = () => {
+        this.clientRef.sendMessage('/app/getAll');
+>>>>>>> devRens
     };
   }
 
@@ -25,6 +48,7 @@ export class AllQuiz extends Component {
   //   console.log(this.newQuizClicked);
   // };
 
+<<<<<<< HEAD
   addQuiz = (quiz) => {
     console.log(quiz);
     this.setState({
@@ -39,6 +63,64 @@ export class AllQuiz extends Component {
   // componentDidUpdate() {
   //   console.log(this.state.Quiz);
   // }
+=======
+    render() {
+        const {newQuizClicked} = this.state;
+        const quizzes = this.state.Quiz;
+        return (
+            <div>
+                <Button
+                    onClick={() => this.setState({newQuizClicked: !newQuizClicked})}
+                >
+                    {newQuizClicked ? "Remove quiz" : "Add quiz"}
+                </Button>
+                <div>
+                    {newQuizClicked ? <AddQuiz Quiz={this.state.Quiz}/> : <div></div>}
+                </div>
+                {newQuizClicked ? (
+                    <Button variant="primary" type="submit">
+                        Submit Quiz
+                    </Button>
+                ) : null}
+                <Table bordered hover striped variant>
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {this.state.Quiz.length === 0 ?
+                        <tr align={"center"}>
+                            <td colSpan={"4"}> {this.state.Quiz.length} You have quizzes ready to start</td>
+                        </tr> :
+                        this.state.Quiz.map((quiz) => (
+                            <tr key={quiz.quizId}>
+                                <td>{quiz.quizName}</td>
+                                {/*{<td><Button onClick={this.startQuiz(quiz)}>Start Quiz</Button></td>}*/}
+                            </tr>
+                        ))
+                    }
+                    </tbody>
+                </Table>
+                {/* <SockJsClient url='http://localhost:8081/quizly'
+                              topics={['/topic/quizzes']}
+                              onConnect={() => {
+                                  console.log("connected");
+                              }}
+                              onDisconnect={() => {
+                                  console.log("Disconnected");
+                              }}
+                              onMessage={(msg) => {
+                                  var jobs = this.state.Quiz;
+                                  jobs.push(msg);
+                                  this.setState({Quiz: jobs});
+                                  console.log(this.state);
+                              }}
+                              ref={(client) => {
+                                  this.clientRef = client
+                              }}/> */}
+            </div>
+>>>>>>> devRens
 
   // render() {
   //   const { newQuizClicked } = this.state;
