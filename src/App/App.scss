@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 * {
     text-decoration: none!important;
     list-style: none;
@@ -12,6 +13,8 @@ body {
 }
 
 #AppHeader {
+    width: inherit;
+    max-width: inherit;
     height: 10vh;
     width: 100% !important;
     display: flex;
@@ -23,7 +26,8 @@ body {
     justify-content: center;
     .row {
         justify-content: space-between!important;
-        width: 100%!important;
+        // width: 100%!important;
+        width: 60%;
         ul {
             margin: 15px!important;
             padding: 0;
@@ -31,6 +35,10 @@ body {
                 display: inline;
                 a {
                     padding: 15px;
+                    font-family: 'PT Sans', sans-serif;
+                    font-weight: 600;
+                    font-size: 1.6em;
+                    color: white;
                 }
                 a:hover {
                     border-bottom: 1px solid red;
