@@ -38,7 +38,7 @@ export class Login extends Component {
       if (response.data != null) {
         // console.log(response.data);
         /*localStorage.setItem('token', response.data.token);*/
-        //localStorage.setItem('userId', response.data.userId);
+        localStorage.setItem('userId', response.data.userId);
         this.setState({ show: true });
         setTimeout(() => this.setState({ show: false }), 3000);
       }

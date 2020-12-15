@@ -1,6 +1,7 @@
 import { Button, Form } from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuestion from "./AddQuestion";
+import axios from 'axios';
 
 export class AddQuiz extends Component {
   constructor(props) {
@@ -22,8 +23,32 @@ export class AddQuiz extends Component {
       questionsData: [],
       // >>>>>>> cfc7003299b6031e574f355e599a8527f9d8cc1c
     };
+    this.submitQuiz = this.submitQuiz.bind(this);
+  }
+  componentDidMount() {
+    localStorage.setItem('userId', '13');
   }
 
+  submitQuiz = event => {
+    event.preventDefault();
+
+    const quiz ={
+      quizName: this.state.quizName,
+      questions: this.state.questions,
+
+    };
+    axios.post("http://localhost:8081/quiz/" + localStorage.getItem('userId'), quiz)
+        .then(response =>{
+          if(response.data != null){
+            //als er een response is betekent dat dat de methode gelukt is en kan er dus iets weergegeven worden
+            console.log(response.data);
+          }
+          else{
+            //als de response null is moet de pagina niets doen
+          }
+        })
+    this.setState(this.initialState);
+  };
   newQuestion = (e) => {
     this.setState({
       createdQuestions: [...this.state.createdQuestions, <AddQuestion />],
@@ -85,9 +110,10 @@ export class AddQuiz extends Component {
             />
             <Form.Text className="text-muted"></Form.Text>
           </Form.Group>
-          <Button variant="primary" type="submit">
+          {/*<Button variant="primary" type="submit">
             Submit Quiz
-          </Button>
+          </Button>*/}
+          <Button onClick={this.submitQuiz}>submit quiz</Button>
         </Form>
         <Button onClick={this.newQuestion}>Create Question</Button>
         <div>
