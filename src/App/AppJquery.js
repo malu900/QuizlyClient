@@ -15,7 +15,17 @@ import $ from "jquery";
 var arr = ["#f00", "#0f0", "#00f"];
 function changeColor() {
   $(".animate-bg").css({
-    backgroundColor: arr[parseInt(Math.random() * 3)],
+    "background-color":
+      "rgba(" +
+      Math.floor(Math.random() * 255) +
+      1 +
+      "," +
+      Math.floor(Math.random() * 255) +
+      1 +
+      "," +
+      Math.floor(Math.random() * 255) +
+      1 +
+      ", 0.7)",
     transition: "all 8s",
   });
 }

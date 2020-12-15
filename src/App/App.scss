@@ -129,4 +129,41 @@ body {
 
 .animate-bg {
     background-color: pink;
+    // opacity: 0.5;
 }
+
+// @keyframes bgcolorchange {
+//     0% {
+//         background-color: pink;
+//     }
+//     25% {
+//         background-color: magenta;
+//     }
+//     50% {
+//         background-color: blue;
+//     }
+//     75% {
+//         background-color: purple;
+//     }
+//     100% {
+//         background-color: red;
+//     }
+// }
+// /* Chrome, Safari, Opera */
+// @-webkit-keyframes bgcolorchange {
+//     0% {
+//         background-color: pink;
+//     }
+//     25% {
+//         background-color: magenta;
+//     }
+//     50% {
+//         background-color: blue;
+//     }
+//     75% {
+//         background-color: purple;
+//     }
+//     100% {
+//         background-color: red;
+//     }
+// }
