@@ -17,6 +17,11 @@ export default class Lobby extends Component {
   componentDidMount() {
     console.log("bruh lobby component mounted!");
   }
+  addPlayerToLobby = (playerIdOrCode = 5) => {
+    this.setState({
+      Players: [...this.state.Players, playerIdOrCode],
+    });
+  };
 
   render() {
     return (
@@ -54,14 +59,15 @@ export default class Lobby extends Component {
         </form>
         <div id="playersListLobby">
           <ul>
-            <li>Quiz master</li> <Button> Start Quiz</Button>
+            <li>Quiz master</li>{" "}
+            <Button onClick={() => this.addPlayerToLobby()}> Start Quiz</Button>
           </ul>
           <ul>
-            {Array(4)
-              .fill(1)
-              .map((el, i) => (
-                <li> Player name </li>
-              ))}
+            {this.state.Players.length
+              ? this.state.Players.map((player) => (
+                  <p key={player}> {player} </p>
+                ))
+              : ""}
           </ul>
         </div>
       </div>
