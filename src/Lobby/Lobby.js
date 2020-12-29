@@ -60,7 +60,10 @@ export default class Lobby extends Component {
         <div id="playersListLobby">
           <ul>
             <li>Quiz master</li>{" "}
-            <Button onClick={() => this.addPlayerToLobby()}> Start Quiz</Button>
+            <Button onClick={() => this.addPlayerToLobby()}>
+              {" "}
+              add player to lobby
+            </Button>
           </ul>
           <ul>
             {this.state.Players.length
