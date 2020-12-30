@@ -2,7 +2,7 @@ import {Button, Table} from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
 import axios from 'axios'
-import {connect, onMessageReceived, showAllQuizzes, getQuizzes} from '../Ws/WsService'
+import {connect, joinQuiz, showAllQuizzes, getQuizzes} from '../Ws/WsService'
 
 export class AllQuiz extends Component {
     
@@ -29,6 +29,10 @@ export class AllQuiz extends Component {
     onClickCreateQuiz = (e) => {
         console.log(this.newQuizClicked);
     };
+
+    joinQuiz = (id) => {
+        joinQuiz(id, /*todo user toevoegen*/);
+    }
 
     render() {
         const {newQuizClicked} = this.state;
@@ -63,10 +67,9 @@ export class AllQuiz extends Component {
                             <td colSpan={"4"}> {quizzes.length} You have quizzes ready to start</td>
                         </tr> :
                         quizzes.map((quiz) => (
-                            console.log(quiz),
                                 <tr key={quiz.quizId}>
                                 <td>{quiz.quizName}</td>
-                                {/*{<td><Button onClick={this.startQuiz(quiz)}>Start Quiz</Button></td>}*/}
+                                {<Button onClick={this.joinQuiz(quiz)}>Start Quiz</Button>}
                             </tr>
                         ))
                     }

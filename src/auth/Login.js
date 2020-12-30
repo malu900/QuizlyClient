@@ -53,7 +53,7 @@ export class Login extends Component {
     const { email, password } = this.state;
     return (
       <Container id="login">
-        <h2> Login</h2>
+        <h2>Login</h2>
         <Form onReset={this.resetLogin} onSubmit={this.onSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
