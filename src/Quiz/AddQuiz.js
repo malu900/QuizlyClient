@@ -9,16 +9,25 @@ export class AddQuiz extends Component {
       id: 0,
       createQuestion: false,
       quizName: "",
+      // <<<<<<< HEAD
+      createdQuestions: [],
+      // questions: {
+      //   answers: {
+      //     name: "",
+      //   },
+      // },
+      // =======
+      Quiz: [],
       questions: [],
-      questionsData: []
+      questionsData: [],
+      // >>>>>>> cfc7003299b6031e574f355e599a8527f9d8cc1c
     };
   }
 
   newQuestion = (e) => {
     this.setState({
-      questions: [...this.state.questions, <AddQuestion />],
+      createdQuestions: [...this.state.createdQuestions, <AddQuestion />],
     });
-    console.log(this.state.questions);
   };
 
   deleteQuestion = (e) => {
@@ -39,26 +48,26 @@ export class AddQuiz extends Component {
     e.preventDefault();
     let quiz = {
       quizName: this.state.quizName,
+      questions: this.state.questions,
     };
+    // this.setState({
+    //   Quiz: [...this.state.Quiz, quiz],
+    // });
     this.props.addQuiz(quiz);
+  };
+  // componentDidUpdate() {
+  //   console.log("testtttt " + quiz);
+  // }
 
+  addQuestionToQuiz = (question) => {
+    console.log(question);
     this.setState({
-      quizName: "",
+      questions: [...this.state.questions, question],
     });
   };
-
   componentDidUpdate() {
     console.log(this.state.questions);
   }
-
-  addQuestionToQuiz = (question) => {
-    this.setState({
-      questionsData: [...this.state.questionsData, question],
-    });
-    this.state.questionsData.forEach(item => console.log(item));
-    console.log(this.state.questionsData.length);
-    // console.log(this.state.questionsData)
-  };
 
   render() {
     return (
@@ -82,14 +91,14 @@ export class AddQuiz extends Component {
         </Form>
         <Button onClick={this.newQuestion}>Create Question</Button>
         <div>
-          {this.state.questions.map((question) => (
+          {this.state.createdQuestions.map((question) => (
             <AddQuestion
               key={question.name}
               addQuestionToQuiz={this.addQuestionToQuiz}
             />
           ))}
         </div>
-        <Button onClick={this.deleteQuestion}>remove Question</Button>
+        {/* <Button onClick={this.deleteQuestion}>remove Question</Button> */}
       </div>
     );
   }

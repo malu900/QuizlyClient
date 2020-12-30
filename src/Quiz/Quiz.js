@@ -5,14 +5,18 @@ export class Quiz extends Component {
     super(props);
     this.state = {
       quizName: "",
+      questions: [],
     };
   }
+
+  componentDidMount() {
+    this.setState({
+      quizName: this.props.quiz,
+      questions: this.props.questions,
+    });
+  }
   render() {
-    return (
-      <div>
-        <h1> QUIZ </h1>
-      </div>
-    );
+    return <div>{/* <p>{this.props.q.quizName} </p> */}</div>;
   }
 }
 
