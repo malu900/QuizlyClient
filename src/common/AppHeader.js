@@ -23,10 +23,17 @@ export class AppHeader extends Component {
                 <Link to="/quiz">Quiz</Link>
               </li>
               <li>
+                <Link to="/quiz/lobby/currentQuiz">currentquiz</Link>
+              </li>
+              <li>
+                <Link to="/quiz/lobby/currentQuiz/winners">winners</Link>
+              </li>
+              <li>
                 {/* <<<<<<< HEAD
                 <Link to="/parent">Quiz</Link>
 ======= */}
                 <Link to="/lobby">Lobby</Link>
+
                 {/* >>>>>>> 62115990f07f0455acbe6b0cb82cd8e1dc62bf4a */}
               </li>
             </ul>

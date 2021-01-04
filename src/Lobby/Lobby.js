@@ -3,6 +3,7 @@ import wsApp from "../Websockets/wsApp";
 import Guest from "../auth/Guest";
 import { Form, Button } from "react-bootstrap";
 import "../App/App.scss";
+import { Link } from "react-router-dom";
 
 export default class Lobby extends Component {
   constructor(props) {
@@ -72,6 +73,7 @@ export default class Lobby extends Component {
                 ))
               : ""}
           </ul>
+          <Link to={"/quiz/lobby/currentQuiz"}> start </Link>
         </div>
       </div>
     );
