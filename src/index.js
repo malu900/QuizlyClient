@@ -5,6 +5,7 @@ import App from "./App/App";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
+import QuestionOverview from "./Quiz/QuestionOverview";
 
 ReactDOM.render(
   <BrowserRouter>

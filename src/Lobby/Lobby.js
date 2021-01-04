@@ -3,7 +3,11 @@ import wsApp from "../Websockets/wsApp";
 import Guest from "../auth/Guest";
 import { Form, Button } from "react-bootstrap";
 import "../App/App.scss";
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
+=======
+import {leaveQuiz} from '../Ws/WsService'
+>>>>>>> devRens
 
 export default class Lobby extends Component {
   constructor(props) {
@@ -23,6 +27,12 @@ export default class Lobby extends Component {
       Players: [...this.state.Players, playerIdOrCode],
     });
   };
+
+  
+  //todo koppelen aan button ui
+  leaveQuiz = (id) => {
+    leaveQuiz(id, /*todo user toevoegen*/);
+  }
 
   render() {
     return (
