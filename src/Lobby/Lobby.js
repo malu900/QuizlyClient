@@ -3,11 +3,8 @@ import wsApp from "../Websockets/wsApp";
 import Guest from "../auth/Guest";
 import { Form, Button } from "react-bootstrap";
 import "../App/App.scss";
-<<<<<<< HEAD
 import { Link } from "react-router-dom";
-=======
-import {leaveQuiz} from '../Ws/WsService'
->>>>>>> devRens
+import {leaveQuiz} from '../Ws/WsService';
 
 export default class Lobby extends Component {
   constructor(props) {
