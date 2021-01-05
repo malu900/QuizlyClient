@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import "../App/App.scss";
 import { Container, Form, Button } from "react-bootstrap";
 import axios from "axios";
+import {joinQuiz, connect} from '../Ws/WsService';
 
 export class Guest extends Component {
     constructor(props) {
         super(props);
         this.state = this.initialState;
         this.state.show = false;
-        this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
     }
     initialState = {
@@ -21,30 +21,12 @@ export class Guest extends Component {
             [event.target.name]: event.target.value,
         });
     };
-
-    onSubmit = (e) => {
-        // e.stopPropagation();
-        e.preventDefault();
-        const guest = {
-            name: this.state.name,
-            code: this.state.code
-        };
-        axios.post("http://localhost:8081/auth/guest", guest).then((response) => {
-            if (response.data != null) {
-                this.setState({ show: true });
-                setTimeout(() => this.setState({ show: false }), 3000);
-            } else {
-                this.setState({ show: false });
-            }
-        });
-        this.setState(this.initialState);
-    };
     render() {
         const { name, code } = this.state;
         return (
             <Container id="register">
                 <h2> Quizly </h2>
-                <Form onSubmit={this.onSubmit}>
+                <Form>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Nickname</Form.Label>
                         <Form.Control
@@ -67,7 +49,7 @@ export class Guest extends Component {
                         />
                         <Form.Text className="text-muted"></Form.Text>
                     </Form.Group>
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" type="submit" onClick= {() => joinQuiz(name, code)}>
                         Join
                     </Button>
                 </Form>
