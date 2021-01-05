@@ -1,7 +1,12 @@
 import { Button, Form } from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuestion from "./AddQuestion";
+<<<<<<< HEAD
 import axios from 'axios';
+=======
+import axios from "axios";
+import {showAllQuizzes} from '../Ws/WsService'
+>>>>>>> devRens
 
 export class AddQuiz extends Component {
   constructor(props) {
@@ -10,7 +15,6 @@ export class AddQuiz extends Component {
       id: 0,
       createQuestion: false,
       quizName: "",
-      // <<<<<<< HEAD
       createdQuestions: [],
       // questions: {
       //   answers: {
@@ -21,7 +25,6 @@ export class AddQuiz extends Component {
       Quiz: [],
       questions: [],
       questionsData: [],
-      // >>>>>>> cfc7003299b6031e574f355e599a8527f9d8cc1c
     };
   }
 
@@ -64,11 +67,18 @@ export class AddQuiz extends Component {
     // this.setState({
     //   Quiz: [...this.state.Quiz, quiz],
     // });
-    this.props.addQuiz(quiz);
+    this.addQuiz(quiz);
   };
   // componentDidUpdate() {
   //   console.log("testtttt " + quiz);
   // }
+
+  //TODO userid toevoegen
+  addQuiz = (quiz) => {
+    axios.post("http://localhost:8081/quiz/1", quiz).then((response) => {
+      showAllQuizzes();
+    });
+  }
 
   addQuestionToQuiz = (question) => {
     console.log(question);

@@ -36,6 +36,7 @@ export class Register extends Component {
       password: this.state.password,
       secondPassword: this.state.secondPassword,
     };
+    console.log(user);
     axios.post("http://localhost:8081/auth/register", user).then((response) => {
       if (response.data != null) {
         this.setState({ show: true });
@@ -59,7 +60,7 @@ export class Register extends Component {
               name={"name"}
               value={name}
               onChange={this.onChange}
-              placeholder="Enter email"
+              placeholder="Enter name"
             />
             <Form.Text className="text-muted"></Form.Text>
           </Form.Group>

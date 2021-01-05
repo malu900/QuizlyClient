@@ -31,7 +31,7 @@ export class AllQuiz extends Component {
     };
 
     joinQuiz = (id) => {
-        joinQuiz(id, /*todo user toevoegen*/);
+        joinQuiz(id, sessionStorage.getItem('userId'));
     }
 
     render() {
@@ -69,7 +69,7 @@ export class AllQuiz extends Component {
                         quizzes.map((quiz) => (
                                 <tr key={quiz.quizId}>
                                 <td>{quiz.quizName}</td>
-                                {<Button onClick={this.joinQuiz(quiz)}>Start Quiz</Button>}
+                                {<Button onClick={this.joinQuiz(quiz.quizId)}>Start Quiz</Button>}
                             </tr>
                         ))
                     }
