@@ -4,7 +4,7 @@ import Stomp from 'stompjs';
 
 let stompClient;
 var quizzes = [];
-const history = useHistory();
+//const history = useHistory();
 
     export const getQuizzes = () => {
         return quizzes;
@@ -35,7 +35,8 @@ const history = useHistory();
     
     export const joinQuiz = (id, user) => {
         stompClient.send('/app/join/'+ id, {}, JSON.stringify(user));
-        history.push('/lobby');
+        //history.push('/lobby');
+        //redirect
     }
 
     export const leaveQuiz = (id, user) => {

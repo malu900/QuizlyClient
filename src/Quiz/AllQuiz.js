@@ -23,7 +23,7 @@ export class AllQuiz extends Component {
                 this.setState({Quizzes : getQuizzes()});
                 console.log(this.state.Quizzes.length);
             },1000);
-        }, 1000);
+        }, 3000);
     }
 
     onClickCreateQuiz = (e) => {
@@ -61,7 +61,7 @@ export class AllQuiz extends Component {
                     </tr>
                     </thead>
                     <tbody>
-                    {console.log(quizzes.length),
+                    {
                     quizzes.length === 0 ?
                         <tr align={"center"}>
                             <td colSpan={"4"}> {quizzes.length} You have quizzes ready to start</td>
