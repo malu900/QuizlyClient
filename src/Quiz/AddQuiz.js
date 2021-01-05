@@ -1,12 +1,9 @@
 import { Button, Form } from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuestion from "./AddQuestion";
-<<<<<<< HEAD
-import axios from 'axios';
-=======
 import axios from "axios";
 import {showAllQuizzes} from '../Ws/WsService'
->>>>>>> devRens
+
 
 export class AddQuiz extends Component {
   constructor(props) {

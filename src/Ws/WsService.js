@@ -4,15 +4,12 @@ import Stomp from 'stompjs';
 
 let stompClient;
 var quizzes = [];
-<<<<<<< HEAD
 //const history = useHistory();
-=======
 var guests = [];
 
     export const getGuests = () => {
         return guests;
     }
->>>>>>> devRens
 
     export const getQuizzes = () => {
         return quizzes;
@@ -53,18 +50,16 @@ var guests = [];
     export const showAllQuizzes = () => {
         stompClient.send('/app/getAll');
     }
-    
-<<<<<<< HEAD
-    export const joinQuiz = (id, user) => {
+
+    /*export const joinQuiz = (id, user) => {
         stompClient.send('/app/join/'+ id, {}, JSON.stringify(user));
         //history.push('/lobby');
         //redirect
-    }
+    }*/
 
-    export const leaveQuiz = (id, user) => {
+    /*export const leaveQuiz = (id, user) => {
         stompClient.send('/app/leave/'+ id, {}, JSON.stringify(user));
-    }
-=======
+    }*/
     export const joinQuiz = (code, name) => {
         connectToQuiz(code);
         setTimeout(() =>{ 
@@ -88,4 +83,4 @@ var guests = [];
           });
         }, console.log("Oh no something went wrong"));
     }
->>>>>>> devRens
+
