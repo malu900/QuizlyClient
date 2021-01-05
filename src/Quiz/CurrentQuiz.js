@@ -16,6 +16,7 @@ export class CurrentQuiz extends Component {
     };
   }
   componentDidMount() {
+    console.log(this.props.match.params.id);
     this.myInterval = setInterval(() => {
       const { seconds, minutes } = this.state;
 

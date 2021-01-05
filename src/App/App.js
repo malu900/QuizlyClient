@@ -50,10 +50,9 @@ export class App extends Component {
               <Route path="/addquestion">
                 <AddQuestion />
               </Route>
-              <Route exact path="/quiz/lobby/currentQuiz">
-                <CurrentQuiz />
+              <Route path="/quiz/lobby/currentQuiz/:id" component={CurrentQuiz}>
               </Route>
-              <Route path="/quiz/lobby/currentQuiz/winners">
+            <Route path="/quiz/lobby/currentQuiz/winners">
                 <Winners />
               </Route>
               {/* <Route path="/parent">

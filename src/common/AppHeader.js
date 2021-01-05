@@ -23,7 +23,7 @@ export class AppHeader extends Component {
                 <Link to="/quiz">Quiz</Link>
               </li>
               <li>
-                <Link to="/quiz/lobby/currentQuiz">currentquiz</Link>
+                <Link to="/quiz/lobby/currentQuiz/:id" >currentquiz</Link>
               </li>
               <li>
                 <Link to="/quiz/lobby/currentQuiz/winners">winners</Link>

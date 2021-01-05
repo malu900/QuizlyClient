@@ -2,20 +2,27 @@ import {Button, Table} from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
 import axios from 'axios'
-import {connect, joinQuiz, showAllQuizzes, getQuizzes} from '../Ws/WsService'
+import {connect, joinQuiz, showAllQuizzes, getQuizzes} from '../Ws/WsService';
+import { useHistory } from 'react-router-dom';
+import History from "../Utils/History";
+
+
 
 export class AllQuiz extends Component {
-    
+
     constructor(props) {
         super(props);
         this.state = {
             Quizzes : [],
             newQuizClicked: false,
             Quiz: [],
+            userId: null
         };
     }
 
     componentDidMount = () => {
+        this.state.userId =
+            sessionStorage.getItem('userId') ;
         connect();
         setTimeout(()=>{
             showAllQuizzes();
@@ -32,8 +39,16 @@ export class AllQuiz extends Component {
 
     joinQuiz = (id) => {
         joinQuiz(id, sessionStorage.getItem('userId'));
+        //this.props.history.push("/quiz/lobby/currentQuiz");
     }
-
+    viewProfile = function () {
+    //const {history} = this.props;
+        History.push("/quiz/lobby/currentQuiz");
+    };
+    redirectMePlease = (id) => {
+        window.location.href =
+            "http://localhost:3000/quiz/lobby/currentQuiz/" + id;
+    };
     render() {
         const {newQuizClicked} = this.state;
         const quizzes = this.state.Quizzes;
@@ -69,7 +84,9 @@ export class AllQuiz extends Component {
                         quizzes.map((quiz) => (
                                 <tr key={quiz.quizId}>
                                 <td>{quiz.quizName}</td>
-                                {<Button onClick={this.joinQuiz(quiz.quizId)}>Start Quiz</Button>}
+                                    {this.state.userId != null ?
+                                        <Button onClick={() => this.redirectMePlease(quiz.quizId)}>Start quiz </Button>
+                                        : "" }
                             </tr>
                         ))
                     }

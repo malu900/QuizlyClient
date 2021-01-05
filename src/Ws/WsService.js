@@ -12,6 +12,7 @@ var guests = [];
     }
 
     export const getQuizzes = () => {
+        console.log(quizzes)
         return quizzes;
     }
 
@@ -33,10 +34,10 @@ var guests = [];
         var message = JSON.parse(message.body);
         switch (message.body.method) {
           case 'JOIN':
-            this.guests = JSON.parse(message.body.message);
+            guests = JSON.parse(message.body.message);
             break;
           case 'LEAVE':
-            this.guests = JSON.parse(message.body.message);
+            guests = JSON.parse(message.body.message);
             break;
           case 'GETALL':
             if(message.body.message != "[]"){
