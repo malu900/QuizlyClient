@@ -1,5 +1,5 @@
 // import { Button } from "bootstrap";
-import React, { Component } from "react";
+import React, {Component, useEffect} from "react";
 import { Button } from "react-bootstrap";
 import "../App/App.scss";
 import CurrentQuestion from "./CurrentQuestion";
@@ -11,8 +11,9 @@ export class CurrentQuiz extends Component {
       Quiz: null,
       Players: [],
       CurrentPlayer: null,
-      minutes: 1,
+      minutes: 0,
       seconds: 5,
+      round: 1
     };
   }
   componentDidMount() {
@@ -28,7 +29,7 @@ export class CurrentQuiz extends Component {
       if (seconds === 0) {
         if (minutes === 0) {
           clearInterval(this.myInterval);
-          // go to next question
+
           this.setState({});
         } else {
           this.setState(({ minutes }) => ({
@@ -47,8 +48,12 @@ export class CurrentQuiz extends Component {
   componentWillUnmount() {
     clearInterval(this.myInterval);
   }
-
+  nextRound= () =>{
+    this.setState({round: this.state.round+ 1})
+    console.log("komt in de methode" + this.state.round)
+  }
   render() {
+    const count = 0
     const { minutes, seconds } = this.state;
     return (
       <div className="current-quiz">
@@ -56,13 +61,18 @@ export class CurrentQuiz extends Component {
           <div class="circle">0</div>
           <CurrentQuestion />
           <div class="time-remaining">
-            {minutes === 0 && seconds === 0 ? (
-              <h1>Next question!</h1>
+            {minutes === 0 && seconds === 0 && this.state.round === 1 ? (
+
+                <div> {this.nextRound()} <CurrentQuestion round ={this.state.round} />
+                  {console.log(this.state.round)}
+
+              <h1>Next question!</h1></div>
             ) : (
+                <div> <CurrentQuestion round ={this.state.round} />
               <h1>
                 Time Remaining: {minutes}:
                 {seconds < 10 ? `0${seconds}` : seconds}
-              </h1>
+              </h1></div>
             )}
           </div>
         </div>
