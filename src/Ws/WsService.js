@@ -1,12 +1,12 @@
-import history from "../Utils/History";
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
+import { MessageService } from '../Ws/MessageService';
 
 let stompClient;
 var quizzes = [];
-var guests = [];
+let guests = [];
 
-    export const getGuests = () => {
+    export var getGuests = () => {
         return guests;
     }
 
@@ -32,10 +32,10 @@ var guests = [];
         var message = JSON.parse(message.body);
         switch (message.body.method) {
           case 'JOIN':
-            this.guests = JSON.parse(message.body.message);
+            MessageService.sendMessage(JSON.parse(message.body.message));
             break;
           case 'LEAVE':
-            this.guests = JSON.parse(message.body.message);
+            MessageService.sendMessage(JSON.parse(message.body.message));
             break;
           case 'GETALL':
             if(message.body.message != "[]"){
@@ -45,20 +45,24 @@ var guests = [];
             break;
         }
     }
+
+    export const disconnect = () => {
+        stompClient.disconnect();
+    }
     
     export const showAllQuizzes = () => {
         stompClient.send('/app/getAll');
     }
     
-    export const joinQuiz = (code, name) => {
+    export const joinQuiz = (name, code) => {
         connectToQuiz(code);
         setTimeout(() =>{ 
         stompClient.send('/app/join/'+ code, {}, JSON.stringify(name));
-        history.push("/lobby")},2000);
+        },2000);
     }
 
-    export const leaveQuiz = (id, userId) => {
-        stompClient.send('/app/leave/'+ id, {}, JSON.stringify(userId));
+    export const leaveQuiz = (name, code) => {
+        stompClient.send('/app/leave/'+ code, {}, JSON.stringify(name));
     }
 
     export const connectToQuiz = (code) => {

@@ -1,7 +1,6 @@
 import {Button, Table} from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
-import axios from 'axios'
 import {connect, joinQuiz, showAllQuizzes, getQuizzes} from '../Ws/WsService'
 
 export class AllQuiz extends Component {
@@ -22,17 +21,13 @@ export class AllQuiz extends Component {
             setTimeout(()=>{
                 this.setState({Quizzes : getQuizzes()});
                 console.log(this.state.Quizzes.length);
-            },1000);
-        }, 1000);
+            },2000);
+        }, 10000);
     }
 
     onClickCreateQuiz = (e) => {
         console.log(this.newQuizClicked);
     };
-
-    joinQuiz = (id) => {
-        joinQuiz(id, sessionStorage.getItem('userId'));
-    }
 
     render() {
         const {newQuizClicked} = this.state;
@@ -58,18 +53,19 @@ export class AllQuiz extends Component {
                     <thead>
                     <tr>
                         <th>Name</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    {console.log(quizzes.length),
-                    quizzes.length === 0 ?
+                    {
+                        quizzes.length === 0 ?
                         <tr align={"center"}>
                             <td colSpan={"4"}> {quizzes.length} You have quizzes ready to start</td>
                         </tr> :
                         quizzes.map((quiz) => (
                                 <tr key={quiz.quizId}>
                                 <td>{quiz.quizName}</td>
-                                {<Button onClick={this.joinQuiz(quiz.quizId)}>Start Quiz</Button>}
+                                <td><Button onClick={this.onClickCreateQuiz()}>Start Quiz</Button></td>
                             </tr>
                         ))
                     }
