@@ -36,7 +36,7 @@ export class Login extends Component {
     };
     axios.post("http://localhost:8081/auth/login", login).then((response) => {
       if (response.data != null) {
-        // console.log(response.data);
+        console.log(response.data);
         /*localStorage.setItem('token', response.data.token);*/
         sessionStorage.setItem('userId', response.data.userId);
         this.setState({ show: true });
