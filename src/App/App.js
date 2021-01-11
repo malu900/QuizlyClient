@@ -15,6 +15,7 @@ import CurrentQuiz from "../Quiz/CurrentQuiz";
 import Lobby from "../Lobby/Lobby";
 import Guest from "../auth/Guest";
 import Winners from "../Quiz/Winners";
+import PersonalQuizzes from "../Quiz/PersonalQuizzes";
 
 // >>>>>>> 62115990f07f0455acbe6b0cb82cd8e1dc62bf4a
 export class App extends Component {
@@ -52,6 +53,7 @@ export class App extends Component {
               </Route>
               <Route path="/quiz/lobby/currentQuiz/:id" component={CurrentQuiz}>
               </Route>
+              <Route path="/PersonalQuizzes" component={PersonalQuizzes}/>
             <Route path="/quiz/lobby/currentQuiz/winners">
                 <Winners />
               </Route>
