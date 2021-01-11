@@ -3,12 +3,15 @@ import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import "../App/App.scss";
 import CurrentQuestion from "./CurrentQuestion";
+import axios from "axios";
+import { data } from "jquery";
 
 export class CurrentQuiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
       Quiz: null,
+      questions: [],
       Players: [],
       CurrentPlayer: null,
       minutes: 1,
@@ -38,23 +41,46 @@ export class CurrentQuiz extends Component {
         }
       }
     }, 1000);
+
+    this.getQuizById(this.props.match.params.id);
   }
-  componentDidUpdate() {}
-  //   handleTiming = (someArg) => {
-  //     setTimeout(200);
-  //     alert("We pass argument from Child to Parent: " + someArg);
-  //   };
+
+  getQuizById(id) {
+    axios.get("http://localhost:8081/quiz/" + id).then((response) =>
+      this.setState({
+        Quiz: response.data,
+        // questions: response.data.object.questions,
+      })
+    );
+  }
+  // updateLater() {
+  //   this.setState({
+  //     questions: this.state.Quiz
+  //   })
+  // }
+  componentDidUpdate() {
+    console.log(this.state.Quiz);
+  }
+  // handleTiming = (someArg) => {
+  //   setTimeout(200);
+  //   alert("We pass argument from Child to Parent: " + someArg);
+  // };
   componentWillUnmount() {
     clearInterval(this.myInterval);
   }
 
   render() {
-    const { minutes, seconds } = this.state;
+    const { minutes, seconds, Quiz } = this.state;
+    // const { questions } = this.state.Quiz.questions;
     return (
       <div className="current-quiz">
         <div>
           <div class="circle">0</div>
-          <CurrentQuestion />
+          {/* {this.state.questions.map((q) => (
+            <p> {q}</p>
+          ))} */}
+
+          <CurrentQuestion {...this.props} />
           <div class="time-remaining">
             {minutes === 0 && seconds === 0 ? (
               <h1>Next question!</h1>
