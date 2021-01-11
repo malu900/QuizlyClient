@@ -6,16 +6,22 @@ export class CurrentQuestion extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Question: null,
+      Question: [],
+      answers: [],
       rightAnswer: false,
       wrongAnswer: false,
     };
   }
   componentDidMount() {
-    console.log(this.state.rightAnswer);
+    // console.log("TEST", this.props.question);
+    const question = this.props.question;
+    const answers = question.answers;
+    this.setState({
+      Question: question,
+      answers: answers,
+    });
   }
   componentDidUpdate() {
-    console.log(this.state.rightAnswer);
     if (this.state.rightAnswer == true) {
       this.reward.rewardMe();
     }
@@ -24,27 +30,32 @@ export class CurrentQuestion extends Component {
     this.setState({
       rightAnswer: true,
     });
-
-    // if (this.state.rightAnswer == true) {
-    //   this.reward.rewardMe();
-    // }
-    // if (answer == goodanswer) {
-    //   // something to add to score with axios
-    // }
   };
+
   render() {
     const rightAnswer = this.state.rightAnswer;
-    // var handleTiming = this.props.handleTiming;
+    const answers = this.props.question.answers;
     return (
       <div class="current-question">
-        <p>Current question </p>
+        <p>{this.state.Question.questionName} </p>
         <Reward
           ref={(ref) => {
             this.reward = ref;
           }}
           type="confetti"
         >
-          <Button
+          {answers.map((e, i) => (
+            <Button
+              key={i}
+              onClick={() => {
+                this.rightOrWrong();
+                // handleTiming(rightAnswer);
+              }}
+            >
+              {e.answerId}
+            </Button>
+          ))}
+          {/* <Button
             onClick={() => {
               this.rightOrWrong();
               // handleTiming(rightAnswer);
@@ -55,7 +66,7 @@ export class CurrentQuestion extends Component {
           </Button>
           <Button> Answer 2 </Button>
           <Button> Answer 3 </Button>
-          <Button> Answer 4 </Button>
+          <Button> Answer 4 </Button> */}
         </Reward>
       </div>
     );
