@@ -8,11 +8,14 @@ import Quiz from "../Quiz/AllQuiz";
 import Auth from "../auth/Auth";
 import AddQuestion from "../Quiz/AddQuestion";
 import Home from "../Home";
+import CurrentQuiz from "../Quiz/CurrentQuiz";
 // <<<<<<< HEAD
 // import Parent from "../Test/Parent";
 // =======
 import Lobby from "../Lobby/Lobby";
 import Guest from "../auth/Guest";
+import Winners from "../Quiz/Winners";
+import PersonalQuizzes from "../Quiz/PersonalQuizzes";
 
 // >>>>>>> 62115990f07f0455acbe6b0cb82cd8e1dc62bf4a
 export class App extends Component {
@@ -42,11 +45,17 @@ export class App extends Component {
               {/*<Route path="/guest">
             <Guest />
           </Route>*/}
-              <Route path="/quiz">
+              <Route exact path="/quiz">
                 <Quiz />
               </Route>
               <Route path="/addquestion">
                 <AddQuestion />
+              </Route>
+              <Route path="/quiz/lobby/currentQuiz/:id" component={CurrentQuiz}>
+              </Route>
+              <Route path="/PersonalQuizzes" component={PersonalQuizzes}/>
+            <Route path="/quiz/lobby/currentQuiz/winners">
+                <Winners />
               </Route>
               {/* <Route path="/parent">
             <Parent />

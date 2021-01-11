@@ -4,6 +4,7 @@ import AddQuestion from "./AddQuestion";
 import axios from "axios";
 import {showAllQuizzes} from '../Ws/WsService'
 
+
 export class AddQuiz extends Component {
   constructor(props) {
     super(props);
@@ -50,6 +51,16 @@ export class AddQuiz extends Component {
       quizName: this.state.quizName,
       questions: this.state.questions,
     };
+    axios.post("http://localhost:8081/quiz/" + localStorage.getItem('userId'), quiz)
+        .then(response =>{
+          if(response.data != null){
+
+          }
+          else{
+          }
+        })
+    this.setState(this.initialState);
+    this.componentDidMount();
     // this.setState({
     //   Quiz: [...this.state.Quiz, quiz],
     // });
