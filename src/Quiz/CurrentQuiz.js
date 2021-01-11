@@ -51,6 +51,7 @@ export class CurrentQuiz extends Component {
   nextRound= () =>{
     this.setState({round: this.state.round+ 1})
     console.log("komt in de methode" + this.state.round)
+    this.setState({seconds: 10})
   }
   render() {
     const count = 0
@@ -61,12 +62,13 @@ export class CurrentQuiz extends Component {
           <div class="circle">0</div>
           <CurrentQuestion />
           <div class="time-remaining">
-            {minutes === 0 && seconds === 0 && this.state.round === 1 ? (
+            {minutes === 0 && seconds === 0 ? (
 
                 <div> {this.nextRound()} <CurrentQuestion round ={this.state.round} />
                   {console.log(this.state.round)}
 
               <h1>Next question!</h1></div>
+
             ) : (
                 <div> <CurrentQuestion round ={this.state.round} />
               <h1>

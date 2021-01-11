@@ -12,7 +12,7 @@ export class CurrentQuestion extends Component {
       rightAnswer: false,
       wrongAnswer: false,
       answers : [],
-      id : 1,
+      id : 7,
       round : 1,
       questions: []
     };
