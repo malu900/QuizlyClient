@@ -6,6 +6,7 @@ let stompClient;
 var quizzes = [];
 //const history = useHistory();
 var guests = [];
+var startgame = false;
 
     export const getGuests = () => {
         return guests;
@@ -14,6 +15,9 @@ var guests = [];
     export const getQuizzes = () => {
         console.log(quizzes)
         return quizzes;
+    }
+        export const getStartGame = () => {
+        return startgame;
     }
 
     export const connect = () => {
@@ -44,6 +48,9 @@ var guests = [];
                 console.log(quizzes);
                 quizzes = JSON.parse(message.body.message);
             }
+            case 'START':
+                startgame = JSON.parse(message.body.message);
+                break;
             break;
         }
     }
