@@ -17,7 +17,7 @@ class PersonalQuizzes extends Component{
     }
 
     findAllQuizzes(){
-        axios.get("http://localhost:8081/GetByUserID/" + sessionStorage.getItem("userId"))
+        axios.get("http://localhost:8081/quiz/GetByUserID/" + sessionStorage.getItem("userId"))
             .then(response => response.data)
             .then((data) => {
                 this.setState({quizzes : data})
