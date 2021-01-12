@@ -2,7 +2,7 @@ import { Button, Form } from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuestion from "./AddQuestion";
 import axios from "axios";
-import {showAllQuizzes} from '../Ws/WsService'
+import {showAllQuizzes, getQuizzes} from '../Ws/WsService'
 
 
 export class AddQuiz extends Component {
@@ -19,7 +19,7 @@ export class AddQuiz extends Component {
       //   },
       // },
       // =======
-      Quiz: [],
+      quizzes: [],
       questions: [],
       questionsData: [],
     };
@@ -51,10 +51,12 @@ export class AddQuiz extends Component {
       quizName: this.state.quizName,
       questions: this.state.questions,
     };
-    axios.post("http://localhost:8081/quiz/" + localStorage.getItem('userId'), quiz)
+    console.log("onSubmit sessionStorage-check: " + sessionStorage.getItem("userId"))
+    axios.post("http://localhost:8081/quiz/" + sessionStorage.getItem('userId'), quiz)
         .then(response =>{
           if(response.data != null){
-
+            showAllQuizzes();
+            alert("Quiz has been added.")
           }
           else{
           }
@@ -63,18 +65,7 @@ export class AddQuiz extends Component {
     // this.setState({
     //   Quiz: [...this.state.Quiz, quiz],
     // });
-    this.addQuiz(quiz);
   };
-  // componentDidUpdate() {
-  //   console.log("testtttt " + quiz);
-  // }
-
-  //TODO userid toevoegen
-  addQuiz = (quiz) => {
-    axios.post("http://localhost:8081/quiz/1", quiz).then((response) => {
-      showAllQuizzes();
-    });
-  }
 
   addQuestionToQuiz = (question) => {
     console.log(question);
@@ -82,11 +73,13 @@ export class AddQuiz extends Component {
       questions: [...this.state.questions, question],
     });
   };
+
   componentDidUpdate() {
-    console.log(this.state.questions);
+    // console.log(this.state.questions);
   }
 
   render() {
+    console.log("The userId beeyatch: " + sessionStorage.getItem("userId"))
     return (
       <div>
         <Form onSubmit={this.onSubmit}>
@@ -100,7 +93,7 @@ export class AddQuiz extends Component {
               onChange={this.onChange}
               required
             />
-            <Form.Text className="text-muted"></Form.Text>
+            <Form.Text className="text-muted"/>
           </Form.Group>
           <Button variant="primary" type="submit">
             Submit Quiz
