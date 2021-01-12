@@ -12,6 +12,7 @@ class Lobby extends Component {
     super(props);
     this.state = {
       Quiz: [],
+      Host: [],
       Players: [],
       GuestName: "",
       GuestCode: "",
@@ -25,10 +26,11 @@ class Lobby extends Component {
         Players : message.text,
       })
     });
-    console.log(this.state.Players);
-    console.log(this.props.location);
+    this.setState({Host: this.props.location.state.Host});
     this.setState({ GuestName: this.props.location.state.guestName,
       GuestCode: this.props.location.state.guestCode});
+      console.log(this.state.Host);
+      console.log(this.state.guestCode);
     connectToQuiz(this.state.GuestCode);
     setTimeout(() => {
       console.log(this.state.GuestName);
@@ -37,6 +39,7 @@ class Lobby extends Component {
   }
 
   componentDidMount() {
+    console.log(this.state.Host);
     console.log("bruh lobby component mounted!");
   }
 
@@ -69,6 +72,9 @@ class Lobby extends Component {
               add player to lobby
             </Button>
           </ul>
+          <div>
+            {this.state.Host}
+          </div>
           <Table bordered hover striped variant>
             <thead>
               <tr>
