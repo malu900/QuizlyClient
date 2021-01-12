@@ -24,14 +24,14 @@ export class AppHeader extends Component {
                     <Link to="/quiz">Quiz</Link>
                   </li>
                   {/* <li> */}
-                  {/* <Link to="/quiz/lobby/currentQuiz/:id">currentquiz</Link>
+                    {/* <Link to="/quiz/lobby/currentQuiz/:id">currentquiz</Link>
                   </li>
                   <li>
                     <Link to="/quiz/lobby/currentQuiz/winners">winners</Link>
                   </li> */}
                   <li>
                     {
-                      <Link to="/parent">Quiz</Link>}
+                <Link to="/parent">Quiz</Link>}
                     <Link to="/lobby">Lobby</Link>
                   </li>
                   <li>
@@ -44,9 +44,9 @@ export class AppHeader extends Component {
                   <li>
                     <Link to="/login">Login</Link>
                   </li>
-                  <li>
-                    <Link to="/guest">Guest</Link>
-                  </li>
+                         <li>
+                <Link to="/guest">Guest</Link>
+              </li>
                 </ul>
               </div>
             </Row>
@@ -55,7 +55,7 @@ export class AppHeader extends Component {
     }
     else {
       return(
-          <Container id="AppHeader">
+<Container id="AppHeader">
             <Row>
               <div>
                 <ul>
@@ -76,7 +76,7 @@ export class AppHeader extends Component {
                   </li> */}
                   <li>
                     {
-                      <Link to="/parent">Quiz</Link>}
+                <Link to="/parent">Quiz</Link>}
                     <Link to="/lobby">Lobby</Link>
                   </li>
                   <li>
@@ -96,7 +96,7 @@ export class AppHeader extends Component {
               </div>
             </Row>
           </Container>
-      )
+          )
     }
   }
 }

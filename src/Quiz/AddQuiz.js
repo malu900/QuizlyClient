@@ -60,7 +60,6 @@ export class AddQuiz extends Component {
           }
         })
     this.setState(this.initialState);
-    this.componentDidMount();
     // this.setState({
     //   Quiz: [...this.state.Quiz, quiz],
     // });

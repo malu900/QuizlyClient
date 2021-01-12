@@ -3,12 +3,13 @@ import {Card, Table} from "react-bootstrap";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import AddQuiz from "./AddQuiz";
+import history from "../Utils/History";
 
 class PersonalQuizzes extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            quizzes : [] //(wsservice products kan ook wanneer die export is)
+            quizzes : []
         }
     }
 
@@ -17,26 +18,31 @@ class PersonalQuizzes extends Component{
     }
 
     findAllQuizzes(){
-        axios.get("http://localhost:8081/GetByUserID/" + sessionStorage.getItem("userId"))
+        axios.get("http://localhost:8081/quiz/GetByUserID/" + sessionStorage.getItem("userId"))
             .then(response => response.data)
             .then((data) => {
                 this.setState({quizzes : data})
                 console.log(this.state.quizzes);
             });
     }
-    redirectMePlease = (id) => {
-        window.location.href =
-            "http://localhost:3000/Product/" + id;
-    };
+
+    joinQuizAsHost = (quiz) => {
+        console.log(quiz);
+        history.push({
+            pathname: '/lobby',
+            state: {Host: quiz.user, GuestCode: quiz.code},
+        });
+    }
+
+
     render(){
-        //const Products = this.state.products;
-        //console.log("dit zijn de products in de render: " + products);
         return(
             <div>
                 <Table bordered hover striped variant>
                     <thead>
                     <tr>
                         <th>Name</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -46,19 +52,17 @@ class PersonalQuizzes extends Component{
                                 {" "}
                                 {this.state.quizzes.length} You have quizzes ready to start
                             </td>
+                            <td>
+
+                            </td>
                         </tr>
                     ) : (
                         this.state.quizzes.map((quiz) => (
                             <tr key={quiz.quizId}>
                                 <td>{quiz.quizName}</td>
-                                {/*{this.state.userId != null ? (
-                                    <Button onClick={() => this.redirectMePlease(quiz.quizId)}>
-                                        Start quiz{" "}
-                                    </Button>
-                                ) : (
-                                    ""
-                                )}*/}
+                                <td><button onClick={() => this.joinQuizAsHost(quiz)}></button></td>
                             </tr>
+
                         ))
                     )}
                     </tbody>

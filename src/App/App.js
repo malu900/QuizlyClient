@@ -36,7 +36,7 @@ export class App extends Component {
         <Container id="content-container">
           <div id="center-content">
             <Switch>
-              <Route path="/lobby">
+              <Route path="/lobby" component={Lobby}>
                 <Lobby />
               </Route>
               <Route path="/login">
