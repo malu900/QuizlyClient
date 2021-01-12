@@ -4,7 +4,9 @@ import { MessageService } from '../Ws/MessageService';
 
 let stompClient;
 var quizzes = [];
-let guests = [];
+//const history = useHistory();
+var guests = [];
+var startgame = false;
 
     export var getGuests = () => {
         return guests;
@@ -12,6 +14,9 @@ let guests = [];
 
     export const getQuizzes = () => {
         return quizzes;
+    }
+        export const getStartGame = () => {
+        return startgame;
     }
 
     export const connect = () => {
@@ -42,6 +47,9 @@ let guests = [];
                 console.log(quizzes);
                 quizzes = JSON.parse(message.body.message);
             }
+            case 'START':
+                startgame = JSON.parse(message.body.message);
+                break;
             break;
         }
     }
