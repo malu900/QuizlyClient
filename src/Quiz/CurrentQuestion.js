@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import Reward from "react-rewards";
 import ListGroup from "react-bootstrap/ListGroup";
 import axios from "axios";
+import {MessageService} from "../Ws/MessageService";
 
 export class CurrentQuestion extends Component {
   constructor(props) {
@@ -14,7 +15,8 @@ export class CurrentQuestion extends Component {
       answers : [],
       id : 7,
       round : 1,
-      questions: []
+      questions: [],
+      startGame: false
     };
   }
   nextRound(){
@@ -31,6 +33,17 @@ export class CurrentQuestion extends Component {
           console.log(this.state.answers)
         });
   }
+  componentWillMount() {
+    if (this.state.startGame === true) {
+      this.subscription = MessageService.getMessage().subscribe(message => {
+        this.setState({
+          startGame: message.text,
+        })
+      });
+    }
+  }
+
+
   componentDidMount() {
 
     this.findQuestion()
