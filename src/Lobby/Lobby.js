@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Table } from "react-bootstrap";
 import "../App/App.scss";
-import {leaveQuiz, disconnect, joinQuiz, connectToQuiz} from '../Ws/WsService'
+import {leaveQuiz, disconnect, joinQuiz, connectToQuiz, connectStartGame} from '../Ws/WsService'
 import {Link, withRouter} from "react-router-dom";
 import { MessageService } from '../Ws/MessageService';
 import history from "../Utils/History";
@@ -17,15 +17,20 @@ class Lobby extends Component {
       GuestName: "",
       GuestCode: "",
       QuizMaster: [],
+      startGame: false
     };
   }
 
   componentWillMount() {
+
     this.subscription = MessageService.getMessage().subscribe(message => {
+      console.log(message)
       this.setState({
         Players : message.text,
       })
     });
+
+
     this.setState({Host: this.props.location.state.Host});
     this.setState({ GuestName: this.props.location.state.guestName,
       GuestCode: this.props.location.state.guestCode});

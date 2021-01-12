@@ -86,7 +86,7 @@ var startgame = false;
           });
         }, console.log("Oh no something went wrong"));
     }
-    export const connectStartGame = (code) => {
+    /*export const connectStartGame = (code) => {
      console.log('Initialize WebSocket Connection');
      const ws = new SockJS('http://localhost:8081/quizly');
      stompClient = Stomp.over(ws);
@@ -99,7 +99,7 @@ var startgame = false;
 
     }, console.log("Oh no something went wrong"));
 
-}
+}*/
 export const startGame = ( code) => {
     stompClient.send('/startGame/'+ code, {}, JSON.stringify(true));
 }

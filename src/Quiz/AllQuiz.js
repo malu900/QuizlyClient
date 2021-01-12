@@ -1,7 +1,7 @@
 import {Button, Table} from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
-import {connect, joinQuiz, showAllQuizzes, getQuizzes, connectStartGame, startGame, disconnect} from '../Ws/WsService'
+import {connect, joinQuiz, showAllQuizzes, getQuizzes, startGame, disconnect} from '../Ws/WsService'
 import CurrentQuestion from "./CurrentQuestion";
 
 export class AllQuiz extends Component {
@@ -27,12 +27,17 @@ export class AllQuiz extends Component {
     }
 
     onClickCreateQuiz = (code,id) => {
-        connectStartGame(code)
+       /* connectStartGame(code)*/
         setTimeout(()=>{
             startGame(code)
         },2000);
-        disconnect();
+
         this.redirectMePlease(id);
+        /*setTimeout(()=>{
+            disconnect();
+          /!*  startgame = true*!/
+        },2000);*/
+
     };
     redirectMePlease = (id) => {
         window.location.href = "http://localhost:3000/quiz/lobby/currentQuiz/" + id;
@@ -74,7 +79,7 @@ export class AllQuiz extends Component {
                         quizzes.map((quiz) => (
                                 <tr key={quiz.quizId}>
                                 <td>{quiz.quizName}</td>
-                                <td><Button onClick={this.onClickCreateQuiz(quiz.code,quiz.quizId)}>Start Quiz</Button></td>
+                                <td><Button onClick={()=>this.onClickCreateQuiz(quiz.code,quiz.quizId)}>Start Quiz</Button></td>
                             </tr>
                         ))
                     }
