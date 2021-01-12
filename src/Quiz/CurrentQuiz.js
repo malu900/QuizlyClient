@@ -3,12 +3,15 @@ import React, {Component, useEffect} from "react";
 import { Button } from "react-bootstrap";
 import "../App/App.scss";
 import CurrentQuestion from "./CurrentQuestion";
+import axios from "axios";
+import { data } from "jquery";
 
 export class CurrentQuiz extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Quiz: null,
+      Quiz: [],
+      questions: [],
       Players: [],
       CurrentPlayer: null,
       minutes: 0,
@@ -39,12 +42,44 @@ export class CurrentQuiz extends Component {
         }
       }
     }, 1000);
+
+    this.getQuizById(this.props.match.params.id);
+
+    this.setState({
+      questions: this.state.Quiz.questions,
+    });
   }
-  componentDidUpdate() {}
-  //   handleTiming = (someArg) => {
-  //     setTimeout(200);
-  //     alert("We pass argument from Child to Parent: " + someArg);
-  //   };
+
+  getQuizById = (id) => {
+    // axios.get("http://localhost:8081/quiz/" + id).then((response) =>
+    //   const Quiz = response.data;
+    //     this.setState({ persons });
+    //   this.setState({
+    //     Quiz: response.data,
+    //     // questions: response.data.Quiz.questions,
+    //   })
+    // );
+
+    axios.get("http://localhost:8081/quiz/" + id).then((res) => {
+      const quiz = res.data;
+      const q = quiz.questions;
+      this.setState({ Quiz: quiz, questions: q });
+
+      console.group(this.state.questions);
+    });
+  };
+  // updateLater() {
+  //   this.setState({
+  //     questions: this.state.Quiz
+  //   })
+  // }
+  // componentDidUpdate() {
+  //   console.log(this.state.Quiz);
+  // }
+  // handleTiming = (someArg) => {
+  //   setTimeout(200);
+  //   alert("We pass argument from Child to Parent: " + someArg);
+  // };
   componentWillUnmount() {
     clearInterval(this.myInterval);
   }
@@ -59,9 +94,14 @@ export class CurrentQuiz extends Component {
     return (
       <div className="current-quiz">
         <div>
-          <div class="circle">0</div>
-          <CurrentQuestion />
-          <div class="time-remaining">
+          <div className="circle">0</div>
+          <h1> {this.state.Quiz.id}</h1>
+          {/* {this.state.questions.map((q) => (
+            <p> {q}</p>
+          ))} */}
+
+          <CurrentQuestion {...this.props} />
+          <div className="time-remaining">
             {minutes === 0 && seconds === 0 ? (
 
                 <div> {this.nextRound()} <CurrentQuestion round ={this.state.round} />
