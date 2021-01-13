@@ -3,6 +3,7 @@ import Stomp from 'stompjs';
 import { MessageService } from '../Ws/MessageService';
 
 let stompClient;
+let stompClient2;
 var quizzes = [];
 //const history = useHistory();
 var guests = [];
@@ -85,12 +86,23 @@ var startgame = false;
             onMessageReceived(sdkEvent);
           });
         }, console.log("Oh no something went wrong"));
+        console.log('Initialize WebSocket Connection');
+        const ws2 = new SockJS('http://localhost:8081/quizly');
+        stompClient2 = Stomp.over(ws2);
+        const topic2 = '/topic/startGame/'+ code;
+        stompClient2.connect({}, () => {
+            console.log("connected");
+            stompClient2.subscribe(topic2, (sdkEvent) => {
+                onMessageReceived(sdkEvent);
+            });
+
+        }, console.log("Oh no something went wrong"));
     }
-    /*export const connectStartGame = (code) => {
+    export const connectStartGame = (code) => {
      console.log('Initialize WebSocket Connection');
      const ws = new SockJS('http://localhost:8081/quizly');
      stompClient = Stomp.over(ws);
-    const topic = '/topic/quizzes/'+ code;
+    const topic = '/topic/startGame/'+ code;
     stompClient.connect({}, () => {
         console.log("connected");
         stompClient.subscribe(topic, (sdkEvent) => {
@@ -99,7 +111,7 @@ var startgame = false;
 
     }, console.log("Oh no something went wrong"));
 
-}*/
+}
 export const startGame = ( code) => {
-    stompClient.send('/startGame/'+ code, {}, JSON.stringify(true));
+    stompClient.send('/app/startGame/'+ code, {}, JSON.stringify(true));
 }

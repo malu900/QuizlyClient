@@ -1,8 +1,9 @@
 import {Button, Table} from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
-import {connect, joinQuiz, showAllQuizzes, getQuizzes, startGame, disconnect} from '../Ws/WsService'
+import {connect, joinQuiz, showAllQuizzes, getQuizzes, startGame, disconnect, connectStartGame} from '../Ws/WsService'
 import CurrentQuestion from "./CurrentQuestion";
+import {MessageService} from "../Ws/MessageService";
 
 export class AllQuiz extends Component {
     
@@ -27,12 +28,12 @@ export class AllQuiz extends Component {
     }
 
     onClickCreateQuiz = (code,id) => {
-       /* connectStartGame(code)*/
+        connectStartGame(code)
         setTimeout(()=>{
             startGame(code)
         },2000);
 
-        this.redirectMePlease(id);
+        //this.redirectMePlease(id);
         /*setTimeout(()=>{
             disconnect();
           /!*  startgame = true*!/
@@ -42,6 +43,12 @@ export class AllQuiz extends Component {
     redirectMePlease = (id) => {
         window.location.href = "http://localhost:3000/quiz/lobby/currentQuiz/" + id;
     };
+
+    componentWillMount() {
+        this.subscription = MessageService.getMessage().subscribe(message => {
+            console.log(message);
+        });
+    }
 
     render() {
         const {newQuizClicked} = this.state;
