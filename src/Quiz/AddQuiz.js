@@ -51,7 +51,7 @@ export class AddQuiz extends Component {
       quizName: this.state.quizName,
       questions: this.state.questions,
     };
-    axios.post("http://localhost:8081/quiz/" + localStorage.getItem('userId'), quiz)
+    axios.post("http://localhost:8081/quiz/" + sessionStorage.getItem('userId'), quiz)
         .then(response =>{
           if(response.data != null){
 

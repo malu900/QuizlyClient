@@ -30,7 +30,7 @@ class PersonalQuizzes extends Component{
         console.log(quiz);
         history.push({
             pathname: '/lobby',
-            state: {Host: quiz.user, GuestCode: quiz.code},
+            state: {Host: quiz.user.name, Code: quiz.code, IsHost: true},
         });
     }
 

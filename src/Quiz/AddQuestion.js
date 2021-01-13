@@ -23,7 +23,7 @@ export default class AddQuestion extends Component {
     event.preventDefault();
     const question = {
       questionName: this.state.questionName,
-      answers: this.state.answers,
+      answers: [this.state.answers],
     };
     axios.post("http://localhost:8081/", question).then((response) => {
       if (response.data != null) {
@@ -58,7 +58,7 @@ export default class AddQuestion extends Component {
 
   submitAnswers = (answers) => {
     this.setState({
-      answerss: answers,
+      answerss: [answers],
     });
   };
   // componentDidUpdate() {
