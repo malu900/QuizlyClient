@@ -12,10 +12,11 @@ class Lobby extends Component {
     super(props);
     this.state = {
       Quiz: [],
-      Host: [],
+      HostName: "",
+      isHost: false,
       Players: [],
       GuestName: "",
-      GuestCode: "",
+      Code: "",
       QuizMaster: [],
       startGame: false
     };
@@ -29,6 +30,7 @@ class Lobby extends Component {
         Players : message.text,
       })
     });
+<<<<<<< HEAD
 
 
     this.setState({Host: this.props.location.state.Host});
@@ -41,13 +43,36 @@ class Lobby extends Component {
       console.log(this.state.GuestName);
       joinQuiz(this.state.GuestName, this.state.GuestCode);
     },2000);
+=======
+    if(this.props.location.state.IsHost === true){
+      this.setupForHost();
+    }
+    else{
+      this.setupForGuest();
+    }
+>>>>>>> origin/devRens
   }
 
-  componentDidMount() {
-    console.log(this.state.Host);
+  componentDidUpdate() {
     console.log("bruh lobby component mounted!");
   }
 
+  setupForGuest = () => {
+    this.setState({ GuestName: this.props.location.state.guestName,
+      Code: this.props.location.state.guestCode});
+      setTimeout(() => {
+        connectToQuiz(this.state.Code);
+        joinQuiz(this.state.GuestName, this.state.Code);
+      },2000);
+  }
+
+  setupForHost = () => {
+    this.setState({ HostName: this.props.location.state.Host, Code: this.props.location.state.Code});
+    setTimeout(() => {
+      connectToQuiz(this.state.Code);
+    }, 2000)
+    
+  }
 
   addPlayerToLobby = (playerIdOrCode = 5) => {
     this.setState({
@@ -57,7 +82,7 @@ class Lobby extends Component {
 
   
   leaveQuiz = () => {
-    leaveQuiz(this.state.GuestName, this.state.GuestCode);
+    leaveQuiz(this.state.GuestName, this.state.Code);
     setTimeout(()=>{
       disconnect();
     },2000)
@@ -69,6 +94,12 @@ class Lobby extends Component {
 
   render() {
     return (
+      <div>
+        <div id="playersListLobby">
+          <p>
+              Host is: {this.state.HostName}
+          </p>
+        </div>
         <div id="playersListLobby">
           <ul>
             <li>Quiz master</li>{" "}
@@ -99,6 +130,7 @@ class Lobby extends Component {
             </tbody>
           </Table>
         </div>
+      </div>
     )
   }
 }

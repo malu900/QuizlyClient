@@ -5,7 +5,6 @@ import { MessageService } from '../Ws/MessageService';
 let stompClient;
 let stompClient2;
 var quizzes = [];
-//const history = useHistory();
 var guests = [];
 var startgame = false;
 
@@ -33,7 +32,11 @@ var startgame = false;
         }, console.log("Oh no something went wrong"));
     }
 
-
+    export const joinQuizAsHost = (code) => {
+        stompClient.unsubscribe();
+        const topic = '/topic/quizzes/'+ code;
+        stompClient.subscribe(topic);
+    }
 
     export const onMessageReceived = (message) => {
         var message = JSON.parse(message.body);
@@ -49,10 +52,11 @@ var startgame = false;
                 console.log(quizzes);
                 quizzes = JSON.parse(message.body.message);
             }
-            case 'START':
-                MessageService.sendMessage(JSON.parse(message.body.message));
-                break;
             break;
+          case 'START':
+                MessageService.sendMessage(JSON.parse(message.body.message));
+            break;
+            
         }
     }
 
@@ -98,6 +102,7 @@ var startgame = false;
 
         }, console.log("Oh no something went wrong"));
     }
+<<<<<<< HEAD
     export const connectStartGame = (code) => {
      console.log('Initialize WebSocket Connection');
      const ws = new SockJS('http://localhost:8081/quizly');
@@ -108,10 +113,17 @@ var startgame = false;
         stompClient.subscribe(topic, (sdkEvent) => {
             onMessageReceived(sdkEvent);
         });
+=======
+    export const startGame = ( code) => {
+        stompClient.send('/startGame/'+ code, {}, JSON.stringify(true));
+    }
+>>>>>>> origin/devRens
 
-    }, console.log("Oh no something went wrong"));
 
+<<<<<<< HEAD
 }
 export const startGame = ( code) => {
     stompClient.send('/app/startGame/'+ code, {}, JSON.stringify(true));
 }
+=======
+>>>>>>> origin/devRens
