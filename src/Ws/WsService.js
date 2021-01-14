@@ -10,14 +10,14 @@ var startgame = false;
 
     export var getGuests = () => {
         return guests;
-    }
+    };
 
     export const getQuizzes = () => {
         return quizzes;
-    }
+    };
         export const getStartGame = () => {
         return startgame;
-    }
+    };
 
     export const connect = () => {
         console.log('Initialize WebSocket Connection');
@@ -30,13 +30,13 @@ var startgame = false;
             onMessageReceived(sdkEvent);
           });
         }, console.log("Oh no something went wrong"));
-    }
+    };
 
     export const joinQuizAsHost = (code) => {
         stompClient.unsubscribe();
         const topic = '/topic/quizzes/'+ code;
         stompClient.subscribe(topic);
-    }
+    };
 
     export const onMessageReceived = (message) => {
         var message = JSON.parse(message.body);
@@ -54,30 +54,31 @@ var startgame = false;
             }
             break;
           case 'START':
+              console.log(message)
                 MessageService.sendMessage(JSON.parse(message.body.message));
             break;
             
         }
-    }
+    };
 
     export const disconnect = () => {
         stompClient.disconnect();
-    }
+    };
     
     export const showAllQuizzes = () => {
         stompClient.send('/app/getAll');
-    }
+    };
     
     export const joinQuiz = (name, code) => {
         connectToQuiz(code);
         setTimeout(() =>{ 
         stompClient.send('/app/join/'+ code, {}, JSON.stringify(name));
         },2000);
-    }
+    };
 
     export const leaveQuiz = (name, code) => {
         stompClient.send('/app/leave/'+ code, {}, JSON.stringify(name));
-    }
+    };
 
     export const connectToQuiz = (code) => {
         console.log('Initialize WebSocket Connection');
@@ -101,8 +102,8 @@ var startgame = false;
             });
 
         }, console.log("Oh no something went wrong"));
-    }
-<<<<<<< HEAD
+    };
+
     export const connectStartGame = (code) => {
      console.log('Initialize WebSocket Connection');
      const ws = new SockJS('http://localhost:8081/quizly');
@@ -113,17 +114,11 @@ var startgame = false;
         stompClient.subscribe(topic, (sdkEvent) => {
             onMessageReceived(sdkEvent);
         });
-=======
-    export const startGame = ( code) => {
-        stompClient.send('/startGame/'+ code, {}, JSON.stringify(true));
-    }
->>>>>>> origin/devRens
+    })}
+
+    export const startGame = (code) => {
+        console.log("startgame method called")
+        stompClient2.send('/app/startGame/'+ code, {}, JSON.stringify(true));
+    };
 
 
-<<<<<<< HEAD
-}
-export const startGame = ( code) => {
-    stompClient.send('/app/startGame/'+ code, {}, JSON.stringify(true));
-}
-=======
->>>>>>> origin/devRens

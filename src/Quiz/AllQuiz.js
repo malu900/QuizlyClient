@@ -1,11 +1,7 @@
 import {Button, Table} from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
-<<<<<<< HEAD
-import {connect, joinQuiz, showAllQuizzes, getQuizzes, startGame, disconnect, connectStartGame} from '../Ws/WsService'
-=======
-import {connect, showAllQuizzes, getQuizzes, joinQuizAsHost, startGame, disconnect} from '../Ws/WsService'
->>>>>>> origin/devRens
+import {connect, joinQuiz, showAllQuizzes, getQuizzes, disconnect, connectStartGame, startGame} from '../Ws/WsService'
 import CurrentQuestion from "./CurrentQuestion";
 import {MessageService} from "../Ws/MessageService";
 
@@ -31,23 +27,21 @@ export class AllQuiz extends Component {
         }, 3000);
     }
 
-<<<<<<< HEAD
     onClickCreateQuiz = (code,id) => {
         connectStartGame(code)
-        setTimeout(()=>{
+        setTimeout(() => {
             startGame(code)
-        },2000);
+        }, 2000);
 
         //this.redirectMePlease(id);
         /*setTimeout(()=>{
             disconnect();
           /!*  startgame = true*!/
         },2000);*/
+    }
 
-=======
     onClickCreateQuiz = () => {
-        disconnect();        
->>>>>>> origin/devRens
+        disconnect();
     };
     
     redirectMePlease = (id) => {
@@ -96,11 +90,11 @@ export class AllQuiz extends Component {
                         quizzes.map((quiz) => (
                                 <tr key={quiz.quizId}>
                                 <td>{quiz.quizName}</td>
-<<<<<<< HEAD
+
                                 <td><Button onClick={()=>this.onClickCreateQuiz(quiz.code,quiz.quizId)}>Start Quiz</Button></td>
-=======
+
                                 <td><Button onClick={() => this.onClickCreateQuiz(quiz.code,quiz.quizId)}>Start Quiz</Button></td>
->>>>>>> origin/devRens
+
                             </tr>
                         ))
                     }

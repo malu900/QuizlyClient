@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Table } from "react-bootstrap";
 import "../App/App.scss";
-import {leaveQuiz, disconnect, joinQuiz, connectToQuiz, connectStartGame} from '../Ws/WsService'
+import {leaveQuiz, disconnect, joinQuiz, connectToQuiz, connectStartGame, startGame} from '../Ws/WsService'
 import {Link, withRouter} from "react-router-dom";
 import { MessageService } from '../Ws/MessageService';
 import history from "../Utils/History";
@@ -25,34 +25,37 @@ class Lobby extends Component {
   componentWillMount() {
 
     this.subscription = MessageService.getMessage().subscribe(message => {
-      console.log(message)
-      this.setState({
-        Players : message.text,
-      })
+      console.log("received message: " + JSON.stringify(message));
+      if(message.text == true){
+        //this.redirectMePlease(//quizid)
+        console.log("activate the redireeeeeeeect")
+      }
+      else{
+        this.setState({
+          Players : message.text,
+        })
+      }
     });
-<<<<<<< HEAD
-
-
     this.setState({Host: this.props.location.state.Host});
     this.setState({ GuestName: this.props.location.state.guestName,
       GuestCode: this.props.location.state.guestCode});
       console.log(this.state.Host);
       console.log(this.state.guestCode);
-    connectToQuiz(this.state.GuestCode);
+    //connectToQuiz(this.state.GuestCode);
     setTimeout(() => {
       console.log(this.state.GuestName);
-      joinQuiz(this.state.GuestName, this.state.GuestCode);
+      //joinQuiz(this.state.GuestName, this.state.GuestCode);
     },2000);
-=======
     if(this.props.location.state.IsHost === true){
       this.setupForHost();
     }
     else{
       this.setupForGuest();
     }
->>>>>>> origin/devRens
   }
-
+  redirectMePlease = (id) => {
+    window.location.href = "http://localhost:3000/quiz/lobby/currentQuiz/" + id;
+  };
   componentDidUpdate() {
     console.log("bruh lobby component mounted!");
   }
@@ -62,7 +65,9 @@ class Lobby extends Component {
       Code: this.props.location.state.guestCode});
       setTimeout(() => {
         connectToQuiz(this.state.Code);
+        setTimeout(() => {
         joinQuiz(this.state.GuestName, this.state.Code);
+        }, 500);
       },2000);
   }
 
@@ -92,12 +97,26 @@ class Lobby extends Component {
   });
   }
 
+  onClickStartQuiz = () => {
+    //connectStartGame(code)
+    setTimeout(() => {
+      console.log(this.state.Code);
+      startGame(this.state.Code);
+    }, 2000);
+
+    //this.redirectMePlease(id);
+    /*setTimeout(()=>{
+        disconnect();
+      /!*  startgame = true*!/
+    },2000);*/
+  }
   render() {
     return (
       <div>
         <div id="playersListLobby">
           <p>
               Host is: {this.state.HostName}
+            <Button onClick={()=>this.onClickStartQuiz()}>Start Quiz</Button>
           </p>
         </div>
         <div id="playersListLobby">
