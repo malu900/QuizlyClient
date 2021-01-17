@@ -43,14 +43,14 @@ export class CurrentQuiz extends Component {
       }
     }, 1000);
 
-    this.getQuizById(this.props.match.params.id);
+    this.getQuizById(this.props.match.params.Code);
 
     this.setState({
       questions: this.state.Quiz.questions,
     });
   }
 
-  getQuizById = (id) => {
+  getQuizById = (Code) => {
     // axios.get("http://localhost:8081/quiz/" + id).then((response) =>
     //   const Quiz = response.data;
     //     this.setState({ persons });
@@ -60,7 +60,7 @@ export class CurrentQuiz extends Component {
     //   })
     // );
 
-    axios.get("http://localhost:8081/quiz/" + id).then((res) => {
+    axios.get("http://localhost:8081/quiz/" + Code).then((res) => {
       const quiz = res.data;
       const q = quiz.questions;
       this.setState({ Quiz: quiz, questions: q });

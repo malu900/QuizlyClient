@@ -27,8 +27,8 @@ class Lobby extends Component {
     this.subscription = MessageService.getMessage().subscribe(message => {
       console.log("received message: " + JSON.stringify(message));
       if(message.text == true){
-        //this.redirectMePlease(//quizid)
-        console.log("activate the redireeeeeeeect")
+        this.redirectMePlease();
+        //console.log("activate the redireeeeeeeect")
       }
       else{
         this.setState({
@@ -53,8 +53,8 @@ class Lobby extends Component {
       this.setupForGuest();
     }
   }
-  redirectMePlease = (id) => {
-    window.location.href = "http://localhost:3000/quiz/lobby/currentQuiz/" + id;
+  redirectMePlease = () => {
+    window.location.href = "http://localhost:3000/quiz/lobby/currentQuiz/" + this.state.Code;
   };
   componentDidUpdate() {
     console.log("bruh lobby component mounted!");
@@ -66,7 +66,7 @@ class Lobby extends Component {
       setTimeout(() => {
         connectToQuiz(this.state.Code);
         setTimeout(() => {
-        joinQuiz(this.state.GuestName, this.state.Code);
+        //joinQuiz(this.state.GuestName, this.state.Code);
         }, 500);
       },2000);
   }

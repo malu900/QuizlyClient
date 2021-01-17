@@ -51,7 +51,7 @@ export class App extends Component {
               <Route path="/addquestion">
                 <AddQuestion />
               </Route>
-              <Route path="/quiz/lobby/currentQuiz/:id" component={CurrentQuiz}>
+              <Route path="/quiz/lobby/currentQuiz/:Code" component={CurrentQuiz}>
               </Route>
                 <Route path="/PersonalQuizzes" component={PersonalQuizzes}/>
             <Route path="/quiz/lobby/currentQuiz/winners">
