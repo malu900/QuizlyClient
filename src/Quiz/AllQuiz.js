@@ -22,7 +22,6 @@ export class AllQuiz extends Component {
             showAllQuizzes();
             setTimeout(()=>{
                 this.setState({Quizzes : getQuizzes()});
-                console.log(this.state.Quizzes.length);
             },2000);
         }, 3000);
     }
@@ -50,15 +49,12 @@ export class AllQuiz extends Component {
 
     componentWillMount() {
         this.subscription = MessageService.getMessage().subscribe(message => {
-            console.log(message);
         });
     }
 
     render() {
         const {newQuizClicked} = this.state;
         const quizzes = this.state.Quizzes;
-        console.log(quizzes);
-        console.log(this.state.Quizzes);
         return (
             <div>
                 <Button
@@ -69,11 +65,11 @@ export class AllQuiz extends Component {
                 <div>
                     {newQuizClicked ? <AddQuiz Quiz={this.state.Quiz}/> : <div></div>}
                 </div>
-                {newQuizClicked ? (
-                    <Button variant="primary" type="submit">
-                        Submit Quiz
-                    </Button>
-                ) : null}
+                {/*{newQuizClicked ? (*/}
+                {/*    <Button variant="primary" type="submit">*/}
+                {/*        Submit Quiz*/}
+                {/*    </Button>*/}
+                {/*) : null}*/}
                 <Table bordered hover striped variant>
                     <thead>
                     <tr>
@@ -83,7 +79,7 @@ export class AllQuiz extends Component {
                     </thead>
                     <tbody>
                     {
-                        quizzes.length === 0 ?
+                        quizzes.length === 0 || quizzes === undefined || quizzes === "Can't find all quizzes" ?
                         <tr align={"center"}>
                             <td colSpan={"4"}> {quizzes.length} You have quizzes ready to start</td>
                         </tr> :

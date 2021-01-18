@@ -17,10 +17,6 @@ export class Login extends Component {
     password: "",
   };
 
-  // componentDidUpdate() {
-  //   console.log(this.props.login.email);
-  // }
-
   onChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -36,19 +32,20 @@ export class Login extends Component {
     };
     axios.post("http://localhost:8081/auth/login", login).then((response) => {
       if (response.data != null) {
-        console.log(response.data);
         /*localStorage.setItem('token', response.data.token);*/
         sessionStorage.setItem('userId', response.data.userId);
+        window.location.replace("/quiz");
         this.setState({ show: true });
         setTimeout(() => this.setState({ show: false }), 3000);
       }
     });
     this.setState(this.initialState);
-    // console.log(this.props.login);
   };
+
   resetLogin = () => {
     this.setState(() => this.initialState);
   };
+
   render() {
     const { email, password } = this.state;
     return (

@@ -14,10 +14,8 @@ export class Answers extends Component {
   //   e.preventDefault();
   // };
   onSubmit = (name) => {
-    console.log(name.target.value);
   };
   callBackFunction = (childData) => {
-    console.log(childData);
   };
   // returnAnswer = (answer) => {};
   render() {

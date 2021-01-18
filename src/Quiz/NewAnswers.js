@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 import "../App/App.scss";
+import AddQuestion from "./AddQuestion";
+import {AssignmentReturn} from "@material-ui/icons";
 
 export class NewAnswers extends Component {
   constructor(props) {
@@ -13,17 +15,22 @@ export class NewAnswers extends Component {
     };
   }
 
+  giveAnswers = (answers) =>{
+    this.props.parentCallback(answers);
+  }
+
   handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
+    }, () =>{
+      let answers = [
+        this.state.goodanswer,
+        this.state.answerOne,
+        this.state.answerTwo,
+        this.state.answerThree
+      ];
+      this.giveAnswers(answers);
     });
-    let answers = {
-      goodanswer: this.state.goodanswer,
-      answerOne: this.state.answerOne,
-      answerTwo: this.state.answerTwo,
-      answerThree: this.state.answerThree,
-    };
-    this.props.onChange(answers);
   };
 
   render() {

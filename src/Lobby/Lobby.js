@@ -25,7 +25,6 @@ class Lobby extends Component {
   componentWillMount() {
 
     this.subscription = MessageService.getMessage().subscribe(message => {
-      console.log("received message: " + JSON.stringify(message));
       if(message.text == true){
         this.redirectMePlease();
       }
@@ -86,7 +85,6 @@ class Lobby extends Component {
   onClickStartQuiz = () => {
     //connectStartGame(code)
     setTimeout(() => {
-      console.log(this.state.Code);
       startGame(this.state.Code);
     }, 2000);
 
