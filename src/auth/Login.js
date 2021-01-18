@@ -17,10 +17,6 @@ export class Login extends Component {
     password: "",
   };
 
-  // componentDidUpdate() {
-  //   console.log(this.props.login.email);
-  // }
-
   onChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -45,11 +41,12 @@ export class Login extends Component {
       }
     });
     this.setState(this.initialState);
-    // console.log(this.props.login);
   };
+
   resetLogin = () => {
     this.setState(() => this.initialState);
   };
+
   render() {
     const { email, password } = this.state;
     return (

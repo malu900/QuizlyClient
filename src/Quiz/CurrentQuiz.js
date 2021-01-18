@@ -15,12 +15,11 @@ export class CurrentQuiz extends Component {
       Players: [],
       CurrentPlayer: null,
       minutes: 0,
-      seconds: 5,
+      seconds: 10,
       round: 1
     };
   }
   componentDidMount() {
-    console.log(this.props.match.params.id);
     this.myInterval = setInterval(() => {
       const { seconds, minutes } = this.state;
 
@@ -68,24 +67,12 @@ export class CurrentQuiz extends Component {
       console.group(this.state.questions);
     });
   };
-  // updateLater() {
-  //   this.setState({
-  //     questions: this.state.Quiz
-  //   })
-  // }
-  // componentDidUpdate() {
-  //   console.log(this.state.Quiz);
-  // }
-  // handleTiming = (someArg) => {
-  //   setTimeout(200);
-  //   alert("We pass argument from Child to Parent: " + someArg);
-  // };
+
   componentWillUnmount() {
     clearInterval(this.myInterval);
   }
   nextRound= () =>{
     this.setState({round: this.state.round+ 1})
-    console.log("komt in de methode" + this.state.round)
     this.setState({seconds: 10})
   }
   render() {
@@ -105,7 +92,6 @@ export class CurrentQuiz extends Component {
             {minutes === 0 && seconds === 0 ? (
 
                 <div> {this.nextRound()} <CurrentQuestion round ={this.state.round} />
-                  {console.log(this.state.round)}
 
               <h1>Next question!</h1></div>
 

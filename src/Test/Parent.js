@@ -11,35 +11,15 @@ export class Parent extends Component {
       childs: [],
     };
   }
-  // handleSelect = (selectedValue) => {
-  //   this.setState({
-  //     name: selectedValue,
-  //   });
-  //   let namess = {
-  //     names: [...this.state.childs, selectedValue],
-  //   };
-  //   console.log(namess);
-  // };
-  // componentDidUpdate() {
-  //   console.log("Parent: " + this.state.names);
-  // }
-
-  // submitChange = (e) => {
-  //   e.preventDefault();
-
-  //   // childs: [...this.state.childs, selectedValue],
-  // };
+  
 
   handleChange(i, e) {
-    console.log(i, e);
     this.setState({
       names: { ...this.state.names, [i]: e.target.value },
     });
-    console.log(this.state.names);
   }
   submitChange = (event) => {
     event.preventDefault();
-    console.log(this.state.names);
   };
 
   render() {

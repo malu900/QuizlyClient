@@ -22,12 +22,10 @@ class PersonalQuizzes extends Component{
             .then(response => response.data)
             .then((data) => {
                 this.setState({quizzes : data})
-                console.log(this.state.quizzes);
             });
     }
 
     joinQuizAsHost = (quiz) => {
-        console.log(quiz);
         history.push({
             pathname: '/lobby',
             state: {Host: quiz.user.name, Code: quiz.code, IsHost: true},
