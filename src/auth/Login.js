@@ -36,9 +36,10 @@ export class Login extends Component {
     };
     axios.post("http://localhost:8081/auth/login", login).then((response) => {
       if (response.data != null) {
-        console.log(response.data);
+        console.log(response.data.userId);
         /*localStorage.setItem('token', response.data.token);*/
         sessionStorage.setItem('userId', response.data.userId);
+        window.location.href= "http://localhost:3000/PersonalQuizzes"
         this.setState({ show: true });
         setTimeout(() => this.setState({ show: false }), 3000);
       }
