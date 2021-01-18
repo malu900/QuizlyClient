@@ -60,7 +60,7 @@ class PersonalQuizzes extends Component{
                         this.state.quizzes.map((quiz) => (
                             <tr key={quiz.quizId}>
                                 <td>{quiz.quizName}</td>
-                                <td><button onClick={() => this.joinQuizAsHost(quiz)}></button></td>
+                                <td><button onClick={() => this.joinQuizAsHost(quiz)}>Start quiz</button></td>
                             </tr>
 
                         ))
