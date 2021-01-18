@@ -8,95 +8,76 @@ import { Container, Row } from "react-bootstrap";
 
 export class AppHeader extends Component {
   render() {
-    if(sessionStorage.getItem("userId") === null) {
+    if (sessionStorage.getItem("userId") === null) {
       return (
-          <Container id="AppHeader">
-            <Row>
-              <div>
-                <ul>
-                  <li>
-                    <Link to="/">Home</Link>
-                  </li>
-                  <li>
-                    <Link to="/topics">Topics</Link>
-                  </li>
-                  <li>
-                    <Link to="/quiz">Quiz</Link>
-                  </li>
-                  {/* <li> */}
-                    {/* <Link to="/quiz/lobby/currentQuiz/:id">currentquiz</Link>
-                  </li>
-                  <li>
-                    <Link to="/quiz/lobby/currentQuiz/winners">winners</Link>
-                  </li> */}
-                  <li>
-                    {
-                <Link to="/parent">Quiz</Link>}
-                    <Link to="/lobby">Lobby</Link>
-                  </li>
-                  <li>
-                    <Link to="/PersonalQuizzes">Your Quizzes</Link>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <ul>
-                  <li>
-                    <Link to="/login">Login</Link>
-                  </li>
-                         <li>
-                <Link to="/guest">Guest</Link>
-              </li>
-                </ul>
-              </div>
-            </Row>
-          </Container>
+        <Container id="AppHeader">
+          <Row>
+            <div>
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/topics">Topics</Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+                <li>
+                  <Link to="/guest">Guest</Link>
+                </li>
+              </ul>
+            </div>
+          </Row>
+        </Container>
       );
-    }
-    else {
-      return(
-<Container id="AppHeader">
-            <Row>
-              <div>
-                <ul>
-                  <li>
-                    <Link to="/">Home</Link>
-                  </li>
-                  <li>
-                    <Link to="/topics">Topics</Link>
-                  </li>
-                  <li>
-                    <Link to="/quiz">Quiz</Link>
-                  </li>
-                  {/* <li>
+    } else {
+      return (
+        <Container id="AppHeader">
+          <Row>
+            <div>
+              <ul>
+                <li>
+                  <Link to="/">Home</Link>
+                </li>
+                <li>
+                  <Link to="/topics">Topics</Link>
+                </li>
+                <li>
+                  <Link to="/quiz">Quiz</Link>
+                </li>
+                {/* <li>
                     <Link to="/quiz/lobby/currentQuiz/:id">currentquiz</Link>
                   </li>
                   <li>
                     <Link to="/quiz/lobby/currentQuiz/winners">winners</Link>
                   </li> */}
-                  <li>
-                    {
-                <Link to="/parent">Quiz</Link>}
-                    <Link to="/lobby">Lobby</Link>
-                  </li>
-                  <li>
-                    <Link to="/PersonalQuizzes">Your Quizzes</Link>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <ul>
-                  <li>
-                    <Link to="/login">Login</Link>
-                  </li>
-                  {/*       <li>
+                <li>
+                  {<Link to="/parent">Quiz</Link>}
+                  <Link to="/lobby">Lobby</Link>
+                </li>
+                <li>
+                  <Link to="/PersonalQuizzes">Your Quizzes</Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+                {/*       <li>
                 <Link to="/guest">Guest</Link>
               </li>*/}
-                </ul>
-              </div>
-            </Row>
-          </Container>
-          )
+              </ul>
+            </div>
+          </Row>
+        </Container>
+      );
     }
   }
 }

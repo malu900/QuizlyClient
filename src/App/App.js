@@ -9,6 +9,7 @@ import Auth from "../auth/Auth";
 import AddQuestion from "../Quiz/AddQuestion";
 import Home from "../Home";
 import CurrentQuiz from "../Quiz/CurrentQuiz";
+import NewAddQuiz from "../Quiz/NewAddQuiz";
 // <<<<<<< HEAD
 // import Parent from "../Test/Parent";
 // =======
@@ -39,22 +40,24 @@ export class App extends Component {
               <Route path="/lobby" component={Lobby}>
                 <Lobby />
               </Route>
-              <Route path="/login">
+              <Route path="/addquiznew">
                 <Auth />
               </Route>
-              {/*<Route path="/guest">
-            <Guest />
-          </Route>*/}
+              <Route path="/newwww">
+                <NewAddQuiz />
+              </Route>
               <Route exact path="/quiz">
                 <Quiz />
               </Route>
               <Route path="/addquestion">
                 <AddQuestion />
               </Route>
-              <Route path="/quiz/lobby/currentQuiz/:Code" component={CurrentQuiz}>
-              </Route>
-                <Route path="/PersonalQuizzes" component={PersonalQuizzes}/>
-            <Route path="/quiz/lobby/currentQuiz/winners">
+              <Route
+                path="/quiz/lobby/currentQuiz/:Code"
+                component={CurrentQuiz}
+              ></Route>
+              <Route path="/PersonalQuizzes" component={PersonalQuizzes} />
+              <Route path="/quiz/lobby/currentQuiz/winners">
                 <Winners />
               </Route>
               {/* <Route path="/parent">

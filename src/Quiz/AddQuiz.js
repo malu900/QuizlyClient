@@ -2,8 +2,7 @@ import { Button, Form } from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuestion from "./AddQuestion";
 import axios from "axios";
-import {showAllQuizzes} from '../Ws/WsService'
-
+import { showAllQuizzes } from "../Ws/WsService";
 
 export class AddQuiz extends Component {
   constructor(props) {
@@ -51,14 +50,18 @@ export class AddQuiz extends Component {
       quizName: this.state.quizName,
       questions: this.state.questions,
     };
-    axios.post("http://localhost:8081/quiz/" + sessionStorage.getItem('userId'), quiz)
-        .then(response =>{
-          if(response.data != null){
-
-          }
-          else{
-          }
-        })
+    axios
+      .post(
+        "http://localhost:8081/quiz/" + sessionStorage.getItem("userId"),
+        quiz
+      )
+      .then((response) => {
+        if (response.data != null) {
+          console.log(response);
+        } else {
+          console.log("error");
+        }
+      });
     this.setState(this.initialState);
     // this.setState({
     //   Quiz: [...this.state.Quiz, quiz],
@@ -74,7 +77,7 @@ export class AddQuiz extends Component {
     axios.post("http://localhost:8081/quiz/1", quiz).then((response) => {
       showAllQuizzes();
     });
-  }
+  };
 
   addQuestionToQuiz = (question) => {
     console.log(question);
