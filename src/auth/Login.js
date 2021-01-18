@@ -36,9 +36,9 @@ export class Login extends Component {
     };
     axios.post("http://localhost:8081/auth/login", login).then((response) => {
       if (response.data != null) {
-        // console.log(response.data);
+        console.log(response.data);
         /*localStorage.setItem('token', response.data.token);*/
-        //localStorage.setItem('userId', response.data.userId);
+        sessionStorage.setItem('userId', response.data.userId);
         this.setState({ show: true });
         setTimeout(() => this.setState({ show: false }), 3000);
       }
@@ -53,7 +53,7 @@ export class Login extends Component {
     const { email, password } = this.state;
     return (
       <Container id="login">
-        <h2> Login</h2>
+        <h2>Login</h2>
         <Form onReset={this.resetLogin} onSubmit={this.onSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>

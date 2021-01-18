@@ -1,6 +1,9 @@
 import { Button, Form } from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuestion from "./AddQuestion";
+import axios from "axios";
+import {showAllQuizzes} from '../Ws/WsService'
+
 
 export class AddQuiz extends Component {
   constructor(props) {
@@ -9,16 +12,23 @@ export class AddQuiz extends Component {
       id: 0,
       createQuestion: false,
       quizName: "",
+      createdQuestions: [],
+      // questions: {
+      //   answers: {
+      //     name: "",
+      //   },
+      // },
+      // =======
+      Quiz: [],
       questions: [],
-      questionsData: []
+      questionsData: [],
     };
   }
 
   newQuestion = (e) => {
     this.setState({
-      questions: [...this.state.questions, <AddQuestion />],
+      createdQuestions: [...this.state.createdQuestions, <AddQuestion />],
     });
-    console.log(this.state.questions);
   };
 
   deleteQuestion = (e) => {
@@ -39,26 +49,42 @@ export class AddQuiz extends Component {
     e.preventDefault();
     let quiz = {
       quizName: this.state.quizName,
+      questions: this.state.questions,
     };
-    this.props.addQuiz(quiz);
+    axios.post("http://localhost:8081/quiz/" + sessionStorage.getItem('userId'), quiz)
+        .then(response =>{
+          if(response.data != null){
 
-    this.setState({
-      quizName: "",
-    });
+          }
+          else{
+          }
+        })
+    this.setState(this.initialState);
+    // this.setState({
+    //   Quiz: [...this.state.Quiz, quiz],
+    // });
+    this.addQuiz(quiz);
   };
+  // componentDidUpdate() {
+  //   console.log("testtttt " + quiz);
+  // }
 
-  componentDidUpdate() {
-    console.log(this.state.questions);
+  //TODO userid toevoegen
+  addQuiz = (quiz) => {
+    axios.post("http://localhost:8081/quiz/1", quiz).then((response) => {
+      showAllQuizzes();
+    });
   }
 
   addQuestionToQuiz = (question) => {
+    console.log(question);
     this.setState({
-      questionsData: [...this.state.questionsData, question],
+      questions: [...this.state.questions, question],
     });
-    this.state.questionsData.forEach(item => console.log(item));
-    console.log(this.state.questionsData.length);
-    // console.log(this.state.questionsData)
   };
+  componentDidUpdate() {
+    console.log(this.state.questions);
+  }
 
   render() {
     return (
@@ -82,14 +108,14 @@ export class AddQuiz extends Component {
         </Form>
         <Button onClick={this.newQuestion}>Create Question</Button>
         <div>
-          {this.state.questions.map((question) => (
+          {this.state.createdQuestions.map((question) => (
             <AddQuestion
               key={question.name}
               addQuestionToQuiz={this.addQuestionToQuiz}
             />
           ))}
         </div>
-        <Button onClick={this.deleteQuestion}>remove Question</Button>
+        {/* <Button onClick={this.deleteQuestion}>remove Question</Button> */}
       </div>
     );
   }

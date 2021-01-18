@@ -59,7 +59,7 @@ export class Register extends Component {
               name={"name"}
               value={name}
               onChange={this.onChange}
-              placeholder="Enter email"
+              placeholder="Enter name"
             />
             <Form.Text className="text-muted"></Form.Text>
           </Form.Group>

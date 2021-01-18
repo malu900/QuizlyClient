@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "../App/App.scss";
 import { Container, Form, Button } from "react-bootstrap";
-import axios from "axios";
+import history from "../Utils/History";
+import {joinQuiz, getGuests} from '../Ws/WsService';
 
 export class Guest extends Component {
     constructor(props) {
@@ -13,7 +14,7 @@ export class Guest extends Component {
     }
     initialState = {
         name: "",
-        code: ""
+        code: "",
     };
 
     onChange = (event) => {
@@ -23,22 +24,13 @@ export class Guest extends Component {
     };
 
     onSubmit = (e) => {
-        // e.stopPropagation();
         e.preventDefault();
-        const guest = {
-            name: this.state.name,
-            code: this.state.code
-        };
-        axios.post("http://localhost:8081/auth/guest", guest).then((response) => {
-            if (response.data != null) {
-                this.setState({ show: true });
-                setTimeout(() => this.setState({ show: false }), 3000);
-            } else {
-                this.setState({ show: false });
-            }
+        history.push({
+            pathname: '/lobby',
+            state: {guestName: this.state.name  , guestCode: this.state.code},
         });
-        this.setState(this.initialState);
     };
+
     render() {
         const { name, code } = this.state;
         return (

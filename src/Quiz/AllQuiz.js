@@ -1,42 +1,64 @@
 import {Button, Table} from "react-bootstrap";
 import React, { Component } from "react";
 import AddQuiz from "./AddQuiz";
-import Quiz from "./Quiz";
-import axios from 'axios'
-import SockJsClient from 'react-stomp';
+import {connect, joinQuiz, showAllQuizzes, getQuizzes, disconnect, connectStartGame, startGame} from '../Ws/WsService'
+import CurrentQuestion from "./CurrentQuestion";
+import {MessageService} from "../Ws/MessageService";
 
 export class AllQuiz extends Component {
     
     constructor(props) {
         super(props);
         this.state = {
+            Quizzes : [],
             newQuizClicked: false,
             Quiz: [],
-            stompClient: null,
         };
     }
 
-    sendMessage = () => {
-        this.clientRef.sendMessage('/app/getAll');
+    componentDidMount = () => {
+        connect();
+        setTimeout(()=>{
+            showAllQuizzes();
+            setTimeout(()=>{
+                this.setState({Quizzes : getQuizzes()});
+                console.log(this.state.Quizzes.length);
+            },2000);
+        }, 3000);
+    }
+
+    onClickCreateQuiz = (code,id) => {
+        connectStartGame(code)
+        setTimeout(() => {
+            startGame(code)
+        }, 2000);
+
+        //this.redirectMePlease(id);
+        /*setTimeout(()=>{
+            disconnect();
+          /!*  startgame = true*!/
+        },2000);*/
+    }
+
+    onClickCreateQuiz = () => {
+        disconnect();
+    };
+    
+    redirectMePlease = (id) => {
+        window.location.href = "http://localhost:3000/quiz/lobby/currentQuiz/" + id;
     };
 
-    onClickCreateQuiz = (e) => {
-        console.log(this.newQuizClicked);
-    };
-
-    findAllQuizzes(){
-        axios.get("http://localhost:8081/quiz/getAll")
-            .then(response => response.data)
-            .then((data) => {
-                this.setState({Quiz: data})
-                console.log(data)
-            });
-        console.log(this.state.Quiz)
+    componentWillMount() {
+        this.subscription = MessageService.getMessage().subscribe(message => {
+            console.log(message);
+        });
     }
 
     render() {
         const {newQuizClicked} = this.state;
-        const quizzes = this.state.Quiz;
+        const quizzes = this.state.Quizzes;
+        console.log(quizzes);
+        console.log(this.state.Quizzes);
         return (
             <div>
                 <Button
@@ -56,42 +78,29 @@ export class AllQuiz extends Component {
                     <thead>
                     <tr>
                         <th>Name</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    {this.state.Quiz.length === 0 ?
+                    {
+                        quizzes.length === 0 ?
                         <tr align={"center"}>
-                            <td colSpan={"4"}> {this.state.Quiz.length} You have quizzes ready to start</td>
+                            <td colSpan={"4"}> {quizzes.length} You have quizzes ready to start</td>
                         </tr> :
-                        this.state.Quiz.map((quiz) => (
-                            <tr key={quiz.quizId}>
+                        quizzes.map((quiz) => (
+                                <tr key={quiz.quizId}>
                                 <td>{quiz.quizName}</td>
-                                {/*{<td><Button onClick={this.startQuiz(quiz)}>Start Quiz</Button></td>}*/}
+
+                                <td><Button onClick={()=>this.onClickCreateQuiz(quiz.code,quiz.quizId)}>Start Quiz</Button></td>
+
+                                <td><Button onClick={() => this.onClickCreateQuiz(quiz.code,quiz.quizId)}>Start Quiz</Button></td>
+
                             </tr>
                         ))
                     }
                     </tbody>
                 </Table>
-                <SockJsClient url='http://localhost:8081/quizly'
-                              topics={['/topic/quizzes']}
-                              onConnect={() => {
-                                  console.log("connected");
-                              }}
-                              onDisconnect={() => {
-                                  console.log("Disconnected");
-                              }}
-                              onMessage={(msg) => {
-                                  var jobs = this.state.Quiz;
-                                  jobs.push(msg);
-                                  this.setState({Quiz: jobs});
-                                  console.log(this.state);
-                              }}
-                              ref={(client) => {
-                                  this.clientRef = client
-                              }}/>
             </div>
-
-
         )
     }
 
