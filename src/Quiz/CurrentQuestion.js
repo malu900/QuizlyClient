@@ -31,7 +31,7 @@ export class CurrentQuestion extends Component {
           console.log(data)
           this.setState({answers : data.answers})
           console.log(this.state.answers)
-        });
+        }).catch(window.location.href = "http://localhost:3000/quiz/lobby/currentQuiz/end/" + this.state.Code);
   }
   componentWillMount() {
     if (this.state.startGame === true) {

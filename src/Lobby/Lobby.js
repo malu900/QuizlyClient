@@ -28,7 +28,6 @@ class Lobby extends Component {
       console.log("received message: " + JSON.stringify(message));
       if(message.text == true){
         this.redirectMePlease();
-        //console.log("activate the redireeeeeeeect")
       }
       else{
         this.setState({
@@ -36,16 +35,6 @@ class Lobby extends Component {
         })
       }
     });
-    this.setState({Host: this.props.location.state.Host});
-    this.setState({ GuestName: this.props.location.state.guestName,
-      GuestCode: this.props.location.state.guestCode});
-      console.log(this.state.Host);
-      console.log(this.state.guestCode);
-    //connectToQuiz(this.state.GuestCode);
-    setTimeout(() => {
-      console.log(this.state.GuestName);
-      //joinQuiz(this.state.GuestName, this.state.GuestCode);
-    },2000);
     if(this.props.location.state.IsHost === true){
       this.setupForHost();
     }
@@ -56,9 +45,6 @@ class Lobby extends Component {
   redirectMePlease = () => {
     window.location.href = "http://localhost:3000/quiz/lobby/currentQuiz/" + this.state.Code;
   };
-  componentDidUpdate() {
-    console.log("bruh lobby component mounted!");
-  }
 
   setupForGuest = () => {
     this.setState({ GuestName: this.props.location.state.guestName,
@@ -66,7 +52,7 @@ class Lobby extends Component {
       setTimeout(() => {
         connectToQuiz(this.state.Code);
         setTimeout(() => {
-        //joinQuiz(this.state.GuestName, this.state.Code);
+        joinQuiz(this.state.GuestName, this.state.Code);
         }, 500);
       },2000);
   }
