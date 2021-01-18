@@ -44,11 +44,14 @@ export class Login extends Component {
       }
     });
     this.setState(this.initialState);
-    // console.log(this.props.login);
+    console.log("sessionStorage userId: " + sessionStorage.getItem("userId"))
+    window.location.replace("/quiz");
   };
+
   resetLogin = () => {
     this.setState(() => this.initialState);
   };
+
   render() {
     const { email, password } = this.state;
     return (
