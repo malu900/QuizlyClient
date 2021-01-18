@@ -51,7 +51,6 @@ export class AddQuiz extends Component {
       quizName: this.state.quizName,
       questions: this.state.questions,
     };
-    console.log("onSubmit sessionStorage-check: " + sessionStorage.getItem("userId"))
     axios.post("http://localhost:8081/quiz/" + sessionStorage.getItem('userId'), quiz)
         .then(response =>{
           if(response.data != null){
@@ -68,18 +67,12 @@ export class AddQuiz extends Component {
   };
 
   addQuestionToQuiz = (question) => {
-    console.log(question);
     this.setState({
       questions: [...this.state.questions, question],
     });
   };
 
-  componentDidUpdate() {
-    // console.log(this.state.questions);
-  }
-
   render() {
-    console.log("The userId beeyatch: " + sessionStorage.getItem("userId"))
     return (
       <div>
         <Form onSubmit={this.onSubmit}>

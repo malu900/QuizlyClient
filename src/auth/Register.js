@@ -17,9 +17,7 @@ export class Register extends Component {
     password: "",
     secondPassword: "",
   };
-  /*componentDidUpdate() {
-    console.log(this.props.login.email);
-  }*/
+  
 
   onChange = (event) => {
     this.setState({

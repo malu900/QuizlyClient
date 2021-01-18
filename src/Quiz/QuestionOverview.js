@@ -28,19 +28,11 @@ export default class  QuestionOverview extends Component {
             .then(response => response.data)
             .then((data) => {
                 this.setState({questions: data})
-                console.log(data)
                 this.setState({answers : data.answers})
-                console.log(this.state.answers)
-             /*   console.log(data.answers[0].answer)
-
-                console.log(this.state.questions.answers[0].answer)*/
             });
-     /*   console.log(this.state.questions.answers[0].answer)*/
-        //console.log(this.state.Quiz)
     }
     render() {
         const { isLoaded } = this.state;
-        console.log(this.state.answers[0])
         return (
 
             <div className='app'>
@@ -93,7 +85,6 @@ export default class  QuestionOverview extends Component {
     }
 
     Test(answerId) {
-            console.log(answerId)
     }
 
 }

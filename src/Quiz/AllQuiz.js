@@ -22,7 +22,6 @@ export class AllQuiz extends Component {
             showAllQuizzes();
             setTimeout(()=>{
                 this.setState({Quizzes : getQuizzes()});
-                console.log("Quizzes.length: " + this.state.Quizzes.length);
             },2000);
         }, 3000);
     }
@@ -50,15 +49,12 @@ export class AllQuiz extends Component {
 
     componentWillMount() {
         this.subscription = MessageService.getMessage().subscribe(message => {
-            console.log(message);
         });
     }
 
     render() {
         const {newQuizClicked} = this.state;
         const quizzes = this.state.Quizzes;
-        console.log("These are the quizzes man in AllQuiz: " + JSON.stringify(quizzes));
-        // console.log(this.state.Quizzes);
         return (
             <div>
                 <Button

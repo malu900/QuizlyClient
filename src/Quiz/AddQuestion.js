@@ -33,8 +33,6 @@ export default class AddQuestion extends Component {
             showAllQuizzes();
             setTimeout(() => {
                 this.setState({quizzes: getQuizzes()});
-                console.log("last quiz from all in onSubmit(): " + JSON.stringify(this.state.quizzes[this.state.quizzes.length - 1]))
-                console.log("the id: " + JSON.stringify(this.state.quizzes[this.state.quizzes.length - 1].quizId))
                 lastQuizId = this.state.quizzes[this.state.quizzes.length - 1].quizId;
                 setTimeout(() => {
                     this.postQuestion(lastQuizId)
@@ -56,7 +54,6 @@ export default class AddQuestion extends Component {
                 if (response.data != null) {
                     this.setState({show: true});
                     setTimeout(() => this.setState({show: false}), 3000);
-                    console.log("submitQuestion response.data: " + response.data)
 
                     this.getLastQuestion(); //also submits answers with it
                 } else {
@@ -76,9 +73,7 @@ export default class AddQuestion extends Component {
         axios.get("http://localhost:8081/question/")
             .then((response) => {
                 this.setState({questions: response.data})
-                console.log("Questions in state: " + JSON.stringify(this.state.questions))
                 questionId = this.state.questions[this.state.questions.length - 1].questionId;
-                console.log("the lastId: " + questionId)
 
                 this.submitAnswers(questionId)
             })
@@ -92,13 +87,10 @@ export default class AddQuestion extends Component {
                 rightAnswer: false,
                 question: null
             }
-            console.log("Answer: " + JSON.stringify(answer) + index)
             index === 0 ? formattedAnswer.rightAnswer = true : formattedAnswer.rightAnswer = false
 
             axios.post("http://localhost:8081/answer/" + questionId, formattedAnswer)
                 .then(response => {
-                    console.log("Answer have been potentially added with questionId [" + questionId +
-                        "], response.data: " + response.data)
                     alert("Quiz + questions + answers have been added.")
                 })
         })
@@ -136,7 +128,6 @@ export default class AddQuestion extends Component {
                         />
                     </Form.Group>
                     <NewAnswers parentCallback={this.callbackGetAnswers}/>
-                    {console.log("THEFUCKINGANSWERCALLBACK this.state.answerList: " + JSON.stringify(this.state.answerList))}
                     <Button variant="primary" type="submit">
                         Add question
                     </Button>
