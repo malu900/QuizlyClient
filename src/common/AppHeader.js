@@ -18,9 +18,6 @@ export class AppHeader extends Component {
                     <Link to="/">Home</Link>
                   </li>
                   <li>
-                    <Link to="/topics">Topics</Link>
-                  </li>
-                  <li>
                     <Link to="/quiz">Quiz</Link>
                   </li>
                   {/* <li> */}
@@ -29,11 +26,7 @@ export class AppHeader extends Component {
                   <li>
                     <Link to="/quiz/lobby/currentQuiz/winners">winners</Link>
                   </li> */}
-                  <li>
-                    {
-                <Link to="/parent">Quiz</Link>}
-                    <Link to="/lobby">Lobby</Link>
-                  </li>
+
                   <li>
                     <Link to="/PersonalQuizzes">Your Quizzes</Link>
                   </li>
