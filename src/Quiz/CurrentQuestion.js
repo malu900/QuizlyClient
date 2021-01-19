@@ -48,9 +48,18 @@ export class CurrentQuestion extends Component {
     }
   }
   rightOrWrong = (answer) => {
-    this.setState({
-      rightAnswer: true,
-    });
+
+    if (answer.rightAnswer === true) {
+      this.setState({
+        rightAnswer: true,
+      });
+      this.reward.rewardMe();
+
+    }
+
+  };
+  Test = (answer) => {
+    console.log(answer)
 
   };
   render (){
@@ -68,7 +77,7 @@ export class CurrentQuestion extends Component {
           type="confetti"
         >
             {this.state.answers.map((answer) => (
-                  <Button onClick={() => this.Test(answer.answerId)}> {answer.answerContent} </Button>
+                  <Button onClick={() => this.rightOrWrong(answer)}> {answer.answerContent} </Button>
             ))}
         </Reward>
       </div>

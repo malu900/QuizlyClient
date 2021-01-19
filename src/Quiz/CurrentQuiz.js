@@ -15,7 +15,7 @@ export class CurrentQuiz extends Component {
       Players: [],
       CurrentPlayer: null,
       minutes: 0,
-      seconds: 10,
+      seconds: 100,
       round: 1
     };
   }
