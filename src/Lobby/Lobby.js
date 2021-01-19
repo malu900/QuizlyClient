@@ -5,6 +5,7 @@ import {leaveQuiz, disconnect, joinQuiz, connectToQuiz, connectStartGame, startG
 import {Link, withRouter} from "react-router-dom";
 import { MessageService } from '../Ws/MessageService';
 import history from "../Utils/History";
+import CurrentQuestion from "../Quiz/CurrentQuestion";
 
 
 class Lobby extends Component {
@@ -18,7 +19,8 @@ class Lobby extends Component {
       GuestName: "",
       Code: "",
       QuizMaster: [],
-      startGame: false
+      startGame: false,
+      PassGuestName : false
     };
   }
 
@@ -26,7 +28,7 @@ class Lobby extends Component {
 
     this.subscription = MessageService.getMessage().subscribe(message => {
       if(message.text == true){
-        this.redirectMePlease();
+          this.redirectMePlease();
       }
       else{
         this.setState({
@@ -42,7 +44,18 @@ class Lobby extends Component {
     }
   }
   redirectMePlease = () => {
-    window.location.href = "http://localhost:3000/quiz/lobby/currentQuiz/" + this.state.Code;
+    /*window.location.href = "http://localhost:3000/quiz/lobby/currentQuiz/" + this.state.Code;*/
+    console.log(this.state.GuestName)
+    history.push({
+      pathname: '/quiz/lobby/currentQuiz/' + this.state.Code,
+      state: {GuestName: this.state.GuestName},
+    });
+  /*  const state = { GuestName: this.state.GuestName }
+    const title = ''
+    const url = 'hello-world.html'
+
+    history.pushState(state, title, url)*/
+
   };
 
   setupForGuest = () => {
@@ -86,8 +99,8 @@ class Lobby extends Component {
     //connectStartGame(code)
     setTimeout(() => {
       startGame(this.state.Code);
-    }, 2000);
 
+    }, 2000);
     //this.redirectMePlease(id);
     /*setTimeout(()=>{
         disconnect();
@@ -95,13 +108,16 @@ class Lobby extends Component {
     },2000);*/
   }
   render() {
+    console.log(this.state.GuestName)
     return (
+
+
       <div>
         <div id="playersListLobby">
           <p>
               Host is: {this.state.HostName}
             <Button onClick={()=>this.onClickStartQuiz()}>Start Quiz</Button>
-          </p>
+                </p>
         </div>
         <div id="playersListLobby">
           <ul>

@@ -5,6 +5,8 @@ import "../App/App.scss";
 import CurrentQuestion from "./CurrentQuestion";
 import axios from "axios";
 import { data } from "jquery";
+import {joinQuiz} from "../Ws/WsService";
+import history from "../Utils/History";
 
 export class CurrentQuiz extends Component {
   constructor(props) {
@@ -15,11 +17,11 @@ export class CurrentQuiz extends Component {
       Players: [],
       CurrentPlayer: null,
       minutes: 0,
-      seconds: 100,
+      seconds: 3,
       round: 1
     };
   }
-  componentDidMount() {
+  componentWillMount() {
     this.myInterval = setInterval(() => {
       const { seconds, minutes } = this.state;
 
@@ -74,14 +76,28 @@ export class CurrentQuiz extends Component {
   nextRound= () =>{
     this.setState({round: this.state.round+ 1})
     this.setState({seconds: 10})
+    this.checkFinished()
+
   }
+  checkFinished = () => {
+    /*setTimeout(() => {
+      if (this.state.round > 3) {
+        history.push({
+          pathname: '/quiz/lobby/currentQuiz/winners',
+        });
+      }
+    }, 500);*/
+
+  }
+
   render() {
+
     const count = 0
     const { minutes, seconds } = this.state;
     return (
       <div className="current-quiz">
         <div>
-          <div className="circle">0</div>
+          <div className="circle">{this.state.round}</div>
           <h1> {this.state.Quiz.id}</h1>
           {/* {this.state.questions.map((q) => (
             <p> {q}</p>

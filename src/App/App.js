@@ -39,6 +39,8 @@ export class App extends Component {
               <Route path="/lobby" component={Lobby}>
                 <Lobby />
               </Route>
+              <Route path="/quiz/lobby/currentQuiz/:Code" component={CurrentQuiz}>
+              </Route>
               <Route path="/login">
                 <Auth />
               </Route>
@@ -51,8 +53,7 @@ export class App extends Component {
               <Route path="/addquestion">
                 <AddQuestion />
               </Route>
-              <Route path="/quiz/lobby/currentQuiz/:Code" component={CurrentQuiz}>
-              </Route>
+
                 <Route path="/PersonalQuizzes" component={PersonalQuizzes}/>
             <Route path="/quiz/lobby/currentQuiz/winners">
                 <Winners />

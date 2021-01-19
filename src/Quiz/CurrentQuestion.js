@@ -13,12 +13,19 @@ export class CurrentQuestion extends Component {
       rightAnswer: false,
       wrongAnswer: false,
       answers : [],
-      id: 40,
+      id: 42,
       round : 1,
       questions: [],
-      startGame: false
+      startGame: false,
+      GuestName: "",
+      Score : 0
     };
   }
+  increaseScore= () =>{
+    this.setState({Score: this.state.Score+ 1})
+    this.setState({seconds: 5})
+  }
+
   findQuestion(){
     axios.get("http://localhost:8081/question/"+ this.state.id + "/" + this.state.round )
         .then(response => response.data)
@@ -50,11 +57,8 @@ export class CurrentQuestion extends Component {
   rightOrWrong = (answer) => {
 
     if (answer.rightAnswer === true) {
-      this.setState({
-        rightAnswer: true,
-      });
+      this.increaseScore();
       this.reward.rewardMe();
-
     }
 
   };
@@ -63,12 +67,14 @@ export class CurrentQuestion extends Component {
 
   };
   render (){
-    const rightAnswer = this.state.rightAnswer;
     this.state.round = this.props.round;
+    console.log(this.state.GuestName)
+    console.log(this.state.questions)
+
 
     // var handleTiming = this.props.handleTiming;
     return (
-      <div class="current-question">
+      <div className="current-question">
         <p>Current question {this.state.questions.questionName}</p>
         <Reward
           ref={(ref) => {
