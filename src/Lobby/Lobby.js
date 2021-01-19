@@ -29,9 +29,14 @@ class Lobby extends Component {
         this.redirectMePlease();
       }
       else{
-        this.setState({
-          Players : message.text,
-        })
+        if(message.text != "Couldn't join the quiz") {
+          this.setState({
+            Players: message.text,
+          })
+        }
+        else{
+          this.redirectToHome();
+        }
       }
     });
     if(this.props.location.state.IsHost === true){
@@ -44,6 +49,9 @@ class Lobby extends Component {
   redirectMePlease = () => {
     window.location.href = "http://localhost:3000/quiz/lobby/currentQuiz/" + this.state.Code;
   };
+  redirectToHome = () => {
+    window.location.href = "http://localhost:3000/"
+  }
 
   setupForGuest = () => {
     this.setState({ GuestName: this.props.location.state.guestName,
