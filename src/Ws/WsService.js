@@ -48,9 +48,9 @@ var startgame = false;
             MessageService.sendMessage(JSON.parse(message.body.message));
             break;
           case 'GETALL':
-            if(message.body.message != "[]"){
-                console.log(quizzes);
+            if(message.body.message !== "[]"){
                 quizzes = JSON.parse(message.body.message);
+                console.log("GETALL: " + JSON.stringify(quizzes));
             }
             break;
           case 'START':
