@@ -12,23 +12,25 @@ export class CurrentQuestion extends Component {
       rightAnswer: false,
       wrongAnswer: false,
       answers : [],
-      id: 39,
+      id: 59,
       round : 1,
       questions: [],
       startGame: false,
-      score: 0
+      score: 0,
+      value: true
     };
   }
   findQuestion(){
-    setTimeout(()=>{
+   /* setTimeout(()=>{*/
       axios.get("http://localhost:8081/question/"+ this.state.id + "/" + this.state.round )
       .then(response => response.data)
       .then((data) => {
         console.log(data);
         this.setState({questions: data})
         this.setState({answers : data.answers})
+
       }).catch(console.log('failed'));
-    }, 3000);
+/*    }, 3000);*/
   }
   componentWillMount() {
     if (this.state.startGame === true) {
@@ -41,18 +43,19 @@ export class CurrentQuestion extends Component {
   }
 
   checkForRightAnswer = (answer) => {
+    this.setState({value:false})
     if(answer.rightAnswer){
       this.reward.rewardMe();
       this.setState({
-        score: this.state.score + 100
+        score: this.state.score + 100,
       })
     }
   }
 
 
   componentDidMount() {
-
     this.findQuestion()
+    this.setState({value: true})
   }
   componentDidUpdate() {
  
@@ -70,6 +73,7 @@ export class CurrentQuestion extends Component {
       <div class="current-question">
         <p>Score {this.state.score}</p>
         <p>Current question {this.state.questions.questionName}</p>
+
         <Reward
           ref={(ref) => {
             this.reward = ref;
@@ -77,7 +81,7 @@ export class CurrentQuestion extends Component {
           type="confetti"
         >
             {this.state.answers.map((answer) => (
-                  <Button onClick={() => this.checkForRightAnswer(answer)}> {answer.answerContent} </Button>
+                  <Button  disabled={!this.state.value} onClick={() => this.checkForRightAnswer(answer)}> {answer.answerContent} </Button>
             ))}
         </Reward>
       </div>

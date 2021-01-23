@@ -16,7 +16,9 @@ export class CurrentQuiz extends Component {
       CurrentPlayer: null,
       minutes: 0,
       seconds: 10,
-      round: 1
+      round: 1,
+      lengthquiz: "",
+      score: 0
     };
   }
   componentDidMount() {
@@ -63,8 +65,8 @@ export class CurrentQuiz extends Component {
       const quiz = res.data;
       const q = quiz.questions;
       this.setState({ Quiz: quiz, questions: q });
-
-      console.group(this.state.questions);
+      this.setState({lengthquiz: this.state.questions.length + 1})
+      console.group(this.state.lengthquiz);
     });
   };
 
@@ -74,6 +76,11 @@ export class CurrentQuiz extends Component {
   nextRound= () =>{
     this.setState({round: this.state.round+ 1})
     this.setState({seconds: 10})
+    console.log(this.state.score)
+  }
+  checkIfQuizIsFinished=() => {
+    console.log("einde pagina")
+    window.location.replace("/winners")
   }
   render() {
     const count = 0
@@ -86,12 +93,12 @@ export class CurrentQuiz extends Component {
           {/* {this.state.questions.map((q) => (
             <p> {q}</p>
           ))} */}
-
-          <CurrentQuestion {...this.props} />
+          {this.state.round === this.state.lengthquiz ?(<div>{this.checkIfQuizIsFinished()}</div>) : (<div></div>)}
+      {/*    <CurrentQuestion {...this.props} />*/}
           <div className="time-remaining">
             {minutes === 0 && seconds === 0 ? (
 
-                <div> {this.nextRound()} <CurrentQuestion round ={this.state.round} />
+                <div> {this.nextRound()} {} <CurrentQuestion round ={this.state.round} />
 
               <h1>Next question!</h1></div>
 
