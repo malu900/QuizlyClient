@@ -3,10 +3,9 @@ import React, { Component } from "react";
 export class Winners extends Component {
   render() {
     return (
-      <div className="winners">
-        <div className="winner3">1</div>
-        <div className="winner1">2</div>
-        <div className="winner2">3</div>
+      <div>
+          <h2>You finished the quiz</h2>
+          <h2>Your score is: {sessionStorage.getItem('score')}</h2>
       </div>
     );
   }
