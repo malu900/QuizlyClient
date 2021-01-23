@@ -30,6 +30,9 @@ export class AppHeader extends Component {
                   <li>
                     <Link to="/PersonalQuizzes">Your Quizzes</Link>
                   </li>
+                  <li>
+                    <Link to="/tutorial">Tutorial</Link>
+                  </li>
                 </ul>
               </div>
               <div>
@@ -69,6 +72,9 @@ export class AppHeader extends Component {
                   </li> */}
                   <li>
                     <Link to="/PersonalQuizzes">Your Quizzes</Link>
+                  </li>
+                  <li>
+                    <Link to="/tutorial">Tutorial</Link>
                   </li>
                 </ul>
               </div>

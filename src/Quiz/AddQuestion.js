@@ -91,9 +91,10 @@ export default class AddQuestion extends Component {
 
             axios.post("http://localhost:8081/answer/" + questionId, formattedAnswer)
                 .then(response => {
-                    alert("Quiz + questions + answers have been added.")
+                    console.log("SubmitAnswers: " + response.data);
                 })
         })
+        console.log("Questions and answers added :D")
     }
 
     render() {
@@ -101,12 +102,6 @@ export default class AddQuestion extends Component {
         return (
             <div>
                 <div style={{display: this.state.show ? "block" : "none"}}>
-                    <MyToast
-                        children={{
-                            show: this.state.show,
-                            message: "Question saved Succesfully.",
-                        }}
-                    />
                 </div>
 
                 <Form
@@ -123,7 +118,7 @@ export default class AddQuestion extends Component {
                             name={"questionName"}
                             value={questionName}
                             onChange={this.questionChange}
-                            className={"bg-dark text-white"}
+                            className={""}
                             placeholder="Enter Question"
                         />
                     </Form.Group>

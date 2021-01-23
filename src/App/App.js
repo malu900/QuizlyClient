@@ -16,6 +16,7 @@ import Lobby from "../Lobby/Lobby";
 import Guest from "../auth/Guest";
 import Winners from "../Quiz/Winners";
 import PersonalQuizzes from "../Quiz/PersonalQuizzes";
+import {Tutorial} from "./Tutorial";
 
 // >>>>>>> 62115990f07f0455acbe6b0cb82cd8e1dc62bf4a
 export class App extends Component {
@@ -41,6 +42,9 @@ export class App extends Component {
               </Route>
               <Route path="/login">
                 <Auth />
+              </Route>
+              <Route path="/tutorial">
+                <Tutorial />
               </Route>
               {/*<Route path="/guest">
             <Guest />

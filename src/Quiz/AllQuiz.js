@@ -65,16 +65,11 @@ export class AllQuiz extends Component {
                 <div>
                     {newQuizClicked ? <AddQuiz Quiz={this.state.Quiz}/> : <div></div>}
                 </div>
-                {/*{newQuizClicked ? (*/}
-                {/*    <Button variant="primary" type="submit">*/}
-                {/*        Submit Quiz*/}
-                {/*    </Button>*/}
-                {/*) : null}*/}
+                <h1>All quizzes</h1>
                 <Table bordered hover striped variant>
                     <thead>
                     <tr>
                         <th>Name</th>
-                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -86,11 +81,6 @@ export class AllQuiz extends Component {
                         quizzes.map((quiz) => (
                                 <tr key={quiz.quizId}>
                                 <td>{quiz.quizName}</td>
-
-                                <td><Button onClick={()=>this.onClickCreateQuiz(quiz.code,quiz.quizId)}>Start Quiz</Button></td>
-
-                                <td><Button onClick={() => this.onClickCreateQuiz(quiz.code,quiz.quizId)}>Start Quiz</Button></td>
-
                             </tr>
                         ))
                     }

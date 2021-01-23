@@ -45,7 +45,7 @@ export class NewAnswers extends Component {
             name="goodanswer"
             value={this.state.goodanswer}
             onChange={this.handleChange}
-            className={"bg-dark text-white"}
+            className={""}
             placeholder="Enter answer "
           />
         </Form.Group>
@@ -58,7 +58,7 @@ export class NewAnswers extends Component {
             name="answerOne"
             value={this.state.answerOne}
             onChange={this.handleChange}
-            className={"bg-dark text-white"}
+            className={""}
             placeholder="Enter answer "
           />
         </Form.Group>
@@ -71,7 +71,7 @@ export class NewAnswers extends Component {
             name="answerTwo"
             value={this.state.answerTwo}
             onChange={this.handleChange}
-            className={"bg-dark text-white"}
+            className={""}
             placeholder="Enter answer "
           />
         </Form.Group>
@@ -84,7 +84,7 @@ export class NewAnswers extends Component {
             name="answerThree"
             value={this.state.answerThree}
             onChange={this.handleChange}
-            className={"bg-dark text-white"}
+            className={""}
             placeholder="Enter answer "
           />
         </Form.Group>

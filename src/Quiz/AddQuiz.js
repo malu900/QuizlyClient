@@ -13,12 +13,6 @@ export class AddQuiz extends Component {
       createQuestion: false,
       quizName: "",
       createdQuestions: [],
-      // questions: {
-      //   answers: {
-      //     name: "",
-      //   },
-      // },
-      // =======
       quizzes: [],
       questions: [],
       questionsData: [],
@@ -61,9 +55,6 @@ export class AddQuiz extends Component {
           }
         })
     this.setState(this.initialState);
-    // this.setState({
-    //   Quiz: [...this.state.Quiz, quiz],
-    // });
   };
 
   addQuestionToQuiz = (question) => {
@@ -101,7 +92,6 @@ export class AddQuiz extends Component {
             />
           ))}
         </div>
-        {/* <Button onClick={this.deleteQuestion}>remove Question</Button> */}
       </div>
     );
   }

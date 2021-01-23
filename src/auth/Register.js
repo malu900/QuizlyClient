@@ -36,6 +36,7 @@ export class Register extends Component {
     };
     axios.post("http://localhost:8081/auth/register", user).then((response) => {
       if (response.data != null) {
+        window.location.replace("/PersonalQuizzes")
         this.setState({ show: true });
         setTimeout(() => this.setState({ show: false }), 3000);
       } else {
