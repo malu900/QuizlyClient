@@ -26,7 +26,7 @@ class Lobby extends Component {
 
     this.subscription = MessageService.getMessage().subscribe(message => {
       if(message.text == true){
-        sessionStorage.setItem('Score', 0);
+        localStorage.setItem('Score', JSON.parse("0"));
         this.redirectMePlease();
       }
       else{

@@ -16,7 +16,7 @@ export class CurrentQuestion extends Component {
       round : 1,
       questions: [],
       startGame: false,
-      score: 0,
+      score: JSON.parse(localStorage.getItem('Score')),
       value: true
     };
   }
@@ -45,11 +45,17 @@ export class CurrentQuestion extends Component {
   checkForRightAnswer = (answer) => {
     this.setState({value:false})
     if(answer.rightAnswer){
+
+
       this.reward.rewardMe();
       this.setState({
         score: this.state.score + 100,
-      })
+      },
+          ()=> localStorage.setItem('Score',JSON.parse(this.state.score))
+      )
+
     }
+
   }
 
 
