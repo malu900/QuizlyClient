@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Button } from "react-bootstrap";
 import Reward from "react-rewards";
-import ListGroup from "react-bootstrap/ListGroup";
 import axios from "axios";
 import {MessageService} from "../Ws/MessageService";
 
@@ -13,19 +12,25 @@ export class CurrentQuestion extends Component {
       rightAnswer: false,
       wrongAnswer: false,
       answers : [],
-      id: 40,
+      id: 59,
       round : 1,
       questions: [],
-      startGame: false
+      startGame: false,
+      score: JSON.parse(localStorage.getItem('Score')),
+      value: true
     };
   }
   findQuestion(){
-    axios.get("http://localhost:8081/question/"+ this.state.id + "/" + this.state.round )
-        .then(response => response.data)
-        .then((data) => {
-          this.setState({questions: data})
-          this.setState({answers : data.answers})
-        });
+   /* setTimeout(()=>{*/
+      axios.get("http://localhost:8081/question/"+ this.state.id + "/" + this.state.round )
+      .then(response => response.data)
+      .then((data) => {
+        console.log(data);
+        this.setState({questions: data})
+        this.setState({answers : data.answers})
+
+      }).catch(console.log('failed'));
+/*    }, 3000);*/
   }
   componentWillMount() {
     if (this.state.startGame === true) {
@@ -37,15 +42,29 @@ export class CurrentQuestion extends Component {
     }
   }
 
+  checkForRightAnswer = (answer) => {
+    this.setState({value:false})
+    if(answer.rightAnswer){
+
+
+      this.reward.rewardMe();
+      this.setState({
+        score: this.state.score + 100,
+      },
+          ()=> localStorage.setItem('Score',JSON.parse(this.state.score))
+      )
+
+    }
+
+  }
+
 
   componentDidMount() {
-
     this.findQuestion()
+    this.setState({value: true})
   }
   componentDidUpdate() {
-    if (this.state.rightAnswer == true) {
-      this.reward.rewardMe();
-    }
+ 
   }
   rightOrWrong = (answer) => {
     this.setState({
@@ -54,13 +73,13 @@ export class CurrentQuestion extends Component {
 
   };
   render (){
-    const rightAnswer = this.state.rightAnswer;
     this.state.round = this.props.round;
 
-    // var handleTiming = this.props.handleTiming;
     return (
       <div class="current-question">
+        <p>Score {this.state.score}</p>
         <p>Current question {this.state.questions.questionName}</p>
+
         <Reward
           ref={(ref) => {
             this.reward = ref;
@@ -68,7 +87,7 @@ export class CurrentQuestion extends Component {
           type="confetti"
         >
             {this.state.answers.map((answer) => (
-                  <Button onClick={() => this.Test(answer.answerId)}> {answer.answerContent} </Button>
+                  <Button  disabled={!this.state.value} onClick={() => this.checkForRightAnswer(answer)}> {answer.answerContent} </Button>
             ))}
         </Reward>
       </div>
