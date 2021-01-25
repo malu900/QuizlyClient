@@ -60,6 +60,7 @@ export default class AddQuestion extends Component {
                     this.setState({show: false});
                 }
             });
+
     }
 
     questionChange = (event) => {
@@ -94,6 +95,7 @@ export default class AddQuestion extends Component {
                     console.log("SubmitAnswers: " + response.data);
                 })
         })
+        alert("Questions and answers added!")
         console.log("Questions and answers added :D")
     }
 

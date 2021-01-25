@@ -12,11 +12,11 @@ export class CurrentQuestion extends Component {
       rightAnswer: false,
       wrongAnswer: false,
       answers : [],
-      id: 59,
+      id: 63,
       round : 1,
       questions: [],
       startGame: false,
-      score: JSON.parse(localStorage.getItem('Score')),
+      score: JSON.parse(sessionStorage.getItem('Score')),
       value: true
     };
   }
@@ -51,7 +51,7 @@ export class CurrentQuestion extends Component {
       this.setState({
         score: this.state.score + 100,
       },
-          ()=> localStorage.setItem('Score',JSON.parse(this.state.score))
+          ()=> sessionStorage.setItem('Score',JSON.parse(this.state.score))
       )
 
     }

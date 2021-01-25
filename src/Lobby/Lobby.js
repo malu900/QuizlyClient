@@ -26,11 +26,12 @@ class Lobby extends Component {
 
     this.subscription = MessageService.getMessage().subscribe(message => {
       if(message.text == true){
-        localStorage.setItem('Score', JSON.parse("0"));
+        sessionStorage.setItem('Score', JSON.parse("0"));
         this.redirectMePlease();
       }
       else{
         if(message.text != "Couldn't join the quiz") {
+
           this.setState({
             Players: message.text,
           })
@@ -108,17 +109,17 @@ class Lobby extends Component {
       <div>
         <div id="playersListLobby">
           <p>
-              Host is: {this.state.HostName}
-            <Button onClick={()=>this.onClickStartQuiz()}>Start Quiz</Button>
+           {/*   Host is: {this.state.HostName}*/}
+            <Button disabled={!this.props.location.state.IsHost} onClick={()=>this.onClickStartQuiz()}>Start Quiz</Button>
           </p>
         </div>
         <div id="playersListLobby">
           <ul>
-            <li>Quiz master</li>{" "}
+          {/*  <li>Quiz master</li>{" "}
             <Button onClick={() => this.addPlayerToLobby()}>
               {" "}
               add player to lobby
-            </Button>
+            </Button>*/}
           </ul>
           <div>
             {this.state.Host}

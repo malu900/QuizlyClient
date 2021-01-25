@@ -15,7 +15,7 @@ export class CurrentQuiz extends Component {
       Players: [],
       CurrentPlayer: null,
       minutes: 0,
-      seconds: 10,
+      seconds: 15,
       round: 1,
       lengthquiz: "",
       score: 0
@@ -75,7 +75,7 @@ export class CurrentQuiz extends Component {
   }
   nextRound= () =>{
     this.setState({round: this.state.round+ 1})
-    this.setState({seconds: 10})
+    this.setState({seconds: 15})
     console.log(this.state.score)
   }
   checkIfQuizIsFinished=() => {
@@ -88,7 +88,7 @@ export class CurrentQuiz extends Component {
     return (
       <div className="current-quiz">
         <div>
-          <div className="circle">0</div>
+          <div className="circle">{this.state.round}</div>
           <h1> {this.state.Quiz.id}</h1>
           {/* {this.state.questions.map((q) => (
             <p> {q}</p>

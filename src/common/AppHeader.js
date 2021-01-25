@@ -81,7 +81,7 @@ export class AppHeader extends Component {
               <div>
                 <ul>
                   <li>
-                    <Link to="/login">Login</Link>
+                    <Link to="/login">LogOut</Link>
                   </li>
                   {/*       <li>
                 <Link to="/guest">Guest</Link>
